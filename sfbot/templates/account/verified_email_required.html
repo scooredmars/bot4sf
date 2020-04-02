@@ -1,23 +1,26 @@
-{% extends "account/base.html" %}
+{% extends "layouts/default.html" %}
 
-{% load i18n %}
+{% load static %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block title %}Verify Your E-mail Address{% endblock %}
 
 {% block content %}
-<h1>{% trans "Verify Your E-mail Address" %}</h1>
 
-{% url 'account_email' as email_url %}
-
-<p>{% blocktrans %}This part of the site requires us to verify that
-you are who you claim to be. For this purpose, we require that you
-verify ownership of your e-mail address. {% endblocktrans %}</p>
-
-<p>{% blocktrans %}We have sent an e-mail to you for
-verification. Please click on the link inside this e-mail. Please
-contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
-
-<p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
-
+<div class="background">
+  <div class="custom-form space">
+    <div id="login">
+      <h1 class="white">Sign Out</h1>
+      <p class="white bigger-p text-center space-p">Are you sure you want to sign out?</p>
+      {% url 'account_email' as email_url %}
+      <p class="white bigger-p text-center space-p">This part of the site requires us to verify that
+      you are who you claim to be. For this purpose, we require that you
+      verify ownership of your e-mail address. </p>
+      <p class="white bigger-p text-center space-p">We have sent an e-mail to you for
+      verification. Please click on the link inside this e-mail. Please
+      contact us if you do not receive it within a few minutes.</p>
+      <p class="white bigger-p text-center space-p">Note: you can still <a href="{{ email_url }}">change your e-mail address</a>.</p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

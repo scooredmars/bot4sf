@@ -151,3 +151,5 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 # LOGIN_REDIRECT_URL = "dashboard"
 
 ACCOUNT_FORMS = {"signup": "sfbot.forms.UserSignupForm"}
+
+ACCOUNT_SESSION_REMEMBER = False
