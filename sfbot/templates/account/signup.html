@@ -1,21 +1,33 @@
 {% extends "layouts/default.html" %}
 
-{% load i18n %}
+{% load static %}
 
-{% block title %}{% trans "Signup" %}{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+<div class="background">
+  <div class="custom-form">
+    <ul class="tab-group">
+      <li class="tab active"><a>Sign Up</a></li>
+      <li class="tab"><a href="{{ login_url }}">Log In</a></li>
+    </ul>
+    <div id="signup">
+      <h1 class="white">Join to us</h1>
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+          <div class="field-wrap">
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+          </div>
+        <button class="button button-block" type="submit">Get Started &raquo;</button><br>
+      </form>
+      <p class="regulations">By clicking GET STARTED, you accept our <a href="regulations" target="_blank">Regulations</a> and <a href="privacy-policy" target="_blank">Privacy Policy</a>.</p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
