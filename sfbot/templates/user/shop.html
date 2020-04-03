@@ -1,0 +1,42 @@
+{% extends "layouts/default.html" %}
+
+{% load static %}
+
+{% block title %}SFBot - Shop{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+  <div class="wrapper">
+    {% include "layouts/sidebar.html" %}
+    <div class="content">
+      {% include "layouts/navbar.html" %}
+    <div class="shop">
+      <h1 class="text-center">Pricing Plan</h1>
+      <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
+
+      <div class="plans">
+      {% for plan in plans %}
+        <div class="plan {{ plan.special_style }}">
+          <div class="header text-center">{{ plan.name }}</div>
+          <div class="price text-center">$0{{ plan.price }}</div>
+          <div class="description text-center">{{ plan.description }}</div>
+          <div class="text-center">
+            {% for permission in plan.permission_list.all %}
+              <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
+            {% endfor %}
+          </div>
+          <a href="signup"><div class="register">Sign Up</div></a>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    </div>
+  {% else %}
+  <div class="background">
+    <div class="form-reg-log">
+      <h1 class="white">You aren't logged in. Go to: <br><a href="login">Login section</a></h1>
+    </div>
+  </div>
+  {% endif %}
+  </div>
+{% endblock %}

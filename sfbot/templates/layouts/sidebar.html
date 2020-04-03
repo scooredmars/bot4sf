@@ -1,0 +1,34 @@
+{% load static %}
+
+<nav class="nav-left sidebar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="dashboard">
+      <div class="sidebar-brand-icon">
+        <i class="robot icon"></i>
+      </div>
+      <div class="sidebar-brand-text"><span>SFBot</span></div>
+    </a>
+    <ul class="navbar-nav" id="accordionSidebar">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" href="dashboard">
+          <i class="tachometer alternate icon"></i><span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="profile">
+          <i class="user icon"></i><span>Profile</span>
+        </a>
+        <a class="nav-link" href="shop">
+          <i class="shopping cart icon"></i><span>Shop</span>
+        </a>
+        <a class="nav-link" href="faq">
+          <i class="info circle icon"></i><span>FAQ</span>
+        </a>
+        <a class="nav-link" href="contact">
+          <i class="comment alternate outline icon"></i><span>Contact</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<script src="{% static 'js/sidebar.js' %}"></script>
