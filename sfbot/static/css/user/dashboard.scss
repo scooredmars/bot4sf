@@ -1,0 +1,184 @@
+.content{
+  background-color: $bg-content;
+  min-height: 100vh;
+  height: $full-size;
+  width: 88%;
+
+
+  .card-shadow{
+    margin: auto;
+    width: 70%;
+    margin-bottom: 1rem;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $white;
+    background-clip: border-box;
+    border: 1px solid $card-border;
+    border-radius: .35rem;
+  }
+
+  .card-header{
+    border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: $bg-content;
+    border-bottom: 1px solid $card-border;
+
+    p{
+      font-size: 1.5em;
+      color: $light-blu;
+      font-weight: 700;
+    }
+  }
+
+  .card-body{
+    flex: 1 1 auto;
+    padding: 1.25rem;
+
+    .form-row{
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -5px;
+      margin-left: -5px;
+    }
+
+    .col-dashboard{
+      padding-right: 5px;
+      padding-left: 5px;
+      min-width: $full-size;
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: $full-size;
+      position: relative;
+      width: $full-size;
+    }
+
+    .col-bot{
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: $full-size;
+      position: relative;
+      width: $full-size;
+      padding-right: .75rem;
+      padding-left: .75rem;
+    }
+
+    .form{
+      padding: 0 16px;
+      font-size: 18px;
+      margin-top: 1em;
+      line-height: 36px;
+      display: flex;
+      font-weight: $bold;
+    }
+
+    .inputGroup:first-child{
+      margin-right: 1em;
+    }
+
+    .inputGroup{
+      display: block;
+      margin: 10px 0;
+      position: relative;
+      width: $full-size;
+      cursor: pointer;
+      font-weight: 100;
+    }
+
+    .int{
+      order: 1;
+      transform: translateY(-$half-size);
+      visibility: hidden;
+      width: 32px;
+      height: 32px;
+      z-index: 2;
+      position: absolute;
+      right: 30px;
+      top: $half-size;
+      cursor: pointer;
+    }
+
+    .int:checked ~ .label {
+      color: $white;
+    }
+
+    .int:checked ~ .label::before {
+      transform: translate(-$half-size, -$half-size) scale3d(56, 56, 1);
+      opacity: 1;
+    }
+
+    .int:checked ~ .label::after {
+      background-color: $mint-color;
+      border-color: $mint-color;
+    }
+
+    .label{
+      padding: 12px 2em 12px 0;
+      width: $full-size;
+      display: block;
+      color: $label-darkgrey;
+      z-index: 2;
+      transition: color .2s ease-in;
+      overflow: hidden;
+      border-radius: 1.5em;
+      position: relative;
+      margin-bottom: .5rem;
+      border: 1px solid rgba(75, 75, 75, 0.295);
+    }
+
+    .label::before {
+      width: 10px;
+      height: 10px;
+      border-radius: $half-size;
+      content: '';
+      background-color: #5562eb;
+      position: absolute;
+      left: $half-size;
+      top: $half-size;
+      transform: translate(-$half-size, -$half-size) scale3d(1, 1, 1);
+      transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .label::after {
+      width: 32px;
+      height: 32px;
+      content: '';
+      border: 2px solid ;
+      background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      background-position: 2px 3px;
+      border-radius: $half-size;
+      z-index: 2;
+      position: absolute;
+      right: 30px;
+      top: $half-size;
+      transform: translateY(-$half-size);
+      cursor: pointer;
+      transition: all 200ms ease-in;
+    }
+
+    .status{
+      padding: .4em 0;
+      font-size: 2em;
+    }
+
+    .btn-settings{
+      display: block;
+      width: $full-size;
+      text-transform: uppercase!important;
+      cursor: pointer;
+      color: $white;
+      background-color: $light-blu;
+      border-color: $light-blu;
+      padding: .7em 0;
+      font-size: 1.3em;
+      border-radius: .7em;
+    }
+  }
+}

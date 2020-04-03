@@ -1,0 +1,77 @@
+{% load static %}
+
+<div class="nav-col">
+  <nav class="nav-right">
+    <div class="container-fluid">
+      <a href="javascript:void(0);" class="icon-media" onclick="myFunction()">
+        <i class="bars icon"></i>
+      </a>
+      <button class="btn-add-bot" type="button">add bot</button>
+      <div class="ui dropdown">
+        <div class="account">{{ user }}</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a href="profile">
+            <div class="item nav-links">
+              <i class="cogs icon"></i>
+              Settings
+            </div>
+          </a>
+          <a href="logout">
+            <div class="item nav-links">
+              <i class="sign out alternate icon"></i>
+              Logout
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="nav-mobile" id="myLinks">
+    <div class="container-fluid">
+      <a class="nav-link" href="dashboard">
+        <i class="tachometer alternate icon"></i><span>Dashboard</span>
+      </a>
+      <a class="nav-link" href="profile">
+        <i class="user icon"></i><span>Profile</span>
+      </a>
+      <a class="nav-link" href="shop">
+        <i class="shopping cart icon"></i><span>Shop</span>
+      </a>
+      <a class="nav-link" href="faq">
+        <i class="info circle icon"></i><span>FAQ</span>
+      </a>
+      <a class="nav-link" href="contact">
+        <i class="comment alternate outline icon"></i><span>Contact</span>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  $('.ui.dropdown')
+    .dropdown();
+
+  function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "flex") {
+    x.style.display = "none ";
+  } else {
+    x.style.display = "flex";
+  }
+}
+
+  $(function () {
+
+    var url = window.location.pathname,
+        urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");
+    $('.nav-mobile a').each(function () {
+        if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
+            $(this).addClass('active-link');
+        }
+    });
+
+});
+
+</script>

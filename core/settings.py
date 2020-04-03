@@ -148,7 +148,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 10
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
-# LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "../dashboard"
 
 ACCOUNT_FORMS = {"signup": "sfbot.forms.UserSignupForm"}
 
