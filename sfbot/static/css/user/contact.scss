@@ -1,0 +1,40 @@
+.contact-user{
+  color: #5D5D5D;
+
+  h1{
+    padding-top: 2em;
+  }
+
+  p{
+    font-size: 1.4em;
+  }
+
+  form{
+    width: 50%;
+    margin: auto;
+    padding-top: 3em;
+
+    .field{
+      padding-bottom: 1em;
+    }
+
+    input, textarea{
+      background: $white;
+      border: 1px solid rgba(128, 128, 128, 0.267);
+      color: black;
+      padding: .8em;
+      margin: 0;
+    }
+
+    ::placeholder{
+      color: rgba(128, 128, 128, 0.808);
+    }
+
+    .ui.button{
+      width: 100%;
+      background: rgb(60, 134, 253);
+      color: $white;
+      font-size: 1.5em;
+    }
+  }
+}

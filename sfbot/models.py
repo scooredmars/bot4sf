@@ -9,6 +9,14 @@ class GeneratePage(models.Model):
         return self
 
 
+class FaqList(models.Model):
+    topic = models.CharField(max_length=70)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.topic
+
+
 class PermissionList(models.Model):
     name = models.CharField(max_length=40)
     icon = models.CharField(max_length=40)
