@@ -11,6 +11,9 @@
     <div class="content">
       {% include "layouts/navbar.html" %}
       <h1 class="text-center">FAQ</h1>
+      {% if not faqs %}
+        <h1 class="text-center">At the moment faqs are empty.</h1>
+      {% else %}
       <div class="ui styled accordion">
         {% for faq in faqs %}
           <div class="title">
@@ -22,6 +25,7 @@
           </div>
         {% endfor %}
       </div>
+      {% endif %}
     </div>
 
   <script src="{% static 'js/faq.js' %}"></script>
