@@ -12,8 +12,10 @@
       {% include "layouts/navbar.html" %}
     <div class="shop">
       <h1 class="text-center">Pricing Plan</h1>
+      {% if not plans %}
+        <p class="text-center">At the moment plans are disable.</p>
+      {% else %}
       <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
-
       <div class="plans">
       {% for plan in plans %}
         <div class="plan {{ plan.special_style }}">
@@ -29,6 +31,7 @@
         </div>
       {% endfor %}
       </div>
+      {% endif %}
     </div>
     </div>
   {% else %}

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from .forms import ContactForm
-from .models import FaqList, GeneratePage, PermissionList, Plan
+from .models import Bots, FaqList, GeneratePage, Plan
 
 # Create your views here.
 
@@ -16,7 +16,11 @@ class Home(ListView):
 
 class Dashboard(ListView):
     template_name = "user/dashboard.html"
-    model = GeneratePage
+    model = Bots
+    context_object_name = "bots"
+
+    def get_queryset(self):
+        return Bots.objects.filter(user=self.request.user)
 
 
 class Shop(ListView):

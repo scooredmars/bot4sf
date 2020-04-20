@@ -11,6 +11,11 @@
     <div class="content">
       {% include "layouts/navbar.html" %}
       <h1 class="text-center">Dashboard</h1>
+      {% for bot in bots %}
+        <div>{{ bot.game_settings.ac_settings.ac_username }}</div>
+        <div>{{ bot.status }}</div>
+        <div>{{ bot.time_left }}</div>
+      {% endfor %}
     </div>
   {% else %}
   <div class="background">
