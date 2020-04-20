@@ -101,6 +101,7 @@ input, textarea {
   color:$white;
   transition:all.5s ease;
   -webkit-appearance: none;
+  cursor: pointer;
   &:hover, &:focus {
     background:$main-dark;
   }
@@ -165,4 +166,143 @@ input, textarea {
 
 .space-p{
   margin-bottom: 2em;
+}
+
+.bigger-form{
+  max-width: 1000px;
+}
+
+fieldset{
+  border: none;
+}
+
+.default-input{
+  width: auto;
+  margin: auto;
+}
+
+.button-holder{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.7em;
+  font-size: 1.3em;
+
+  .primary-button{
+    background-color: #1ab188;
+    width: 30%;
+    color: rgba(255, 255, 255, 0.726);
+    padding: 15px 0;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  .primary-button:hover{
+    background-color: #009b72;
+  }
+
+  .verification-button{
+    background-color: rgb(187, 132, 29);
+    width: 30%;
+    color: rgba(255, 255, 255, 0.726);
+    padding: 15px 0;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  .verification-button:hover{
+    background-color: rgb(172, 112, 2);
+  }
+
+  .remove-button{
+    background-color: rgb(204, 22, 22);
+    width: 30%;
+    color: rgba(255, 255, 255, 0.911);
+    padding: 15px 0;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  .remove-button:hover{
+    background-color: rgb(182, 1, 1);
+  }
+}
+
+.ctrlHolder{
+  margin: 1em;
+}
+
+.custom-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.custom-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: .3em;
+}
+
+.custom-label:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.custom-label input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom-label .checkmark:after {
+  left: 10px;
+  top: 5px;
+  width: 6px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.primary{
+  padding-left: .3em;
+  color: #1ab188;
+}
+
+.verified{
+  padding-left: 1em;
+  color: rgb(218, 141, 0);
+}
+
+.unverified{
+  padding-left: 1em;
+  color: rgba(255, 43, 43, 0.952);
 }
