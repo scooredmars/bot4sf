@@ -56,7 +56,10 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "templates", "allauth"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,18 +141,24 @@ COMPRESS_OFFLINE = True
 
 # Allauth custom settings
 
+LOGIN_REDIRECT_URL = "../dashboard"
+
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 ACCOUNT_USERNAME_MIN_LENGTH = 10
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
-LOGIN_REDIRECT_URL = "../dashboard"
-
 ACCOUNT_FORMS = {"signup": "sfbot.forms.UserSignupForm"}
 
 ACCOUNT_SESSION_REMEMBER = False
+
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "dashboard"
+
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
+
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/dashboard"
