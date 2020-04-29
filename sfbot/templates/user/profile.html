@@ -1,0 +1,84 @@
+{% extends "layouts/default.html" %}
+
+{% load static %}
+
+{% block title %}SFBot - Profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="wrapper">
+  {% include "layouts/sidebar.html" %}
+  <div class="content">
+    {% include "layouts/navbar.html" %}
+      <h1 class="text-center">Profile</h1>
+      <div class="profile-container">
+        <div class="left">
+          <div class="bot-stats">
+              <div class="card-header">
+                <p class="topic">Bots</p>
+              </div>
+              <div class="card-body">
+                {% for bot in bots %}
+                  {% if bot.plan.max_time == 24 %}
+                    <h4 class="info">{{ bot.game_settings.ac_settings.ac_username }}<span class="time">unlimited</span></h4>
+                    <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
+                      <div class="bar"></div>
+                    </div>
+                  {% else %}
+                    <h4 class="info">{{ bot.game_settings.ac_settings.ac_username }}<span class="time">{{ bot.time_left }}h</span></h4>
+                    <div class="ui orange progress" data-percent="{% widthratio bot.time_left 24 100 %}" id="example{{ forloop.counter }}">
+                      <div class="bar"></div>
+                    </div>
+                {% endif %}
+              {% endfor %}
+              </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="card-profile">
+            <div class="card-header">
+              <p class="topic">Account Informations</p>
+            </div>
+            <div class="card-body">
+            {% for info in bots|slice:"1" %}
+              <div class="list">
+                <div class="item">Username:</div>
+                <div class="item">{{ user }}</div>
+              </div>
+              <div class="list">
+                <div class="item">Password:</div>
+                <div class="item">********</div>
+              </div>
+              <div class="list">
+                <div class="item">Name:</div>
+                <div class="item">{{ user.first_name }}</div>
+              </div>
+              <div class="list">
+                <div class="item">Last name:</div>
+                <div class="item">{{ user.last_name }}</div>
+              </div>
+              <div class="list">
+                <div class="item">Email:</div>
+                <div class="item">{{ user.email }}</div>
+              </div>
+              <div class="list">
+                <div class="item">Plan name:</div>
+                <div class="item">{{ info.plan.name }}</div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <script src="{% static 'js/bot-time.js' %}"></script>
+{% else %}
+<div class="background">
+  <div class="form-reg-log">
+    <h1 class="white">You aren't logged in. Go to: <br><a href="login">Login section</a></h1>
+  </div>
+</div>
+{% endif %}
+</div>
+{% endblock %}

@@ -23,6 +23,15 @@ class Dashboard(ListView):
         return Bots.objects.filter(user=self.request.user)
 
 
+class Profile(ListView):
+    template_name = "user/profile.html"
+    model = Bots
+    context_object_name = "bots"
+
+    def get_queryset(self):
+        return Bots.objects.filter(user=self.request.user)
+
+
 class Shop(ListView):
     template_name = "user/shop.html"
     model = Plan

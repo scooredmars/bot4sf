@@ -1,0 +1,163 @@
+.profile-container{
+  width: 88%;
+  margin: auto;
+  display: flex;
+
+  .left{
+    width: 35%;
+
+    .time{
+      float: right;
+    }
+  }
+
+  .right{
+    width: 65%;
+  }
+}
+
+.bot-stats{
+  width: 85%;
+  margin: auto;
+  margin-bottom: 2em;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  background-color: $white;
+  border: 1px solid $card-border;
+  border-radius: .35rem;
+}
+
+.bot-package{
+  width: 92%;
+  margin: auto;
+  margin-bottom: 2em;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  background-color: $white;
+  border: 1px solid $card-border;
+  border-radius: .35rem;
+}
+
+.card-body{
+  font-size: 1.2em;
+}
+
+.topic{
+  color: $light-blu;
+  font-weight: normal !important;
+}
+
+
+.card-profile{
+  width: 92%;
+  margin-bottom: 1rem;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: $white;
+  background-clip: border-box;
+  border: 1px solid $card-border;
+  border-radius: .35rem;
+  margin: auto;
+  margin-bottom: 1em;
+
+  .card-header{
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: $bg-content;
+    border-bottom: 1px solid $card-border;
+
+    .topic{
+      color: $light-blu;
+      font-weight: normal;
+    }
+  }
+
+  .card-body{
+    flex: 1 1 auto;
+    padding: 1.25rem;
+
+    .form-row{
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -5px;
+      margin-left: -5px;
+    }
+
+    .col{
+      padding: 0 5px;
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: $full-size;
+    }
+
+    .form-group{
+      margin-bottom: 1rem;
+    }
+
+    label{
+      display: inline-block;
+      margin-bottom: .5rem;
+      position: relative;
+      transform: 0;
+      color: $lightgrey-color;
+      left: 0;
+      transition: none;
+      pointer-events: none;
+      padding-bottom: .5em;
+      font-size: 1.1em;
+    }
+
+    .form-control{
+      display: block;
+    width: $full-size;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: $normal;
+    line-height: 1.5;
+    color: $lightgrey-color;
+    background-color: $white;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .btn-save{
+      cursor: pointer;
+      width: $full-size;
+      padding: .7em;
+      font-size: 1.2em;
+      border-radius: .5em;
+      color: $white;
+      background-color: $light-blu;
+      border-color: $light-blu;
+    }
+
+    input{
+      color: $black;
+    }
+
+    .list{
+      display: flex;
+      width: 100%;
+      margin-bottom: 1em;
+      font-size: 1.25em;
+      color: rgb(99, 99, 99);
+
+      .item:first-child{
+        width: 17%;
+        color: rgba(0, 0, 0, 0.897);
+      }
+
+      .item{
+        width: 50%;
+      }
+    }
+    .list:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
