@@ -2,9 +2,10 @@ from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import FormView, UpdateView
 
 from .forms import ContactForm
-from .models import Bots, FaqList, GeneratePage, Plan
+from .models import Bots, FaqList, GameSettings, GeneratePage, Plan
 
 # Create your views here.
 
@@ -21,6 +22,17 @@ class Dashboard(ListView):
 
     def get_queryset(self):
         return Bots.objects.filter(user=self.request.user)
+
+
+class SettingsView(UpdateView):
+    template_name = "user/settings.html"
+    model = GameSettings
+    fields = ["tavern_status", "tavern_settings", "arena_status", "arena_settings"]
+
+    success_url = "dashboard"
+
+    def get_queryset(self):
+        return GameSettings.objects.filter(user=self.request.user)
 
 
 class Profile(ListView):
