@@ -2,21 +2,14 @@
 
 {% load static %}
 
-{% block title %}SFBot - Dashboard{% endblock %}
+{% block title %}SFBot - Add Bot{% endblock %}
 
 {% block content %}
   {% if user.is_authenticated %}
   <div class="wrapper">
     {% include "layouts/sidebar.html" %}
     <div class="content">
-      {% include "layouts/navbar.html" %}
-      <h1 class="text-center">Dashboard</h1>
-      {% for bot in bots %}
-        <div>{{ bot.game_settings.ac_settings.ac_username }}</div>
-        <div>{{ bot.status }}</div>
-        <div>{{ bot.time_left }}</div>
-        <a href="{{ bot.game_settings.get_absolute_url }}">Settings</a>
-      {% endfor %}
+      <h1 class="text-center">Add Bot</h1>
     </div>
   {% else %}
   <div class="background">
