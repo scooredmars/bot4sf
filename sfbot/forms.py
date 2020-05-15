@@ -2,6 +2,8 @@ from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 
+from .models import Bots
+
 
 class UserSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label="First Name")
@@ -37,4 +39,15 @@ class ContactForm(forms.Form):
         )
         self.fields["message"].widget.attrs.update(
             {"name": "message", "placeholder": "Message", "rows": "10"}
+        )
+
+
+class AddBotForm(forms.ModelForm):
+    class Meta:
+        model = Bots
+        fields = (
+            "ac_username",
+            "password",
+            "country",
+            "server",
         )

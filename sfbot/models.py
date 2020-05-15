@@ -20,85 +20,12 @@ class FaqList(models.Model):
         return self.topic
 
 
-class Bots(models.Model):
-    STATUS = (
-        ("ON", "ON"),
-        ("OFF", "OFF"),
-    )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey("sfbot.Plan", on_delete=models.CASCADE, null=True)
-    status = models.CharField(max_length=4, choices=STATUS, default="OFF")
-    time_left = models.IntegerField(null=True)
-    game_settings = models.OneToOneField(
-        "sfbot.GameSettings", on_delete=models.CASCADE, null=True
-    )
 
     def __str__(self):
-        return self.game_settings.ac_settings.ac_username
-
-    class Meta:
-        verbose_name = _("bots")
-        verbose_name_plural = _("Bots")
-
-
-class GameSettings(models.Model):
-    STATUS = (
-        ("ON", "ON"),
-        ("OFF", "OFF"),
-    )
-    TAVERN = (
-        ("Gold", "Gold"),
-        ("Exp", "Exp"),
-        ("Time", "Time"),
-    )
-    ARENA = (
-        ("Stop fight after 10 wins", "Stop fight after 10 wins"),
-        (
-            "Attack opponents who have items for your cluster",
-            "Attack opponents who have items for your cluster",
-        ),
-    )
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    ac_settings = models.OneToOneField(
-        "sfbot.AcSettings", on_delete=models.CASCADE, null=True
-    )
-    tavern_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
-    tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
-    arena_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
-    arena_settings = models.CharField(
-        max_length=50, choices=ARENA, default="Stop fight after 10 wins"
-    )
-
-    def __str__(self):
-        return self.ac_settings.ac_username
-
-    def get_absolute_url(self):
-        return reverse("sfbot:settings", kwargs={"pk": self.pk})
-
-    class Meta:
-        verbose_name = _("gamesettings")
-        verbose_name_plural = _("Game Settings")
-
-
-class AcSettings(models.Model):
-    COUNTRY = (("Intercontinental", "Intercontinental"),)
-    SERVER = (
-        ("s1", "s1"),
-        ("s2", "s2"),
-        ("s3", "s3"),
-        ("s4", "s4"),
-        ("s5", "s5"),
-    )
-    ac_username = models.CharField(max_length=40)
-    password = models.CharField(max_length=30)
-    country = models.CharField(
-        max_length=20, choices=COUNTRY, default="Intercontinental"
-    )
-    server = models.CharField(max_length=4, choices=SERVER)
-
-    def __str__(self):
-        return self.ac_username
+        return self.user.username
 
 
 class Plan(models.Model):
@@ -117,10 +44,6 @@ class Plan(models.Model):
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = _("plan")
-        verbose_name_plural = _("plans")
 
 
 class PermissionList(models.Model):
@@ -154,3 +77,57 @@ class PermissionList(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Bots(models.Model):
+    STATUS = (
+        ("ON", "ON"),
+        ("OFF", "OFF"),
+    )
+    TAVERN = (
+        ("Gold", "Gold"),
+        ("Exp", "Exp"),
+        ("Time", "Time"),
+    )
+    ARENA = (
+        ("Stop fight after 10 wins", "Stop fight after 10 wins"),
+        (
+            "Attack opponents who have items for your cluster",
+            "Attack opponents who have items for your cluster",
+        ),
+    )
+    COUNTRY = (("Intercontinental", "Intercontinental"),)
+    SERVER = (
+        ("s1", "s1"),
+        ("s2", "s2"),
+        ("s3", "s3"),
+        ("s4", "s4"),
+        ("s5", "s5"),
+    )
+    profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=4, choices=STATUS, default="OFF")
+    time_left = models.IntegerField(null=True)
+
+    ac_username = models.CharField(max_length=40, null=True)
+    password = models.CharField(max_length=30, null=True)
+    country = models.CharField(
+        max_length=20, choices=COUNTRY, default="Intercontinental", null=True
+    )
+    server = models.CharField(max_length=4, choices=SERVER, null=True)
+
+    tavern_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
+    tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
+    arena_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
+    arena_settings = models.CharField(
+        max_length=50, choices=ARENA, default="Stop fight after 10 wins"
+    )
+
+    def __str__(self):
+        return self.ac_username
+
+    class Meta:
+        verbose_name = _("bots")
+        verbose_name_plural = _("Bots")
+
+    def get_absolute_url(self):
+        return reverse("sfbot:settings", kwargs={"pk": self.pk})
