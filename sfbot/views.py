@@ -1,11 +1,11 @@
 from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.views.generic import ListView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView
 
-from .forms import ContactForm
-from .models import Bots, FaqList, GameSettings, GeneratePage, Plan
+from .forms import AddBotForm, ContactForm
+from .models import Bots, FaqList, GeneratePage, Plan, Profile
 
 # Create your views here.
 
@@ -21,27 +21,44 @@ class Dashboard(ListView):
     context_object_name = "bots"
 
     def get_queryset(self):
-        return Bots.objects.filter(user=self.request.user)
+        return Bots.objects.filter(profile__user=self.request.user)
 
 
-class SettingsView(UpdateView):
-    template_name = "user/settings.html"
-    model = GameSettings
-    fields = ["tavern_status", "tavern_settings", "arena_status", "arena_settings"]
-
-    success_url = "dashboard"
-
-    def get_queryset(self):
-        return GameSettings.objects.filter(user=self.request.user)
-
-
-class Profile(ListView):
+class ProfileView(ListView):
     template_name = "user/profile.html"
     model = Bots
     context_object_name = "bots"
 
     def get_queryset(self):
-        return Bots.objects.filter(user=self.request.user)
+        return Bots.objects.filter(profile__user=self.request.user)
+
+
+class AddBot(CreateView):
+    template_name = "user/add_bot.html"
+    model = Bots
+    form_class = AddBotForm
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.profile = Profile.objects.get(user=self.request.user)
+        obj.time_left = 6  # TODO change for current user plan
+        obj.save()
+        return HttpResponseRedirect(obj.get_absolute_url())
+
+
+class SettingsView(UpdateView):
+    template_name = "user/settings.html"
+    model = Bots
+    fields = [
+        "tavern_status",
+        "tavern_settings",
+        "arena_status",
+        "arena_settings",
+    ]
+    success_url = "dashboard"
+
+    def get_queryset(self):
+        return Bots.objects.filter(profile__user=self.request.user)
 
 
 class Shop(ListView):

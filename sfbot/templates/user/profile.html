@@ -20,12 +20,12 @@
               <div class="card-body">
                 {% for bot in bots %}
                   {% if bot.plan.max_time == 24 %}
-                    <h4 class="info">{{ bot.game_settings.ac_settings.ac_username }}<span class="time">unlimited</span></h4>
+                    <h4 class="info">{{ bot.ac_username }}<span class="time">unlimited</span></h4>
                     <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
                       <div class="bar"></div>
                     </div>
                   {% else %}
-                    <h4 class="info">{{ bot.game_settings.ac_settings.ac_username }}<span class="time">{{ bot.time_left }}h</span></h4>
+                    <h4 class="info">{{ bot.ac_username }}<span class="time">{{ bot.time_left }}h</span></h4>
                     <div class="ui orange progress" data-percent="{% widthratio bot.time_left 24 100 %}" id="example{{ forloop.counter }}">
                       <div class="bar"></div>
                     </div>
@@ -63,7 +63,7 @@
               </div>
               <div class="list">
                 <div class="item">Plan name:</div>
-                <div class="item">{{ info.plan.name }}</div>
+                <div class="item">{{ info.profile.plan.name }}</div>
               </div>
             {% endfor %}
             </div>
