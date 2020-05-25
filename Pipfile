@@ -8,9 +8,14 @@ pylint = "*"
 black = "*"
 
 [packages]
+django = "*"
+django-allauth = "*"
+django-compressor = "*"
+django-libsass = "*"
+django-cleanup = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8.3"
 
 [pipenv]
 allow_prereleases = true

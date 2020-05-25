@@ -3,8 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
-
-from .forms import AddBotForm, ContactForm
+from django.views.generic.detail import DetailView
+from .forms import AddBotForm, ContactForm, SettingsForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile
 
 # Create your views here.
@@ -49,17 +49,15 @@ class AddBot(CreateView):
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
     model = Bots
-    fields = [
-        "tavern_status",
-        "tavern_settings",
-        "arena_status",
-        "arena_settings",
-    ]
+    form_class = SettingsForm
     success_url = "dashboard"
 
     def get_queryset(self):
         return Bots.objects.filter(profile__user=self.request.user)
 
+
+class UserDetail(DetailView):
+    model = Bots 
 
 class Shop(ListView):
     template_name = "user/shop.html"

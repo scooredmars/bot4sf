@@ -19,17 +19,22 @@
               </div>
               <div class="card-body">
                 {% for bot in bots %}
-                  {% if bot.plan.max_time == 24 %}
-                    <h4 class="info">{{ bot.ac_username }}<span class="time">unlimited</span></h4>
+                  {% if bot.profile.plan.max_time == 24 %}
+                    <h4 class="info">{{ bot.SF_Username }}<span class="time">unlimited</span></h4>
                     <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
                       <div class="bar"></div>
                     </div>
-                  {% else %}
-                    <h4 class="info">{{ bot.ac_username }}<span class="time">{{ bot.time_left }}h</span></h4>
-                    <div class="ui orange progress" data-percent="{% widthratio bot.time_left 24 100 %}" id="example{{ forloop.counter }}">
+                  {% elif bot.profile.plan.max_time == 12 %}
+                    <h4 class="info">{{ bot.SF_Username }}<span class="time">{{ bot.time_left }}h</span></h4>
+                    <div class="ui orange progress" data-percent="{% widthratio bot.time_left 12 100 %}" id="example{{ forloop.counter }}">
                       <div class="bar"></div>
                     </div>
-                {% endif %}
+                  {% elif bot.profile.plan.max_time == 6 %}
+                    <h4 class="info">{{ bot.SF_Username }}<span class="time">{{ bot.time_left }}h</span></h4>
+                    <div class="ui orange progress" data-percent="{% widthratio bot.time_left 6 100 %}" id="example{{ forloop.counter }}">
+                      <div class="bar"></div>
+                    </div>
+                  {% endif %}
               {% endfor %}
               </div>
           </div>

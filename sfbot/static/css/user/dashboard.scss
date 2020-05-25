@@ -181,4 +181,57 @@
       border-radius: .7em;
     }
   }
+
+  .bots{
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+
+    .bot{
+      width: 320px;
+      margin: 4em auto;
+      border: 1px solid #babbbe;
+      border-radius: 1em;
+      background-color: #dadbdd27;
+
+      .header-name{
+        font-size: 1.5em;
+        padding: .5em 0;
+        color: #4e73df;
+        border-bottom: 1px solid #d0d1d3;
+      }
+
+      .status,.settings{
+        text-align: center;
+      }
+
+      .status{
+        font-size: 1.3em;
+        padding: 1.2em 0;
+      }
+
+      .settings{
+        font-size: 1.5em;
+        padding-top: .5em;
+        padding-bottom: .7em;
+      }
+
+      .status-color-on{
+        background-color: rgba(0, 226, 0, 0.596);
+        height: 12px;
+        width: 100%;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+      }
+
+      .status-color-off{
+        background-color: rgba(230, 0, 0, 0.61);
+        height: 12px;
+        width: 100%;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+      }
+    }
+  }
 }
