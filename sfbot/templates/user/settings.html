@@ -10,11 +10,85 @@
     {% include "layouts/sidebar.html" %}
     <div class="content">
       {% include "layouts/navbar.html" %}
-      <h1 class="text-center">Settings</h1>
-      <form action="" method="post">
+      <form action="" method="post" class="bot-settings">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="ui button" type="submit">Send</button>
+        <h1 class="text-center">Bot Status</h1>
+        <div class="status">
+          <div class="onoffswitch">
+            {{ form.status }}
+            <label class="onoffswitch-label" for="id_status">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+        </div>
+
+
+        <h1 class="text-center">Information</h1>
+        <div class="information-account">
+          <div class="left">
+            <div class="item">
+              <div class="desc">SF username:</div>
+              <div class="object">{{ object.SF_Username }}</div>
+            </div>
+            <div class="item">
+              <div class="desc">Time to stop bot:</div>
+              <div class="object">{{ object.time_left }}</div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item"> 
+              <div class="desc">Account country:</div> 
+              <div class="object">{{ object.country }}</div>
+            </div>
+            <div class="item"> 
+              <div class="desc">Account server:</div>
+              <div class="object">{{ object.server }}</div>
+            </div>
+          </div>
+        </div>
+
+
+        <h1 class="text-center"> Settings </h1>
+        <div class="section">
+          <div class="work">
+            <div class="onoffswitch">
+              {{ form.tavern_status }}
+              <label class="onoffswitch-label" for="id_tavern_status">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </div>
+          <div class="task text-center">
+            <h1>Tavern</h1>
+            <div class="choose">
+              Prefer: {{ form.tavern_settings }}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="section">
+          <div class="work">
+            <div class="onoffswitch">
+              {{ form.arena_status }}
+              <label class="onoffswitch-label" for="id_arena_status">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            </div>
+          </div>
+          <div class="task text-center">
+            <h1>Arena</h1>
+            <div class="choose">
+              Choose opponents: {{ form.arena_settings }}
+            </div>
+          </div>
+        </div>
+
+        {{ form.non_field_errors }}
+        <button class="button button-block" type="submit">Save Settings</button>
       </form>
     </div>
   {% else %}

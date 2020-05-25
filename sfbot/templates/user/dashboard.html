@@ -11,12 +11,32 @@
     <div class="content">
       {% include "layouts/navbar.html" %}
       <h1 class="text-center">Dashboard</h1>
-      {% for bot in bots %}
-        <div>{{ bot.ac_username }}</div>
-        <div>{{ bot.status }}</div>
-        <div>{{ bot.time_left }}</div>
-        <a href="{{ bot.get_absolute_url }}">Settings</a>
-      {% endfor %}
+      <div class="bots">
+        {% for bot in bots %}
+        <div class="bot">
+          <div class="header-name text-center">
+            {{ bot.SF_Username }}
+          </div>
+          {% if bot.status == True %}
+          <div class="status">
+            <b> Status:</b> <br> Bot is in a fight <img src="{% static 'img/status/work.png' %}">
+          </div>
+          {% else %}
+          <div class="status">
+            <b> Status:</b> <br> Bot waiting for a combat task <img src="{% static 'img/status/wait.png' %}">
+          </div>
+          {% endif %}
+          <div class="settings">
+            <a href="{{ bot.get_absolute_url }}">Settings</a>
+          </div>
+          {% if bot.status == True %}
+            <div class="status-color-on"></div>
+          {% else %}
+            <div class="status-color-off"></div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
     </div>
   {% else %}
   <div class="background">

@@ -9,12 +9,37 @@
   <div class="wrapper">
     {% include "layouts/sidebar.html" %}
     <div class="content">
-      <h1 class="text-center">Add Bot</h1>
-      <form method="post" class="add">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="ui button" type="submit">Add</button>
-      </form>
+      <div class="add-form">
+        <h1 class="text-center add-header">Add New Bot</h1>
+        <form method="post">
+          {% csrf_token %}
+          <p>
+            <label for="id_SF_Username">SF Username</label>
+            {{ form.SF_Username }}
+          </p>
+          <p>
+            <label for="id_SF_Password">SF Password</label>
+            {{ form.SF_Password }}
+          </p>
+          <div class="server-region">
+            <p class="selects">
+              <label for="id_country">Country</label>
+              {{ form.country }}
+            </p>
+            <p class="selects">
+              <label for="id_server">Server</label>
+              {{ form.server }}
+            </p>
+          </div>
+          <div class="explain">
+            * SF - Shakes & Fidget
+          </div>
+          {{ form.non_field_errors }}
+          <div class="add-button">
+            <button class="ui button" type="submit">Add Bot</button>
+          </div>
+        </form>
+      </div>
     </div>
   {% else %}
   <div class="background">

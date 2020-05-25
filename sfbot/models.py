@@ -80,10 +80,6 @@ class PermissionList(models.Model):
 
 
 class Bots(models.Model):
-    STATUS = (
-        ("ON", "ON"),
-        ("OFF", "OFF"),
-    )
     TAVERN = (
         ("Gold", "Gold"),
         ("Exp", "Exp"),
@@ -105,25 +101,25 @@ class Bots(models.Model):
         ("s5", "s5"),
     )
     profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
-    status = models.CharField(max_length=4, choices=STATUS, default="OFF")
+    status = models.BooleanField(verbose_name="Bot status",default=False)
     time_left = models.IntegerField(null=True)
 
-    ac_username = models.CharField(max_length=40, null=True)
-    password = models.CharField(max_length=30, null=True)
+    SF_Username = models.CharField(max_length=40, null=True)
+    SF_Password = models.CharField(max_length=30, null=True)
     country = models.CharField(
         max_length=20, choices=COUNTRY, default="Intercontinental", null=True
     )
     server = models.CharField(max_length=4, choices=SERVER, null=True)
 
-    tavern_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
+    tavern_status = models.BooleanField(verbose_name="Tavern status",default=False)
     tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
-    arena_status = models.CharField(max_length=3, choices=STATUS, default="OFF")
+    arena_status = models.BooleanField(verbose_name="Arena status",default=False)
     arena_settings = models.CharField(
         max_length=50, choices=ARENA, default="Stop fight after 10 wins"
     )
 
     def __str__(self):
-        return self.ac_username
+        return self.SF_Username
 
     class Meta:
         verbose_name = _("bots")
