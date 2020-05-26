@@ -39,11 +39,23 @@ class AddBot(CreateView):
     form_class = AddBotForm
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.profile = Profile.objects.get(user=self.request.user)
-        obj.time_left = 6  # TODO change for current user plan
-        obj.save()
-        return HttpResponseRedirect(obj.get_absolute_url())
+        current_user = Profile.objects.filter(user=self.request.user)
+        if current_user:
+            obj = form.save(commit=False)
+            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+            obj.time_left = 6  # TODO change for current user plan
+            obj.save()
+            return HttpResponseRedirect(obj.get_absolute_url())
+        else:
+            starter_plan = Plan.objects.get(name="FOR BEGINNERS")
+            user_profile = Profile(user=self.request.user, plan=starter_plan)
+            user_profile.save()
+            
+            obj = form.save(commit=False)
+            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+            obj.time_left = 6  # TODO change for current user plan
+            obj.save()
+            return HttpResponseRedirect(obj.get_absolute_url())
 
 
 class SettingsView(UpdateView):
