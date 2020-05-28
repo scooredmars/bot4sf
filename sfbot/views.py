@@ -43,7 +43,9 @@ class AddBot(CreateView):
         if current_user:
             obj = form.save(commit=False)
             obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-            obj.time_left = 6  # TODO change for current user plan
+            current_plan = Plan.objects.get(profile=obj.profile)
+            plan_max_time = current_plan.max_time
+            obj.time_left = plan_max_time
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
         else:
@@ -53,7 +55,9 @@ class AddBot(CreateView):
             
             obj = form.save(commit=False)
             obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-            obj.time_left = 6  # TODO change for current user plan
+            current_plan = Plan.objects.get(profile=obj.profile)
+            plan_max_time = current_plan.max_time
+            obj.time_left = plan_max_time
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
 
