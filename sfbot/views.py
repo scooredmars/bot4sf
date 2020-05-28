@@ -40,27 +40,30 @@ class AddBot(CreateView):
 
     def form_valid(self, form):
         current_user = Profile.objects.filter(user=self.request.user)
-        if current_user:
-            obj = form.save(commit=False)
-            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-            current_plan = Plan.objects.get(profile=obj.profile)
-            plan_max_time = current_plan.max_time
-            obj.time_left = plan_max_time
-            obj.save()
-            return HttpResponseRedirect(obj.get_absolute_url())
-        else:
-            starter_plan = Plan.objects.get(name="FOR BEGINNERS")
-            user_profile = Profile(user=self.request.user, plan=starter_plan)
-            user_profile.save()
-            
-            obj = form.save(commit=False)
-            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-            current_plan = Plan.objects.get(profile=obj.profile)
-            plan_max_time = current_plan.max_time
-            obj.time_left = plan_max_time
-            obj.save()
-            return HttpResponseRedirect(obj.get_absolute_url())
+        max_user_bots = Bots.objects.filter(profile__user=self.request.user).count() # amount of all bots for current user
+        current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to current plan query
 
+        if max_user_bots < current_plan_q.max_bots: 
+            if current_user:
+                obj = form.save(commit=False)
+                obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+                current_plan = Plan.objects.get(profile=obj.profile)
+                obj.time_left = current_plan.max_time
+                obj.save()
+                return HttpResponseRedirect(obj.get_absolute_url())
+            else:
+                starter_plan = Plan.objects.get(name="FOR BEGINNERS")
+                user_profile = Profile(user=self.request.user, plan=starter_plan)
+                user_profile.save()
+            
+                obj = form.save(commit=False)
+                obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+                current_plan = Plan.objects.get(profile=obj.profile)
+                obj.time_left = current_plan.max_time
+                obj.save()
+                return HttpResponseRedirect(obj.get_absolute_url())
+        else:
+            return HttpResponseRedirect("dashboard")
 
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
@@ -74,6 +77,7 @@ class SettingsView(UpdateView):
 
 class UserDetail(DetailView):
     model = Bots 
+
 
 class Shop(ListView):
     template_name = "user/shop.html"
