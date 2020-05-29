@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from .forms import AddBotForm, ContactForm, SettingsForm
-from .models import Bots, FaqList, GeneratePage, Plan, Profile
+from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
 
 # Create your views here.
 
@@ -30,7 +30,8 @@ class ProfileView(ListView):
     context_object_name = "bots"
 
     def get_queryset(self):
-        return Bots.objects.filter(profile__user=self.request.user)
+        return User.objects.filter(username=self.request.user)
+
 
 
 class AddBot(CreateView):
@@ -39,12 +40,12 @@ class AddBot(CreateView):
     form_class = AddBotForm
 
     def form_valid(self, form):
-        current_user = Profile.objects.filter(user=self.request.user)
-        max_user_bots = Bots.objects.filter(profile__user=self.request.user).count() # amount of all bots for current user
-        current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to current plan query
+        current_user = Profile.objects.filter(user=self.request.user) # nie ma
 
-        if max_user_bots < current_plan_q.max_bots: 
-            if current_user:
+        if current_user:
+            max_user_bots = Bots.objects.filter(profile__user=self.request.user).count() # amount of all bots for current user
+            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to current plan query
+            if max_user_bots < current_plan_q.max_bots:
                 obj = form.save(commit=False)
                 obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
                 current_plan = Plan.objects.get(profile=obj.profile)
@@ -52,18 +53,18 @@ class AddBot(CreateView):
                 obj.save()
                 return HttpResponseRedirect(obj.get_absolute_url())
             else:
-                starter_plan = Plan.objects.get(name="FOR BEGINNERS")
-                user_profile = Profile(user=self.request.user, plan=starter_plan)
-                user_profile.save()
-            
-                obj = form.save(commit=False)
-                obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-                current_plan = Plan.objects.get(profile=obj.profile)
-                obj.time_left = current_plan.max_time
-                obj.save()
-                return HttpResponseRedirect(obj.get_absolute_url())
+                return HttpResponseRedirect("dashboard")
         else:
-            return HttpResponseRedirect("dashboard")
+            starter_plan = Plan.objects.get(name="FOR BEGINNERS")
+            user_profile = Profile(user=self.request.user, plan=starter_plan)
+            user_profile.save()
+
+            obj = form.save(commit=False)
+            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+            current_plan = Plan.objects.get(profile=obj.profile)
+            obj.time_left = current_plan.max_time
+            obj.save()
+            return HttpResponseRedirect(obj.get_absolute_url())
 
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
