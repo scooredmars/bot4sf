@@ -40,16 +40,15 @@ class AddBot(CreateView):
     form_class = AddBotForm
 
     def form_valid(self, form):
-        current_user = Profile.objects.filter(user=self.request.user) # nie ma
+        current_user = Profile.objects.filter(user=self.request.user) # check if user profile is created
 
         if current_user:
             max_user_bots = Bots.objects.filter(profile__user=self.request.user).count() # amount of all bots for current user
-            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to current plan query
+            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to user current plan query
             if max_user_bots < current_plan_q.max_bots:
                 obj = form.save(commit=False)
                 obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-                current_plan = Plan.objects.get(profile=obj.profile)
-                obj.time_left = current_plan.max_time
+                obj.time_left = current_plan_q.max_time
                 obj.save()
                 return HttpResponseRedirect(obj.get_absolute_url())
             else:
@@ -61,8 +60,7 @@ class AddBot(CreateView):
 
             obj = form.save(commit=False)
             obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
-            current_plan = Plan.objects.get(profile=obj.profile)
-            obj.time_left = current_plan.max_time
+            obj.time_left = current_plan_q.max_time
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
 
@@ -76,7 +74,7 @@ class SettingsView(UpdateView):
         return Bots.objects.filter(profile__user=self.request.user)
 
 
-class UserDetail(DetailView):
+class UserBotDetails(DetailView):
     model = Bots 
 
 
