@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractBaseUser
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -34,7 +35,8 @@ class Plan(models.Model):
         ("I DON'T HAVE TIME", "I DON'T HAVE TIME"),
         ("I'M ON VACATION", "I'M ON VACATION"),
     )
-    name = models.CharField(max_length=21, choices=NAME, default="FOR BEGINNERS")
+    name = models.CharField(max_length=21, choices=NAME,
+                            default="FOR BEGINNERS")
     price = models.IntegerField()
     description = models.CharField(max_length=70)
     permission_list = models.ManyToManyField("sfbot.PermissionList")
@@ -79,7 +81,7 @@ class PermissionList(models.Model):
         return self.name
 
 
-class Bots(models.Model):
+class Bots(AbstractBaseUser):
     TAVERN = (
         ("Gold", "Gold"),
         ("Exp", "Exp"),
@@ -100,26 +102,34 @@ class Bots(models.Model):
         ("s4", "s4"),
         ("s5", "s5"),
     )
-    profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
-    status = models.BooleanField(verbose_name="Bot status",default=False)
+    profile = models.ForeignKey(
+        "sfbot.Profile", on_delete=models.CASCADE, null=True)
+    status = models.BooleanField(verbose_name="Bot status", default=False)
     time_left = models.IntegerField(null=True)
 
-    SF_Username = models.CharField(max_length=40, null=True)
-    SF_Password = models.CharField(max_length=30, null=True)
+    username = models.CharField(
+        verbose_name="SF Username", max_length=40, null=True)
+    password = models.CharField(
+        verbose_name="SF Password", max_length=30, null=True)
     country = models.CharField(
         max_length=20, choices=COUNTRY, default="Intercontinental", null=True
     )
     server = models.CharField(max_length=4, choices=SERVER, null=True)
 
-    tavern_status = models.BooleanField(verbose_name="Tavern status",default=False)
-    tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
-    arena_status = models.BooleanField(verbose_name="Arena status",default=False)
+    tavern_status = models.BooleanField(
+        verbose_name="Tavern status", default=False)
+    tavern_settings = models.CharField(
+        max_length=4, choices=TAVERN, default="Exp")
+    arena_status = models.BooleanField(
+        verbose_name="Arena status", default=False)
     arena_settings = models.CharField(
         max_length=50, choices=ARENA, default="Stop fight after 10 wins"
     )
 
+    USERNAME_FIELD = "username"
+
     def __str__(self):
-        return self.SF_Username
+        return self.username
 
     class Meta:
         verbose_name = _("bots")

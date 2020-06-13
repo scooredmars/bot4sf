@@ -4,11 +4,13 @@ from .models import Bots, FaqList, PermissionList, Plan, Profile
 
 admin.site.register(FaqList)
 
+
 @admin.register(Bots)
 class BotsAdmin(admin.ModelAdmin):
-    list_display = ("profile", "SF_Username", "country", "server")
+    list_display = ("profile", "username", "country", "server")
     list_filter = ("profile", "server")
-    search_fields = ["SF_Username", "profile__user__username"]
+    search_fields = ["username", "profile__user__username"]
+
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -16,9 +18,11 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ["plan"]
     search_fields = ["user__username"]
 
+
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
     list_display = ("name", "price", "max_time", "max_bots")
+
 
 @admin.register(PermissionList)
 class PermissionListAdmin(admin.ModelAdmin):

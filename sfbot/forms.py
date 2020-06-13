@@ -12,10 +12,12 @@ class UserSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
         self.fields["first_name"].widget.attrs.update(
-            {"name": "first_name", "pattern": "[a-zA-Z]*", "placeholder": "First Name"}
+            {"name": "first_name",
+                "pattern": "[a-zA-Z]*", "placeholder": "First Name"}
         )
         self.fields["last_name"].widget.attrs.update(
-            {"name": "last_name", "pattern": "[a-zA-Z]*", "placeholder": "Last Name"}
+            {"name": "last_name",
+                "pattern": "[a-zA-Z]*", "placeholder": "Last Name"}
         )
 
     def signup(self, request, user):
@@ -27,7 +29,8 @@ class UserSignupForm(SignupForm):
 class ContactForm(forms.Form):
     from_email = forms.EmailField(required=True)
     subject = forms.CharField(required=True, min_length=6)
-    message = forms.CharField(widget=forms.Textarea, required=True, min_length=10)
+    message = forms.CharField(widget=forms.Textarea,
+                              required=True, min_length=10)
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -46,28 +49,29 @@ class AddBotForm(forms.ModelForm):
     class Meta:
         model = Bots
         fields = (
-            "SF_Username",
-            "SF_Password",
+            "username",
+            "password",
             "country",
             "server",
         )
         widgets = {
-            "SF_Password": forms.PasswordInput(),
+            "password": forms.PasswordInput(),
         }
 
     def __init__(self, *args, **kwargs):
         super(AddBotForm, self).__init__(*args, **kwargs)
-        self.fields["SF_Username"].widget.attrs.update({"placeholder": "Username"})
-        self.fields["SF_Password"].widget.attrs.update({"placeholder": "Password"})
+        self.fields["username"].widget.attrs.update(
+            {"placeholder": "Username"})
+        self.fields["password"].widget.attrs.update(
+            {"placeholder": "Password"})
         self.fields["country"].widget.attrs.update({"class": "country-input"})
         self.fields["server"].widget.attrs.update({"class": "server-input"})
 
     def clean(self, *args, **keyargs):
-        SF_Username = self.cleaned_data.get("SF_Username")
-        SF_Password = self.cleaned_data.get("SF_Password")
+        username = self.cleaned_data.get("username")
         server = self.cleaned_data.get("server")
 
-        sf_username_qs = Bots.objects.filter(SF_Username=SF_Username)
+        sf_username_qs = Bots.objects.filter(username=username)
         country_qs = Bots.objects.filter(server=server)
         if sf_username_qs.exists():
             if country_qs.exists():
@@ -75,10 +79,15 @@ class AddBotForm(forms.ModelForm):
                     "An account with this username already exists on this server"
                 )
 
-        if len(SF_Password) < 5:
-            raise forms.ValidationError("Password must be greater than 5 characters")
-
         return super(AddBotForm, self).clean(*args, **keyargs)
+
+    def save(self, commit=True):
+        obj = super().save(commit=False)
+        obj.set_password(self.cleaned_data["password"])
+        obj.save()
+
+        return obj
+
 
 class SettingsForm(forms.ModelForm):
     class Meta:
@@ -90,11 +99,12 @@ class SettingsForm(forms.ModelForm):
             "arena_status",
             "arena_settings",
         )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['status'].widget.attrs.update({'class': 'onoffswitch-checkbox'})
-        self.fields['tavern_status'].widget.attrs.update({'class': 'onoffswitch-checkbox'})
-        self.fields['arena_status'].widget.attrs.update({'class': 'onoffswitch-checkbox'})
-
-
+        self.fields['status'].widget.attrs.update(
+            {'class': 'onoffswitch-checkbox'})
+        self.fields['tavern_status'].widget.attrs.update(
+            {'class': 'onoffswitch-checkbox'})
+        self.fields['arena_status'].widget.attrs.update(
+            {'class': 'onoffswitch-checkbox'})

@@ -33,7 +33,8 @@ class ProfileView (ListView):
         current_user = Profile.objects.filter(user=self.request.user)
 
         if current_user:
-            max_user_bots = Bots.objects.filter(profile__user=self.request.user).count()
+            max_user_bots = Bots.objects.filter(
+                profile__user=self.request.user).count()
             if max_user_bots != 0:
                 return Bots.objects.filter(profile__user=self.request.user)
             else:
@@ -42,34 +43,46 @@ class ProfileView (ListView):
             return User.objects.filter(username=self.request.user)
 
 
-
 class AddBot(CreateView):
     template_name = "user/add_bot.html"
     model = Bots
     form_class = AddBotForm
 
     def form_valid(self, form):
-        current_user = Profile.objects.filter(user=self.request.user) # check if user profile is created
+        # check if user profile is created
+        current_user = Profile.objects.filter(
+            user=self.request.user)
 
         if current_user:
-            max_user_bots = Bots.objects.filter(profile__user=self.request.user).count() # amount of all bots for current user
-            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to user current plan query
+            # amount of all bots for current user
+            max_user_bots = Bots.objects.filter(
+                profile__user=self.request.user).count()
+            # acces to user current plan query
+            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
+                user=self.request.user)))
             if max_user_bots < current_plan_q.max_bots:
                 obj = form.save(commit=False)
-                obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+                # Set current user profile
+                obj.profile = Profile.objects.get(
+                    user=self.request.user)
                 obj.time_left = current_plan_q.max_time
                 obj.save()
                 return HttpResponseRedirect(obj.get_absolute_url())
             else:
+                # TODO add lock to button
                 return HttpResponseRedirect("dashboard")
         else:
             starter_plan = Plan.objects.get(name="FOR BEGINNERS")
             user_profile = Profile(user=self.request.user, plan=starter_plan)
             user_profile.save()
 
-            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=self.request.user))) # acces to user current plan query
+            # acces to user current plan query
+            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
+                user=self.request.user)))
             obj = form.save(commit=False)
-            obj.profile = Profile.objects.get(user=self.request.user) # Set current user profile
+            # Set current user profile
+            obj.profile = Profile.objects.get(
+                user=self.request.user)
             obj.time_left = current_plan_q.max_time
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
@@ -86,7 +99,7 @@ class SettingsView(UpdateView):
 
 
 class UserBotDetails(DetailView):
-    model = Bots 
+    model = Bots
 
 
 class Shop(ListView):
@@ -99,19 +112,3 @@ class Faq(ListView):
     template_name = "user/faq.html"
     model = FaqList
     context_object_name = "faqs"
-
-
-def contact(request):
-    if request.method == "GET":
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data["subject"]
-            from_email = form.cleaned_data["from_email"]
-            message = form.cleaned_data["message"]
-            try:
-                send_mail(subject, message, from_email, ["support@sfbot.com"])
-            except BadHeaderError:
-                return HttpResponse("Invalid header found.")
-    return render(request, "user/contact.html", {"form": form})
