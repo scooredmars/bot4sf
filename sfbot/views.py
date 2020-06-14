@@ -112,3 +112,13 @@ class Faq(ListView):
     template_name = "user/faq.html"
     model = FaqList
     context_object_name = "faqs"
+
+
+class Regulations(ListView):
+    template_name = "account/regulations.html"
+    model = GeneratePage
+
+
+class PrivacyPolicy(ListView):
+    template_name = "account/privacy-policy.html"
+    model = GeneratePage
