@@ -11,4 +11,6 @@ urlpatterns = [
     path("profile", views.ProfileView.as_view(), name="profile"),
     path("shop", views.Shop.as_view(), name="shop"),
     path("faq", views.Faq.as_view(), name="faq"),
+    path("regulations", views.Regulations.as_view(), name="regulations"),
+    path("privacy-policy", views.PrivacyPolicy.as_view(), name="privacy-policy"),
 ]

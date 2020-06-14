@@ -12,30 +12,34 @@
       {% include "layouts/navbar.html" %}
       <h1 class="text-center">Dashboard</h1>
       <div class="bots">
-        {% for bot in bots %}
-        <div class="bot">
-          <div class="header-name text-center">
-            {{ bot.username }}
-          </div>
-          {% if bot.status == True %}
-          <div class="status">
-            <b> Status:</b> <br> Bot is in a fight <img src="{% static 'img/status/work.png' %}">
-          </div>
-          {% else %}
-          <div class="status">
-            <b> Status:</b> <br> Bot waiting for a combat task <img src="{% static 'img/status/wait.png' %}">
-          </div>
-          {% endif %}
-          <div class="settings">
-            <a href="{{ bot.get_absolute_url }}">Settings</a>
-          </div>
-          {% if bot.status == True %}
-            <div class="status-color-on"></div>
-          {% else %}
-            <div class="status-color-off"></div>
-          {% endif %}
-        </div>
-        {% endfor %}
+        {% if bots %}
+          {% for bot in bots %}
+            <div class="bot">
+              <div class="header-name text-center">
+                {{ bot.username }}
+              </div>
+              {% if bot.status == True %}
+                <div class="status">
+                  <b> Status:</b> <br> Bot is in a fight <img src="{% static 'img/status/work.png' %}">
+                </div>
+              {% else %}
+                <div class="status">
+                  <b> Status:</b> <br> Bot waiting for a combat task <img src="{% static 'img/status/wait.png' %}">
+                </div>
+              {% endif %}
+              <div class="settings">
+                <a href="{{ bot.get_absolute_url }}">Settings</a>
+              </div>
+              {% if bot.status == True %}
+                <div class="status-color-on"></div>
+              {% else %}
+                <div class="status-color-off"></div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="text-center no-bots">You don't have any bots, click on "Add Bot", at the top of the page</div>
+        {% endif %}
       </div>
       {% include "layouts/footer-user.html" %}
     </div>
