@@ -43,6 +43,8 @@ class Plan(models.Model):
     special_style = models.CharField(max_length=15, null=True, blank=True)
     max_time = models.IntegerField()
     max_bots = models.IntegerField()
+    available = models.BooleanField(
+        verbose_name="Plan is available", default=True)
 
     def __str__(self):
         return self.name
