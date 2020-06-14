@@ -18,17 +18,22 @@
           <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
           <div class="plans">
             {% for plan in plans %}
-              <div class="plan {{ plan.special_style }}">
-                <div class="header text-center">{{ plan.name }}</div>
-                <div class="price text-center">$0{{ plan.price }}</div>
-                <div class="description text-center">{{ plan.description }}</div>
-                <div class="text-center">
-                  {% for permission in plan.permission_list.all %}
-                    <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
-                  {% endfor %}
+              {% if plan.available %}
+                <div class="plan {{ plan.special_style }}">
+                  <div class="header text-center">{{ plan.name }}</div>
+                  <div class="price text-center">$0{{ plan.price }}</div>
+                  <div class="description text-center">{{ plan.description }}</div>
+                  <div class="text-center">
+                    {% for permission in plan.permission_list.all %}
+                      <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
+                    {% endfor %}
+                  </div>
+                  <a href="signup"><div class="register">Sign Up</div></a>
                 </div>
-                <a href="signup"><div class="register">Sign Up</div></a>
-              </div>
+              {% else %}
+                <div class="plan not-available">
+                </div>
+              {% endif %}
             {% endfor %}
           </div>
         {% endif %}

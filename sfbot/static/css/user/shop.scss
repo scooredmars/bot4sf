@@ -46,6 +46,14 @@
     display: flex;
     justify-content: space-around;
     margin-top: 6.5em;
+    
+    
+    .not-available{
+      cursor: not-allowed;
+      background-image: url(../img/status/not-available.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
 
     .best{
       background: rgb(59,132,254);
