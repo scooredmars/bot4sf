@@ -9,11 +9,43 @@
   <div class="wrapper">
     {% include "layouts/sidebar.html" %}
     <div class="content">
-      {% include "layouts/navbar.html" %}
+      <div class="nav-col">
+        <nav class="nav-right">
+          <div class="container-fluid">
+            {% if lock_add == False %}
+            <a href="add">
+              <button class="btn-add-bot" type="button">add bot</button>
+            </a>
+            {% else %}
+              <button class="btn-add-bot-max" type="button">max bots</button>
+            {% endif %}
+            <div class="ui dropdown">
+              <div class="account">{{ user }}</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <a href="profile">
+                  <div class="item nav-links">
+                    <i class="cogs icon"></i>
+                    Settings
+                  </div>
+                </a>
+                <a href="logout">
+                  <div class="item nav-links">
+                    <i class="sign out alternate icon"></i>
+                    Logout
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <script src="{% static 'js/navbar.js' %}"></script>
+
       <h1 class="text-center">Dashboard</h1>
       <div class="bots">
-        {% if bots %}
-          {% for bot in bots %}
+        {% if user_bots  %}
+          {% for bot in user_bots  %}
             <div class="bot">
               <div class="header-name text-center">
                 {{ bot.username }}

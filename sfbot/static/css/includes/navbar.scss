@@ -155,6 +155,17 @@
     border-radius: .5em;
   }
 
+  .btn-add-bot-max{
+    cursor: not-allowed;
+    text-transform: uppercase;
+    background-color: #b8b8b8cc;
+    border-color: $light-blu;
+    border: 0;
+    padding: .8em;
+    font-size: 1.1em;
+    border-radius: .5em;
+  }
+
   .btn-add-bot:focus{
     outline: none
   }
