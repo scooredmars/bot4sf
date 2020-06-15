@@ -15,13 +15,24 @@ class Home(ListView):
     model = GeneratePage
 
 
-class Dashboard(ListView):
-    template_name = "user/dashboard.html"
-    model = Bots
-    context_object_name = "bots"
+def dashboard(request):
+    bots_q = Bots.objects.all()
+    user_bots = bots_q.filter(profile__user=request.user)
 
-    def get_queryset(self):
-        return Bots.objects.filter(profile__user=self.request.user)
+    amount_user_bots = user_bots.count()
+    current_plan_q = Plan.objects.get(
+        profile=(Profile.objects.get(user=request.user)))
+    if amount_user_bots >= current_plan_q.max_bots:
+        lock_add = True
+    else:
+        lock_add = False
+
+    context = {
+        "user_bots": user_bots,
+        "lock_add": lock_add,
+    }
+
+    return render(request, "user/dashboard.html", context)
 
 
 class ProfileView (ListView):
