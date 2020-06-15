@@ -19,7 +19,7 @@
               </div>
               <div class="card-body">
                 {% for bot in user_info %}
-                  {% if bot.username %}
+                  {% if bot.country %}
                     {% if bot.profile.plan.max_time == 24 %}
                       <h4 class="info">{{ bot.username }}<span class="time">unlimited</span></h4>
                       <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
