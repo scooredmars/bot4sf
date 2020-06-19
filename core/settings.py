@@ -12,6 +12,7 @@ SECRET_KEY = "cvvup7f6u39v1502!m3c#jq$crmrx2fb=y&4)ezi)+7jmp_!5b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+REGISTER_OFFLINE = False
 
 if DEBUG:
     EMAIL_BACKEND = (
@@ -163,5 +164,7 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
 
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/dashboard"
 
-# Disable new users signup
-ACCOUNT_ADAPTER = 'sfbot.adapter.NoNewUsersAccountAdapter'
+if REGISTER_OFFLINE:
+    ACCOUNT_ADAPTER = 'sfbot.adapter.NoNewUsersAccountAdapter'
+
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True

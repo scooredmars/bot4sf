@@ -1,3 +1,4 @@
+from allauth.account.views import PasswordChangeView
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
@@ -18,6 +19,14 @@ class Home(ListView):
 def dashboard(request):
     bots_q = Bots.objects.all()
     user_bots = bots_q.filter(profile__user=request.user)
+    current_user = Profile.objects.filter(user=request.user)
+
+    if current_user:
+        pass
+    else:
+        starter_plan = Plan.objects.get(name="FOR BEGINNERS")
+        user_profile = Profile(user=request.user, plan=starter_plan)
+        user_profile.save()
 
     amount_user_bots = user_bots.count()
     current_plan_q = Plan.objects.get(
@@ -133,3 +142,7 @@ class Regulations(ListView):
 class PrivacyPolicy(ListView):
     template_name = "account/privacy-policy.html"
     model = GeneratePage
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    success_url = "/login/"
