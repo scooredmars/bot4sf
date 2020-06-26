@@ -52,7 +52,7 @@ class AddBotForm(forms.ModelForm):
             "username",
             "password",
             "country",
-            "server",
+            "server"
         )
         widgets = {
             "password": forms.PasswordInput(),
@@ -81,13 +81,6 @@ class AddBotForm(forms.ModelForm):
 
         return super(AddBotForm, self).clean(*args, **keyargs)
 
-    def save(self, commit=True):
-        obj = super().save(commit=False)
-        obj.set_password(self.cleaned_data["password"])
-        obj.save()
-
-        return obj
-
 
 class SettingsForm(forms.ModelForm):
     class Meta:
@@ -97,7 +90,7 @@ class SettingsForm(forms.ModelForm):
             "tavern_status",
             "tavern_settings",
             "arena_status",
-            "arena_settings",
+            "arena_settings"
         )
 
     def __init__(self, *args, **kwargs):
@@ -108,3 +101,28 @@ class SettingsForm(forms.ModelForm):
             {'class': 'onoffswitch-checkbox'})
         self.fields['arena_status'].widget.attrs.update(
             {'class': 'onoffswitch-checkbox'})
+
+
+class EditBotForm(forms.ModelForm):
+    class Meta:
+        model = Bots
+        fields = (
+            "username",
+            "password",
+            "country",
+            "server"
+        )
+
+    def clean(self, *args, **keyargs):
+        username = self.cleaned_data.get("username")
+        server = self.cleaned_data.get("server")
+
+        country_qs = Bots.objects.filter(server=server)
+        sf_username_qs = Bots.objects.filter(username=username)
+        if country_qs.exists():
+            if sf_username_qs.exists():
+                raise forms.ValidationError(
+                    "An account with this username already exists on this server"
+                )
+
+        return super(EditBotForm, self).clean(*args, **keyargs)
