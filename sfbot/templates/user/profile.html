@@ -75,7 +75,7 @@
                 {% if info.profile.plan %}
                   <div class="item">{{ info.profile.plan.name }}</div>
                 {% else %}
-                  <div class="item">You get plan, when you create bot (<a href="add">ADD BOT</a>) </div>
+                  <div class="item">You get plan, when you create bot (<a href="{% url 'sfbot:add_bot' %}">ADD BOT</a>) </div>
                 {% endif %}
               </div>
             {% endfor %}

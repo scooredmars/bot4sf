@@ -8,13 +8,13 @@
         <div class="account">{{ user }}</div>
         <i class="dropdown icon"></i>
         <div class="menu">
-          <a href="profile">
+          <a href="{% url 'sfbot:profile' %}">
             <div class="item nav-links">
               <i class="cogs icon"></i>
               Settings
             </div>
           </a>
-          <a href="logout">
+          <a href="{% url 'account_logout' %}">
             <div class="item nav-links">
               <i class="sign out alternate icon"></i>
               Logout
