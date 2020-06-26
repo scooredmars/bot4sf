@@ -1,0 +1,52 @@
+{% extends "layouts/default.html" %}
+
+{% load static %}
+
+{% block title %}SFBot - Edit Bot Settings{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <div class="wrapper">
+      {% include "layouts/sidebar.html" %}
+      <div class="content">
+        {% include "layouts/navbar.html" %}
+        <h1 class="text-center">Edit Bot Information</h1>
+        <form action="" method="post" class="bot-settings">
+        {% csrf_token %}
+        <div class="information-account">
+          <div class="left">
+            <div class="item">
+              <div class="object">SF username:{{ form.username }}</div>
+            </div>
+            <div class="item">
+              <div class="object">Account country:{{ form.country }}</div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="item"> 
+              <div class="object">SF Password:{{ form.password }}</div>
+            </div>
+            <div class="item"> 
+              <div class="object">Account server:{{ form.server }}</div>
+            </div>
+          </div>
+        </div>
+        {{ form.non_field_errors }}
+        <button class="button button-block" type="submit">Save Settings</button>
+        </form>
+  {% else %}
+    <div class="background">
+      <div class="custom-form space">
+        <ul class="tab-group">
+          <li class="tab"><a href="signup">Sign Up</a></li>
+          <li class="tab active"><a href="login">Log In</a></li>
+        </ul>
+        <div id="login">
+          <h1 class="white">You aren't logged in</h1>
+          <p class="white bigger-p text-center space-p"> Go to "Log In" or if you don't have account, <br> go to "Sign Up"</p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+    </div>
+{% endblock %}
