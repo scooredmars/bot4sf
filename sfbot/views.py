@@ -89,7 +89,6 @@ class AddBot(CreateView):
                 obj.save()
                 return HttpResponseRedirect(obj.get_absolute_url())
             else:
-                # TODO add lock to button
                 return HttpResponseRedirect("dashboard")
         else:
             starter_plan = Plan.objects.get(name="FOR BEGINNERS")
