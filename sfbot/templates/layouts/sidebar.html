@@ -2,7 +2,7 @@
 
 <nav class="nav-left sidebar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard">
+    <a class="navbar-brand" href="{% url 'sfbot:dashboard' %}">
       <div class="sidebar-brand-icon">
         <i class="robot icon"></i>
       </div>
@@ -10,16 +10,16 @@
     </a>
     <ul class="navbar-nav" id="accordionSidebar">
       <li class="nav-item" role="presentation">
-        <a class="nav-link" href="dashboard">
+        <a class="nav-link" href="{% url 'sfbot:dashboard' %}">
           <i class="tachometer alternate icon"></i><span>Dashboard</span>
         </a>
-        <a class="nav-link" href="profile">
+        <a class="nav-link" href="{% url 'sfbot:profile' %}">
           <i class="user icon"></i><span>Profile</span>
         </a>
-        <a class="nav-link" href="shop">
+        <a class="nav-link" href="{% url 'sfbot:shop' %}">
           <i class="shopping cart icon"></i><span>Shop</span>
         </a>
-        <a class="nav-link" href="faq">
+        <a class="nav-link" href="{% url 'sfbot:faq' %}">
           <i class="info circle icon"></i><span>FAQ</span>
         </a>
       </li>

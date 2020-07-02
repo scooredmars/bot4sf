@@ -1,7 +1,7 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-
+from django.http import HttpResponseRedirect
 from .models import Bots
 
 
@@ -52,7 +52,7 @@ class AddBotForm(forms.ModelForm):
             "username",
             "password",
             "country",
-            "server",
+            "server"
         )
         widgets = {
             "password": forms.PasswordInput(),
@@ -69,6 +69,7 @@ class AddBotForm(forms.ModelForm):
 
     def clean(self, *args, **keyargs):
         username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
         server = self.cleaned_data.get("server")
 
         sf_username_qs = Bots.objects.filter(username=username)
@@ -78,15 +79,12 @@ class AddBotForm(forms.ModelForm):
                 raise forms.ValidationError(
                     "An account with this username already exists on this server"
                 )
+        if len(password) < 5:
+            raise forms.ValidationError("Password is too short")
+        if len(password) > 30:
+            raise forms.ValidationError("Password is too long")
 
         return super(AddBotForm, self).clean(*args, **keyargs)
-
-    def save(self, commit=True):
-        obj = super().save(commit=False)
-        obj.set_password(self.cleaned_data["password"])
-        obj.save()
-
-        return obj
 
 
 class SettingsForm(forms.ModelForm):
@@ -97,7 +95,7 @@ class SettingsForm(forms.ModelForm):
             "tavern_status",
             "tavern_settings",
             "arena_status",
-            "arena_settings",
+            "arena_settings"
         )
 
     def __init__(self, *args, **kwargs):
@@ -108,3 +106,68 @@ class SettingsForm(forms.ModelForm):
             {'class': 'onoffswitch-checkbox'})
         self.fields['arena_status'].widget.attrs.update(
             {'class': 'onoffswitch-checkbox'})
+
+
+class EditBotForm(forms.ModelForm):
+    class Meta:
+        model = Bots
+        fields = (
+            "username",
+            "password",
+            "country",
+            "server"
+        )
+
+    def clean(self, *args, **keyargs):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+        server = self.cleaned_data.get("server")
+
+        # check if current queryset bot exist
+        username_change = Bots.objects.filter(username=username)
+        all_bots = Bots.objects.all()
+
+        # username was change and queryset exist
+        if username_change.exists():
+            # list of usernames for current server
+            current_server_username_list = Bots.objects.filter(
+                server=server).filter(username=username)
+            # user id
+            currnet_user_id = Bots.objects.filter(username=username).only("id")
+            for bot_data in currnet_user_id:
+                # data for current user
+                data_user = Bots.objects.get(pk=bot_data.id)
+            # check if user data was change
+            if (data_user.username == username) & (data_user.password == password) & (data_user.server == server):
+                return HttpResponseRedirect("dashboard")
+            elif data_user.password != password:
+                if len(password) < 5:
+                    raise forms.ValidationError("Password is too short")
+                if len(password) > 30:
+                    raise forms.ValidationError("Password is too long")
+                if data_user in all_bots:
+                    if (data_user.username == username) | (data_user.server == server):
+                        if current_server_username_list.exists():
+                            current_server_username = Bots.objects.filter(
+                                server=server).get(username=username)
+                            if current_server_username in current_server_username_list:
+                                raise forms.ValidationError(
+                                    "An account with this username already exists on this server")
+            elif data_user.server != server:
+                if data_user in all_bots:
+                    if current_server_username_list.exists():
+                        current_server_username = Bots.objects.filter(
+                            server=server).get(username=username)
+                        if current_server_username in current_server_username_list:
+                            raise forms.ValidationError(
+                                "An account with this username already exists on this server")
+            elif data_user.username != username:
+                if data_user in all_bots:
+                    if current_server_username_list.exists():
+                        current_server_username = Bots.objects.filter(
+                            server=server).get(username=username)
+                        if current_server_username in current_server_username_list:
+                            raise forms.ValidationError(
+                                "An account with this username already exists on this server")
+
+        return super(EditBotForm, self).clean(*args, **keyargs)

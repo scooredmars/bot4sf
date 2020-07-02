@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
-from .forms import AddBotForm, ContactForm, SettingsForm
+from .forms import AddBotForm, ContactForm, SettingsForm, EditBotForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
 
 # Create your views here.
@@ -89,7 +89,6 @@ class AddBot(CreateView):
                 obj.save()
                 return HttpResponseRedirect(obj.get_absolute_url())
             else:
-                # TODO add lock to button
                 return HttpResponseRedirect("dashboard")
         else:
             starter_plan = Plan.objects.get(name="FOR BEGINNERS")
@@ -120,6 +119,17 @@ class SettingsView(UpdateView):
 
 class UserBotDetails(DetailView):
     model = Bots
+
+
+class EditBotDetails(UpdateView):
+    template_name = "user/edit-bot.html"
+    model = Bots
+    form_class = EditBotForm
+    success_url = "../dashboard"
+    context_object_name = "edit_info"
+
+    def get_queryset(self):
+        return Bots.objects.filter(profile__user=self.request.user)
 
 
 class Shop(ListView):
