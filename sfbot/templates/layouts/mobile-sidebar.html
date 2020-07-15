@@ -1,0 +1,27 @@
+{% load static %}
+<i id="burger" class="bars icon" onclick="burger()"></i>
+<i id="quit" class="times icon" onclick="quit()"></i>
+<div id="links">
+    {% if lock_add == False %}
+        <a class="nav-link" href="{% url 'sfbot:add_bot' %}" onclick="quit()">
+            <i class="plus icon"></i><span>Add Bot</span>
+        </a>
+    {% endif %}
+    <a class="nav-link" href="{% url 'sfbot:dashboard' %}" onclick="quit()">
+        <i class="tachometer alternate icon"></i><span>Dashboard</span>
+    </a>
+    <a class="nav-link" href="{% url 'sfbot:profile' %}" onclick="quit()">
+        <i class="user icon"></i><span>Profile</span>
+    </a>
+    <a class="nav-link" href="{% url 'sfbot:shop' %}" onclick="quit()">
+        <i class="shopping cart icon"></i><span>Shop</span>
+    </a>
+    <a class="nav-link" href="{% url 'sfbot:faq' %}" onclick="quit()">
+        <i class="info circle icon"></i><span>FAQ</span>
+    </a>
+    <a class="nav-link" href="{% url 'account_logout' %}" onclick="quit()">
+        <i class="sign out alternate icon"></i><span>Logout</span>
+    </a>
+</div>
+
+<script src="{% static 'js/mobile-nav.js' %}"></script>

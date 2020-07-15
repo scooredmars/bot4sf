@@ -16,7 +16,6 @@
       <h1 class="white">Join to us</h1>
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
-      {{ form.non_field_errors }}
           <div class="field-wrap">
             {{ form.as_p }}
             {% if redirect_field_value %}
