@@ -8,7 +8,8 @@
   {% if user.is_authenticated %}
   <div class="wrapper">
     {% include "layouts/sidebar.html" %}
-    <div class="content">
+    {% include "layouts/mobile-sidebar.html" %}
+    <div class="content dashboard">
       <div class="nav-col">
         <nav class="nav-right">
           <div class="container-fluid">
@@ -70,7 +71,10 @@
             </div>
           {% endfor %}
         {% else %}
-          <div class="text-center no-bots">You don't have any bots, click on "Add Bot", at the top of the page</div>
+          <div class="text-center no-bots">
+            You don't have any bots, click on "Add Bot", at the top of the page. <br><br>
+            If you are using the mobile version, go to the menu and click "Add Bot".
+          </div>
         {% endif %}
       </div>
       {% include "layouts/footer-user.html" %}

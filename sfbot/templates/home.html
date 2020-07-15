@@ -5,47 +5,15 @@
 {% block title %}SFBot{% endblock %}
 
 {% block content %}
+{% include "layouts/mobile-navbar.html" %}
 <div class="home-bcga" id="home">
   <div class="navbar">
     <a href="#home"><div class="logo"></div></a>
-    <div class="ui grid">
-      <div class="four wide column text-center"><a href="#home">Home</a></div>
-      <div class="four wide column text-center"><a href="#pricing">Pricing</a></div>
-      <div class="four wide column text-center"><a href="#screenshots">Screenshots</a></div>
-      <div class="four wide column text-center"><a href="#contact">Contact</a></div>
-    </div>
-    <a href="login"><div class="ui button">Try for free</div></a>
-  </div>
-
-  <div class="slogan">
-    <div class="s-img"></div>
-    <div class="s-text">
-      <h1>Improve your character with us</h1>
-      <p>SFBot is a quick way to lvl uo your account when you don't <br> have enought time to play or
-      whne you are just sleeping.</p>
-    </div>
-  </div>
-
-  <div class="about">
-    <h1 class="text-center">About The App</h1>
-    <p class="text-center">Writers and stars of Veep have responded incredulously to the news an Australian politician <br> required preinstalled stitches way  email client, calendar, mapping program.</p>
-    <div class="blocks">
-      <div class="block">
-        <div class="start icon"></div>
-        <div class="topic text-center">Free Start</div>
-        <div class="description text-center">The basic bot isn't paid, but has restrictions visible in the pricing </div>
-      </div>
-      <div class="block">
-        <div class="privacy icon"></div>
-        <div class="topic text-center">Data Privacy</div>
-        <div class="description text-center">Your data is only used by us and not sold to another companies.  </div>
-      </div>
-      <div class="block">
-        <div class="settings icon"></div>
-        <div class="topic text-center">Simple Settings</div>
-        <div class="description text-center">You can set the bot with a few clicks. Our interface is designed to be easy to use. </div>
-      </div>
-    </div>
+    <a href="#home">Home</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#screenshots">Screenshots</a>
+    <a href="#contact">Contact</a>
+    <a href="signup"><div class="ui button">Try for free</div></a>
   </div>
 </div>
 
@@ -53,18 +21,16 @@
   <div class="navbar sections" id="navbar">
     <div class="container">
       <a href="#home"><div class="logo"></div></a>
-      <div class="ui grid">
-        <div class="four wide column text-center"><a href="#home">Home</a></div>
-        <div class="four wide column text-center"><a href="#pricing">Pricing</a></div>
-        <div class="four wide column text-center"><a href="#screenshots">Screenshots</a></div>
-        <div class="four wide column text-center"><a href="#contact">Contact</a></div>
-      </div>
+      <a href="#home">Home</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#contact">Contact</a>
       <a href="signup"><div class="ui button">Try for free</div></a>
     </div>
   </div>
 
   <h1 class="text-center">Pricing Plan</h1>
-  <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
+  <p class="text-center">The plan concerns monthly fees. <br> We do not have annual accounts. <br> Fees are not automatically renewable.</p>
 
   <div class="plans">
     <div class="plan">
@@ -79,7 +45,7 @@
         <div class="information"><i class="times icon"></i>Bot works all the time</div>
         <div class="information"><i class="times icon"></i>Max 5 bot</div>
       </div>
-      <a href="register"><div class="register">Sign Up</div></a>
+      <a href="signup"><div class="register">Sign Up</div></a>
     </div>
     <div class="plan best">
       <div class="header text-center">I DON'T HAVE TIME</div>
@@ -93,7 +59,7 @@
         <div class="information"><i class="times icon"></i>Bot works all the time</div>
         <div class="information"><i class="times icon"></i>Max 5 bot</div>
       </div>
-      <a href="register"><div class="register">Sign Up</div></a>
+      <a href="signup"><div class="register">Sign Up</div></a>
     </div>
     <div class="plan">
       <div class="header text-center">I'M ON VACATION</div>
@@ -107,7 +73,7 @@
         <div class="information"><i class="check icon"></i>Bot works all the time</div>
         <div class="information"><i class="check icon"></i>Max 5 bot</div>
       </div>
-      <a href="register"><div class="register">Sign Up</div></a>
+      <a href="signup"><div class="register">Sign Up</div></a>
     </div>
   </div>
 </div>
@@ -162,6 +128,7 @@
 </div>
 
 <script src="{% static 'js/nav-scroll.js' %}"></script>
+<script src="{% static 'js/mobile-nav.js' %}"></script>
 {% include "layouts/footer.html" %}
 {% endblock %}
 

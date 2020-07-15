@@ -3,6 +3,10 @@
   width: $full-size;
 }
 
+#burger,#quit,#links{
+  display: none;
+}
+
 .nav-left{
   min-height: 100vh;
   width: 12%;
@@ -116,17 +120,6 @@
     justify-content: flex-start;
     align-items: center;
     display: flex;
-    padding: .5rem 1rem;
-  }
-
-  .nav-mobile{
-    height: 4.375rem;
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
-    background-color: $white;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    display: none;
     padding: .5rem 1rem;
   }
 
