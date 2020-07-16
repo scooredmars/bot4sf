@@ -9,14 +9,15 @@
   <div class="wrapper">
     {% include "layouts/sidebar.html" %}
     {% include "layouts/mobile-sidebar.html" %}
-    <div class="content dashboard">
+    {% include "layouts/modal.html" %}
+    <div class="user-content">
       <div class="nav-col">
         <nav class="nav-right">
           <div class="container-fluid">
             {% if lock_add == False %}
-            <a href="{% url 'sfbot:add_bot' %}">
-              <button class="btn-add-bot" type="button">add bot</button>
-            </a>
+              <a href="{% url 'sfbot:add_bot' %}">
+                <button class="btn-add-bot" type="button">add bot</button>
+              </a>
             {% else %}
               <button class="btn-add-bot-max" type="button">max bots</button>
             {% endif %}
@@ -24,24 +25,18 @@
               <div class="account">{{ user }}</div>
               <i class="dropdown icon"></i>
               <div class="menu">
-                <a href="{% url 'sfbot:profile' %}">
-                  <div class="item nav-links">
-                    <i class="cogs icon"></i>
-                    Settings
-                  </div>
-                </a>
-                <a href="logout">
-                  <div class="item nav-links">
-                    <i class="sign out alternate icon"></i>
-                    Logout
-                  </div>
-                </a>
+                <div class="item nav-links quit">
+                  <i class="sign out alternate icon"></i>
+                  Logout
+                </div>
               </div>
             </div>
           </div>
         </nav>
       </div>
       <script src="{% static 'js/navbar.js' %}"></script>
+      <script src="{% static 'js/modal.js' %}"></script>
+
 
       <h1 class="text-center">Dashboard</h1>
       <div class="bots">

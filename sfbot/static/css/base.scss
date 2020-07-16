@@ -3,6 +3,7 @@
 @import "mobile";
 @import "includes/navbar";
 @import "includes/footer";
+@import "includes/modal";
 @import "includes/custom-forms";
 @import "includes/regulation-privacy";
 @import "user/dashboard";
@@ -66,6 +67,10 @@ button:focus{
 
 .text-uppercase{
   text-transform: uppercase !important;
+}
+
+.flex{
+  display: flex;
 }
 
 a:hover {
