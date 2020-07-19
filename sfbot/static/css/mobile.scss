@@ -45,7 +45,7 @@
     flex-direction: column;
     width: 100vw;
     height: 50vh;
-    padding: 20vh 0;
+    padding: 13vh 0;
     z-index: 11;
     position: fixed;
 
@@ -171,12 +171,6 @@
     width: 90% !important;
   }
 
-  // add bot //
-  .add-form{
-    width: 85% !important;
-    margin: 3em auto !important;
-  }
-
   // settings // 
   .bot-settings{
     width: 85% !important;
@@ -206,6 +200,39 @@
 
     .work, .task{
       width: 100% !important;
+    }
+  }
+
+  .user-content{
+    width: 100% !important;
+  }
+
+  // add bot //
+  .create-bot{
+    .data{
+      width: 70% !important;
+
+      p{
+        display: block !important;
+      }
+    }
+
+    .custom{
+      padding: 0 !important;
+      padding-top: 1em !important;
+    }
+  }
+
+  // edit bot //
+  .edit-information{
+    display: block !important;
+
+    .left{
+      padding-bottom: 1em;
+    }
+
+    .item:first-child{
+      padding-bottom: 1em !important;
     }
   }
 

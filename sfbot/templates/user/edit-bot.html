@@ -14,21 +14,25 @@
         <h1 class="text-center">Edit Bot Information</h1>
         <form action="" method="post" class="bot-settings">
         {% csrf_token %}
-        <div class="information-account">
+        <div class="edit-information">
           <div class="left">
             <div class="item">
-              <div class="object">SF username:{{ form.username }}</div>
+              <div class="object">SF username:</div>
+              <div class="object">{{ form.username }}</div>
             </div>
             <div class="item">
-              <div class="object">Account country:{{ form.country }}</div>
+              <div class="object">Account country:</div>
+              <div class="object">{{ form.country }}</div>
             </div>
           </div>
           <div class="right">
             <div class="item"> 
-              <div class="object">SF Password:{{ form.password }}</div>
+              <div class="object">SF Password:</div>
+              <div class="object">{{ form.password }}</div>
             </div>
-            <div class="item"> 
-              <div class="object">Account server:{{ form.server }}</div>
+            <div class="item">
+              <div class="object">Account server:</div>
+              <div class="object">{{ form.server }}</div>
             </div>
           </div>
         </div>

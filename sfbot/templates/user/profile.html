@@ -76,7 +76,9 @@
                 {% if info.profile.plan %}
                   <div class="item">{{ info.profile.plan.name }}</div>
                 {% else %}
-                  <div class="item">You get plan, when you create bot (<a href="{% url 'sfbot:add_bot' %}">ADD BOT</a>) </div>
+                  <div class="item">
+                    You get plan, when you create bot.
+                  </div>
                 {% endif %}
               </div>
             {% endfor %}
@@ -88,6 +90,7 @@
   {% include "layouts/footer-user.html" %}
   </div>
   <script src="{% static 'js/bot-time.js' %}"></script>
+  <script src="{% static 'js/modal.js' %}"></script> 
 {% else %}
 <div class="background">
   <div class="form-reg-log">

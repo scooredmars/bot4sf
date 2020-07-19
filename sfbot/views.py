@@ -16,14 +16,13 @@ class Home(ListView):
     model = GeneratePage
 
 
-def dashboard(request):
+def DashboardAddBot(request):
+    # Dashboard
     bots_q = Bots.objects.all()
     user_bots = bots_q.filter(profile__user=request.user)
     current_user = Profile.objects.filter(user=request.user)
 
-    if current_user:
-        pass
-    else:
+    if not current_user:
         starter_plan = Plan.objects.get(name="FOR BEGINNERS")
         user_profile = Profile(user=request.user, plan=starter_plan)
         user_profile.save()
@@ -36,9 +35,33 @@ def dashboard(request):
     else:
         lock_add = False
 
+    # Add Bot
+    form = AddBotForm()
+    if request.method == "POST":
+        form = AddBotForm(request.POST)
+        if form.is_valid():
+            # check if user profile is created
+            current_user = Profile.objects.filter(user=request.user)
+            if current_user:
+                # amount of all bots for current user
+                max_user_bots = Bots.objects.filter(
+                    profile__user=request.user).count()
+                # acces to user current plan query
+                current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
+                    user=request.user)))
+                if max_user_bots < current_plan_q.max_bots:
+                    obj = form.save(commit=False)
+                    # Set current user profile
+                    obj.profile = Profile.objects.get(
+                        user=request.user)
+                    obj.time_left = current_plan_q.max_time
+                    obj.save()
+                    return HttpResponseRedirect(obj.get_absolute_url())
+
     context = {
         "user_bots": user_bots,
         "lock_add": lock_add,
+        "form": form,
     }
 
     return render(request, "user/dashboard.html", context)
@@ -61,50 +84,6 @@ class ProfileView (ListView):
                 return User.objects.filter(username=self.request.user)
         else:
             return User.objects.filter(username=self.request.user)
-
-
-class AddBot(CreateView):
-    template_name = "user/add_bot.html"
-    model = Bots
-    form_class = AddBotForm
-
-    def form_valid(self, form):
-        # check if user profile is created
-        current_user = Profile.objects.filter(
-            user=self.request.user)
-
-        if current_user:
-            # amount of all bots for current user
-            max_user_bots = Bots.objects.filter(
-                profile__user=self.request.user).count()
-            # acces to user current plan query
-            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
-                user=self.request.user)))
-            if max_user_bots < current_plan_q.max_bots:
-                obj = form.save(commit=False)
-                # Set current user profile
-                obj.profile = Profile.objects.get(
-                    user=self.request.user)
-                obj.time_left = current_plan_q.max_time
-                obj.save()
-                return HttpResponseRedirect(obj.get_absolute_url())
-            else:
-                return HttpResponseRedirect("dashboard")
-        else:
-            starter_plan = Plan.objects.get(name="FOR BEGINNERS")
-            user_profile = Profile(user=self.request.user, plan=starter_plan)
-            user_profile.save()
-
-            # acces to user current plan query
-            current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
-                user=self.request.user)))
-            obj = form.save(commit=False)
-            # Set current user profile
-            obj.profile = Profile.objects.get(
-                user=self.request.user)
-            obj.time_left = current_plan_q.max_time
-            obj.save()
-            return HttpResponseRedirect(obj.get_absolute_url())
 
 
 class SettingsView(UpdateView):
