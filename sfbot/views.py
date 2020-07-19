@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
-from .forms import AddBotForm, ContactForm, SettingsForm, EditBotForm
+from .forms import AddBotForm, SettingsForm, EditBotForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
 
 # Create your views here.

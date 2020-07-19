@@ -26,25 +26,6 @@ class UserSignupForm(SignupForm):
         user.save()
 
 
-class ContactForm(forms.Form):
-    from_email = forms.EmailField(required=True)
-    subject = forms.CharField(required=True, min_length=6)
-    message = forms.CharField(widget=forms.Textarea,
-                              required=True, min_length=10)
-
-    def __init__(self, *args, **kwargs):
-        super(ContactForm, self).__init__(*args, **kwargs)
-        self.fields["from_email"].widget.attrs.update(
-            {"name": "from_email", "placeholder": "Your Email"}
-        )
-        self.fields["subject"].widget.attrs.update(
-            {"name": "subject", "placeholder": "Subject"}
-        )
-        self.fields["message"].widget.attrs.update(
-            {"name": "message", "placeholder": "Message", "rows": "10"}
-        )
-
-
 class AddBotForm(forms.ModelForm):
     class Meta:
         model = Bots

@@ -124,6 +124,7 @@
   top: -150px;
   width: 100%;
   transition: top 0.5s;
+  z-index: 3;
 
   .container{
     width: 76.5%;
@@ -256,53 +257,16 @@
   .images{
     width: 90%;
     margin: auto;
-    display: flex;
     justify-content: space-around;
-    padding-top: 6em;
-
+    padding-top: .5em;
+    
     .image{
-      width: 20%;
-    }
-  }
-}
-
-.contact{
-  min-height: 90vh;
-  padding-bottom: 4vh;
-  background-color: #F8F6F6;
-  color: #5D5D5D;
-
-  h1{
-    padding-top: 4.5em;
-  }
-
-  p{
-    font-size: 1.4em;
-  }
-
-  form{
-    width: 50%;
-    margin: auto;
-    padding-top: 2.7em;
-
-    input, textarea{
-      background: white;
-      border: 1px solid rgba(128, 128, 128, 0.267);
-      color: black;
-      padding: .7em;
-      width: 100%;
-      margin-bottom: .8em;
+      width: 90%;
+      margin: auto;
     }
 
-    ::placeholder{
-      color: rgba(128, 128, 128, 0.808);
-    }
-
-    .ui.button{
-      width: 100%;
-      background: rgb(60, 134, 253);
-      color: white;
-      font-size: 1.5em;
+    .image:nth-child(2){
+      margin: 2em auto;
     }
   }
 }
