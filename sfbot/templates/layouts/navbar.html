@@ -1,4 +1,5 @@
 {% load static %}
+{% include "modal/quit.html" %}
 
 <div class="nav-col">
   <nav class="nav-right">
@@ -8,18 +9,10 @@
         <div class="account">{{ user }}</div>
         <i class="dropdown icon"></i>
         <div class="menu">
-          <a href="{% url 'sfbot:profile' %}">
-            <div class="item nav-links">
-              <i class="cogs icon"></i>
-              Settings
-            </div>
-          </a>
-          <a href="{% url 'account_logout' %}">
-            <div class="item nav-links">
-              <i class="sign out alternate icon"></i>
-              Logout
-            </div>
-          </a>
+          <div class="item nav-links quit">
+            <i class="sign out alternate icon"></i>
+            Logout
+          </div>
         </div>
       </div>
     </div>
@@ -27,3 +20,4 @@
 </div>
 
 <script src="{% static 'js/navbar.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>

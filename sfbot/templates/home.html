@@ -12,7 +12,6 @@
     <a href="#home">Home</a>
     <a href="#pricing">Pricing</a>
     <a href="#screenshots">Screenshots</a>
-    <a href="#contact">Contact</a>
     <a href="signup"><div class="ui button">Try for free</div></a>
   </div>
 </div>
@@ -24,7 +23,6 @@
       <a href="#home">Home</a>
       <a href="#pricing">Pricing</a>
       <a href="#screenshots">Screenshots</a>
-      <a href="#contact">Contact</a>
       <a href="signup"><div class="ui button">Try for free</div></a>
     </div>
   </div>
@@ -83,48 +81,15 @@
 
   <div class="images">
     <div class="image">
-      <div class="ui placeholder">
-        <div class="square image"></div>
-      </div>
+      <img class="ui fluid image" src="{% static 'img/home/dashboard-ss.png' %}">
     </div>
     <div class="image">
-      <div class="ui placeholder">
-        <div class="square image"></div>
-      </div>
+      <img class="ui fluid image" src="{% static 'img/home/settings-ss.png' %}">
     </div>
     <div class="image">
-      <div class="ui placeholder">
-        <div class="square image"></div>
-      </div>
-    </div>
-    <div class="image">
-      <div class="ui placeholder">
-        <div class="square image"></div>
-      </div>
+      <img class="ui fluid image" src="{% static 'img/home/profile-ss.png' %}">
     </div>
   </div>
-</div>
-
-<div class="contact" id="contact">
-  <h1 class="text-center">Do you have a doubt?</h1>
-  <p class="text-center">Write to us to find out more details and start your adventure with us.</p>
-
-  <form action="" method="post">
-    {% csrf_token %}
-    <div class="field">
-      <input type="text" name="name" placeholder="Name">
-    </div>
-    <div class="field">
-      <input type="text" name="topic" placeholder="Topic">
-    </div>
-    <div class="field">
-      <input type="email" placeholder="joe@schmoe.com">
-    </div>
-    <div class="field">
-      <textarea placeholder="Text" rows="5"></textarea>
-    </div>
-    <button class="ui button" type="submit">Send</button>
-  </form>
 </div>
 
 <script src="{% static 'js/nav-scroll.js' %}"></script>

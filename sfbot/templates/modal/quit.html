@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="ui basic modal">
+    <div class="ui icon header">
+        <i class="door open icon"></i>
+        Do you want to quit ?
+    </div>
+    <div class="actions flex">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </div>
+        <form class="modal-form" method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button type="submit"><div class="ui green ok inverted button">
+                <i class="checkmark icon"></i>Yes</div>
+            </button>
+        </form>
+        
+    </div>
+</div>
+
+<script src="{% static 'js/modal.js' %}"></script>

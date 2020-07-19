@@ -131,8 +131,12 @@
     width: $full-size;
     justify-content: space-between;
 
-    .icon-media{
-      display: none;
+    .add{
+      cursor: pointer;
+    }
+
+    .max{
+      cursor: not-allowed;
     }
   }
 

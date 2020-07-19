@@ -21,6 +21,33 @@
     font-weight:$thin;
     margin:0 0 25px;
   }
+
+  label {
+    color: rgba(255, 255, 255, 0.774);
+    font-size:22px;
+    .req {
+      margin:2px;
+      color:$main;
+    }
+  }
+
+  input, textarea {
+    margin-top: .4em;
+    margin-bottom: 1em;
+    font-size:22px;
+    width:$full-size;
+    padding:5px 10px;
+    background:none;
+    background-image:none;
+    border:1px solid $gray-light;
+    color:$white;
+    border-radius:0;
+    transition:border-color .25s ease, box-shadow .25s ease;
+    &:focus {
+      outline:0;
+      border-color:$main;
+    }
+  }
 }
 
 .tab-group {
@@ -54,34 +81,6 @@
     color:$white;
   }
 }
-
-label {
-  color: rgba(255, 255, 255, 0.774);
-  font-size:22px;
-  .req {
-    margin:2px;
-    color:$main;
-  }
-}
-
-input, textarea {
-  margin-top: .4em;
-  margin-bottom: 1em;
-  font-size:22px;
-  width:$full-size;
-  padding:5px 10px;
-  background:none;
-  background-image:none;
-  border:1px solid $gray-light;
-  color:$white;
-  border-radius:0;
-  transition:border-color .25s ease, box-shadow .25s ease;
-  &:focus {
-		outline:0;
-		border-color:$main;
-  }
-}
-
 
 .field-wrap {
   position: relative;
@@ -242,6 +241,46 @@ fieldset{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: .3em;
+  }
+  
+  .custom-label:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  .custom-label input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .custom-label input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .custom-label .checkmark:after {
+    left: 10px;
+    top: 5px;
+    width: 6px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 }
 
 .custom-label input {
@@ -252,45 +291,7 @@ fieldset{
   width: 0;
 }
 
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: .3em;
-}
 
-.custom-label:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-.custom-label input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.custom-label input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.custom-label .checkmark:after {
-  left: 10px;
-  top: 5px;
-  width: 6px;
-  height: 14px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 
 .primary{
   padding-left: .3em;

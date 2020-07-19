@@ -1,89 +1,3 @@
-.add-form{
-  background-color: rgba(84, 84, 252, 0.795);
-  width: 50%;
-  margin: 6em auto;
-  border-radius: 1em;
-
-  .add-header{
-    color: $white;
-    padding-top: 1em;
-  }
-
-  p{
-    width: 80%;
-    margin: auto;
-    padding-top: 1em;
-
-    label{
-      color: $white;
-    }
-
-    input{
-      background-color: rgba(255, 255, 255, 0.829);
-      color: $black;
-      border-radius: .3em;
-    }
-  }
-
-  .server-region{
-    padding-top: 1em;
-    margin: auto;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-
-    .selects{
-      width: 40%;
-      margin: 0;
-
-      select{
-        width: 100%;
-        margin-top: 1em;
-        padding: .35em;
-        font-size: 1.2em;
-        border-radius: .5em;
-      }
-    }
-  }
-
-  .explain{
-    font-size: 1.4em;
-    color: $white;
-    padding-top: 1.4em;
-    width: 80%;
-    margin: auto;
-  }
-
-  .errorlist{
-    color: rgb(250, 169, 169);
-    font-size: 1.4em;
-    width: 80%;
-    margin: auto;
-    padding-top: 1em;
-    padding-bottom: 0;
-    padding-inline-start: 19px;
-  }
-
-  .add-button{
-    width: 50%;
-    margin: auto;
-    padding-top: 5.5em;
-    padding-bottom: 3em;
-
-    button{
-      width: 100%;
-      font-size: 1.3em;
-      border-radius: 1.5em;
-      background-color: rgb(0, 240, 176);
-      transition: all 0.5s ease;
-    }
-
-    button:hover{
-      background-color: rgb(2, 212, 156);
-    }
-  }
-}
-
 .bot-settings{
   width: 55%;
   margin: auto;
@@ -223,4 +137,36 @@
     right: 0px; 
   }
 
+}
+
+.edit-information{
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  border-radius: .7em;
+  padding: 1.8em;
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-around;
+
+  .item:first-child{
+    padding-bottom: 2em;
+  }
+
+  .object:first-child{
+    padding-bottom: .7em;
+  }
+
+  select,input{
+    border-radius: .8em;
+    padding: .5em;
+    border: 1px solid rgba(128, 128, 128, 0.651);
+  }
+
+  select:focus ,input:focus{
+    outline: none;
+  }
+
+  .left, .right{
+    text-align: center;
+  }
 }

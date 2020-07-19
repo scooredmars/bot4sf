@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="ui modal add-bot">
+    <div class="header">
+        Create new bot
+    </div>
+    <div class="create-bot">
+        <div class="description">
+            <form method="post" class="modal-form">
+                {% csrf_token %}
+                <div class="data">
+                    <p>
+                        <label for="id_SF_Username">SF Username: </label>
+                        {{ form.username }}
+                    </p>
+                    <p>
+                        <label for="id_SF_Password">SF Password: </label>
+                        {{ form.password }}
+                    </p>
+                    <p class="selects">
+                        <label for="id_country">Country: </label>
+                        {{ form.country }}
+                    </p>
+                    <p class="selects">
+                        <label for="id_server">Server: </label>
+                        {{ form.server }}
+                    </p>
+                    <div class="explain">
+                        * SF - Shakes & Fidget
+                    </div>
+                    {{ form.non_field_errors }}
+                </div>
+                <div class="custom actions">
+                    <div class="ui black deny button">
+                        Cancel
+                    </div>
+                    <button type="submit">
+                        <div class="ui spositive right labeled icon button">
+                            Create
+                            <i class="checkmark icon"></i>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+<script src="{% static 'js/modal.js' %}"></script> 
