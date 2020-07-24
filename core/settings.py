@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,6 +14,8 @@ SECRET_KEY = "cvvup7f6u39v1502!m3c#jq$crmrx2fb=y&4)ezi)+7jmp_!5b"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 REGISTER_OFFLINE = False
+DEBUG_PROPAGATE_EXCEPTIONS = False
+
 
 if DEBUG:
     EMAIL_BACKEND = (
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -132,11 +136,22 @@ STATICFILES_FINDERS = (
     "compressor.finders.CompressorFinder",
 )
 
+COMPRESS_ENABLED = True
+
+COMPRESS_URL = STATIC_URL
+
+COMPRESS_ROOT = STATIC_ROOT
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 COMPRESS_CSS_FILTERS = ("core.compressor.NonSuffixCSSAbsoluteFilter",)
 
 COMPRESS_JS_FILTERS = ("compressor.filters.jsmin.JSMinFilter",)
 
-COMPRESS_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
+COMPRESS_PRECOMPILERS = (
+    ("text/x-sass", "django_libsass.SassCompiler"),
+    ("text/x-scss", "django_libsass.SassCompiler"),
+)
 
 COMPRESS_OFFLINE = True
 
@@ -168,3 +183,5 @@ if REGISTER_OFFLINE:
     ACCOUNT_ADAPTER = 'sfbot.adapter.NoNewUsersAccountAdapter'
 
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+
+django_heroku.settings(locals())

@@ -111,10 +111,15 @@ class EditBotDetails(UpdateView):
         return Bots.objects.filter(profile__user=self.request.user)
 
 
-class Shop(ListView):
-    template_name = "user/shop.html"
-    model = Plan
-    context_object_name = "plans"
+def shop(request):
+    plans = Plan.objects.all()
+    user_profile = Profile.objects.get(user=request.user)
+    user_plan = user_profile.plan.name
+    context = {
+        "plans": plans,
+        "user_plan": user_plan,
+    }
+    return render(request, "user/shop.html", context)
 
 
 class Faq(ListView):

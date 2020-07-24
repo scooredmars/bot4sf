@@ -1,0 +1,11 @@
+autopep8
+django
+django-allauth
+django-appconf
+django-cleanup
+django-compressor
+django-libsass
+django-heroku
+libsass
+gunicorn
+whitenoise

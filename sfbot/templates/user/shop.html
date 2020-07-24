@@ -29,10 +29,14 @@
                       <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
                     {% endfor %}
                   </div>
-                  <a href="signup"><div class="register">Buy</div></a></div>
-              {% else %}
-                <div class="plan not-available">
+                  {% if not user_plan == plan.name %}
+                    <a href=""><div class="register">Buy</div></a>
+                  {% else %}
+                    <div class="register owned">Alredy have</div>
+                  {% endif %}
                 </div>
+              {% else %}
+                <div class="plan not-available"></div>
               {% endif %}
             {% endfor %}
           </div>
