@@ -109,6 +109,10 @@
         color: $white;
         transition: .6s;
       }
+
+      .owned{
+        cursor: not-allowed;
+      }
     }
   }
 }
