@@ -225,6 +225,26 @@
     }
   }
 
+  // custom error // 
+
+  .error{
+    .container{
+      width: 85% !important;
+
+      h1{
+        font-size: 1.7em;
+      }
+
+      .left{
+        text-align: center;
+      }
+
+      .information{
+        font-size: 1em !important;
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: $width_laptops) and (min-width: $width_mobile){

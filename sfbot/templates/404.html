@@ -1,0 +1,22 @@
+{% extends "layouts/default.html" %}
+
+{% load static %}
+
+{% block title %}SFBot - Error{% endblock %}
+
+{% block content %}
+<div class="error">
+    <div class="container">
+        <div class="left">
+            <h1>Something's wrong here...</h1>
+            <div class="information">
+                We can't find the page you're looking for. Check out your URL or head back to home.
+            </div>
+            <a href="/">Home</a>
+        </div>
+        <div class="right">
+            <img src="{% static 'img/bot.png' %}">
+        </div>
+    </div>
+</div>
+{% endblock %}
