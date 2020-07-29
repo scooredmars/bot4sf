@@ -99,56 +99,66 @@ class EditBotForm(forms.ModelForm):
             "server"
         )
 
+    def __init__(self, *args, **kwargs):
+        # get pk value from views and set them to request
+        self.request = kwargs.pop("pk", None)
+        super(EditBotForm, self).__init__(*args, **kwargs)
+
     def clean(self, *args, **keyargs):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
         server = self.cleaned_data.get("server")
 
-        # check if current queryset bot exist
+        """
+        Check if current QuerySet Bot exists.
+        """
         username_change = Bots.objects.filter(username=username)
-        all_bots = Bots.objects.all()
 
-        # username was change and queryset exist
         if username_change.exists():
-            # list of usernames for current server
-            current_server_username_list = Bots.objects.filter(
+            """
+            Check if current bot username exists on server.
+            If bot doesn't exist return epmty list. Needed for validations.
+            """
+            bot_server_qs = Bots.objects.filter(
                 server=server).filter(username=username)
-            # user id
-            currnet_user_id = Bots.objects.filter(username=username).only("id")
-            for bot_data in currnet_user_id:
-                # data for current user
-                data_user = Bots.objects.get(pk=bot_data.id)
-            # check if user data was change
-            if (data_user.username == username) & (data_user.password == password) & (data_user.server == server):
+
+            """
+            Assignment pk value from request to variable.
+            This is used for check if pk != data.id.
+            """
+            session_pk = self.request
+
+            """
+            Return a QuerySet for currnet session bot, using id.
+            """
+            currnet_bot = Bots.objects.filter(username=username).only("id")
+
+            """
+            Access to values in QuerySet and assign them to variable.
+            """
+            for bot_data in currnet_bot:
+                data = bot_data
+
+            """
+            Check if user  data was change.
+            If data are same as in base, then return to 'dashboard'.
+            """
+            if (data.username == username) & (data.password == password) & (data.server == server):
                 return HttpResponseRedirect("dashboard")
-            elif data_user.password != password:
+            elif data.server != server:
+                if bot_server_qs.exists():
+                    bot_server_data = Bots.objects.filter(
+                        server=server).get(username=username)
+                    if bot_server_data in bot_server_qs:
+                        raise forms.ValidationError(
+                            "An account with this username already exists on this server")
+            elif data.password != password:
                 if len(password) < 5:
                     raise forms.ValidationError("Password is too short")
                 if len(password) > 30:
                     raise forms.ValidationError("Password is too long")
-                if data_user in all_bots:
-                    if (data_user.username == username) | (data_user.server == server):
-                        if current_server_username_list.exists():
-                            current_server_username = Bots.objects.filter(
-                                server=server).get(username=username)
-                            if current_server_username in current_server_username_list:
-                                raise forms.ValidationError(
-                                    "An account with this username already exists on this server")
-            elif data_user.server != server:
-                if data_user in all_bots:
-                    if current_server_username_list.exists():
-                        current_server_username = Bots.objects.filter(
-                            server=server).get(username=username)
-                        if current_server_username in current_server_username_list:
-                            raise forms.ValidationError(
-                                "An account with this username already exists on this server")
-            elif data_user.username != username:
-                if data_user in all_bots:
-                    if current_server_username_list.exists():
-                        current_server_username = Bots.objects.filter(
-                            server=server).get(username=username)
-                        if current_server_username in current_server_username_list:
-                            raise forms.ValidationError(
-                                "An account with this username already exists on this server")
+                if (data.username == username) and (data.id != session_pk):
+                    raise forms.ValidationError(
+                        "An account with this username already exists on this server")
 
         return super(EditBotForm, self).clean(*args, **keyargs)
