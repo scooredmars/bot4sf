@@ -110,6 +110,12 @@ class EditBotDetails(UpdateView):
     def get_queryset(self):
         return Bots.objects.filter(profile__user=self.request.user)
 
+    def get_form_kwargs(self):
+        kwargs = super(EditBotDetails, self).get_form_kwargs()
+        # Update the existing form kwargs dict with the pk session.
+        kwargs.update({"pk": self.kwargs['pk']})
+        return kwargs
+
 
 def shop(request):
     plans = Plan.objects.all()
