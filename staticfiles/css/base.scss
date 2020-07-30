@@ -1,0 +1,119 @@
+@import "includes/home";
+@import "const";
+@import "mobile";
+@import "includes/navbar";
+@import "includes/footer";
+@import "includes/modal";
+@import "includes/custom-forms";
+@import "includes/regulation-privacy";
+@import "includes/error";
+@import "user/dashboard";
+@import "user/shop";
+@import "user/faq";
+@import "user/profile";
+@import "user/bot";
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background: rgba(110, 110, 110, 0.795);
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  font-family: Roboto;
+  width: $full-size;
+}
+
+h1 {
+  margin: 40px 0;
+}
+
+h1, h2, h3, h4{
+  color:  #5a5c69;;
+}
+
+.white{
+  color: rgba(255, 255, 255, 0.795);
+}
+
+button{
+  border: 0;
+}
+
+button:focus{
+  outline: none
+}
+
+.text-center{
+  text-align: center !important;
+}
+
+.text-uppercase{
+  text-transform: uppercase !important;
+}
+
+.flex{
+  display: flex;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.form-row.line {
+  border-bottom: 1px solid #CACEDC;
+}
+
+p {
+  white-space: normal;
+  margin: 0;
+}
+
+a {
+  color: #47b6ff;
+  text-decoration: none;
+  -webkit-transition: color 0.25s ease-in-out;
+  -moz-transition: color 0.25s ease-in-out;
+  -ms-transition: color 0.25s ease-in-out;
+  -o-transition: color 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out;
+}
+
+h3 {
+  font-size: 16px;
+  font-family: Montserrat;
+}
+
+h5 {
+  font-size: 1$br;
+  font-family: Montserrat;
+}
+
+*:focus {
+  outline: #47b6ff auto 5px;
+}
+
+.active-link{
+  color: $white !important;
+}
+
+.incognito{
+  display: none;
+}

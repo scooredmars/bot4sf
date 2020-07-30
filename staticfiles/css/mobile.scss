@@ -1,0 +1,313 @@
+@media only screen and (max-width: $width_mobile){
+  // home //
+  .home-bcga{
+    background-image: url("/static/img/home/mobile-background.png");
+  }
+
+  // navbar //
+
+  .navbar{
+    display: none;
+  }
+  
+  #burger {
+    z-index: 10;
+    display: table-column !important;
+    position: fixed;
+    right: 0;
+    top: 0;
+    color: white;
+    background: linear-gradient(45deg, #9682C8 10%, #05BCC9);
+    font-size: 32px;
+    padding: 16px 31px 36px 20px;
+    border-radius: 0% 0% 0% 80%;
+    transition: 1s;
+    cursor: pointer;
+  }
+
+  i{
+    margin: 0 0 0 0 !important;
+  }
+
+  #quit {
+    position: fixed;
+    top: 0;
+    color: white;
+    font-size: 32px;
+    padding: 16px;
+    display: none;
+    cursor: pointer;
+    z-index: 12;
+  }
+
+  #links {
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    height: 50vh;
+    padding: 13vh 0;
+    z-index: 11;
+    position: fixed;
+
+    .mobile-quit{
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-size: 2em;
+      font-family: 'Roboto';
+      z-index: 1;
+      padding: 1em;
+    }
+  }
+
+  #links a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 2em;
+    font-family: 'Roboto';
+    z-index: 1;
+    padding: 1em;
+  }
+
+  // pricing //
+
+  h1{
+    padding-top: 4vh !important;
+    margin: 2.5vh !important;
+  }
+
+  .pricing{
+    height: auto;
+    padding-bottom: 4vh;
+
+    .plans{
+      margin: 4vh auto;
+      display: block;
+      width: 85%;
+
+      .plan{
+        width: 100%;
+        margin-bottom: 5vh;
+      }
+    }
+  }
+
+  // custom forms //
+  .custom-form.space{
+    margin-top: 4vh;
+  }
+  
+  // sidebar //
+  .nav-left{
+    display: none !important;
+  }
+  
+  .content{
+    width: 100% !important;
+  }
+
+  // navbar user // 
+  .nav-col{
+    display: none !important;
+  }
+
+  // dashboard //
+  .content{
+    .bots{
+      width: auto !important;
+    }
+  }
+
+  // user footer // 
+  .user-footer{
+    display: none;
+  }
+
+  //profile //
+  .profile-container{
+    display: block !important;
+
+    .left,.right{
+      width: 100% !important;
+    }
+
+    .list{
+      display: block !important;
+
+      .item{
+        width: 100% !important;
+      }
+    }
+  }
+
+  // shop // 
+  .shop{
+    .plans{
+      width: 80% !important;
+      display: block !important;
+      margin-top: 3em !important;
+
+      .plan{
+        width: 100% !important;
+        margin-bottom: 3em;
+      }
+    }
+  }
+
+  // faq //
+  .ui.styled.accordion{
+    width: 90% !important;
+  }
+
+  // settings // 
+  .bot-settings{
+    width: 85% !important;
+
+    .information-account{
+      display: block !important;
+
+      .desc{
+        width: auto !important;
+        padding-left: .5em !important;
+        padding-right: 1em !important;
+        font-size: 1.2em !important;
+      }
+
+      .object{
+        font-size: 1.05em !important;
+      }
+    }
+
+    .left,.right{
+      width: auto !important;
+    }
+
+    .section{
+      display: block !important;
+    }
+
+    .work, .task{
+      width: 100% !important;
+    }
+  }
+
+  .user-content{
+    width: 100% !important;
+  }
+
+  // add bot //
+  .create-bot{
+    .data{
+      width: 70% !important;
+
+      p{
+        display: block !important;
+      }
+    }
+
+    .custom{
+      padding: 0 !important;
+      padding-top: 1em !important;
+    }
+  }
+
+  // edit bot //
+  .edit-information{
+    display: block !important;
+
+    .left{
+      padding-bottom: 1em;
+    }
+
+    .item:first-child{
+      padding-bottom: 1em !important;
+    }
+  }
+
+  // custom error // 
+
+  .error{
+    .container{
+      width: 85% !important;
+
+      h1{
+        font-size: 1.7em;
+      }
+
+      .left{
+        text-align: center;
+      }
+
+      .information{
+        font-size: 1em !important;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: $width_laptops) and (min-width: $width_mobile){
+  .home-bcga{
+    background-image: url("/static/img/home/laptop-background.png");
+  }
+
+  .pricing{
+    h1{
+      margin: 2vh 0;
+    }
+
+    .plans{
+      margin-top: 1.5em;
+      width: 90%;
+    }
+  }
+
+  .dashboard{
+    width: 100% !important;
+
+    .bots{
+      width: 95% !important;
+    }
+  }
+
+  // user shop //
+  .shop{
+    h1{
+      padding-top: 1.25em !important;
+    }
+    
+    .plans{
+      width: 100% !important;
+      margin-top: 3.5em !important;
+    }
+  } 
+
+  // profile //
+  .card-profile{
+    .item:first-child{
+      width: 30% !important;
+    }
+  }
+
+  // user footer // 
+  .user-footer{
+    display: none;
+  }
+
+   // settings // 
+  .bot-settings{
+    width: 65% !important;
+
+    .information-account{
+      .desc{
+        width: auto !important;
+        padding-right: 1em !important;
+      }
+    }
+
+    .left,.right{
+      width: auto !important;
+    }
+  }
+}
