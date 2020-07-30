@@ -11,6 +11,14 @@ from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
 # Create your views here.
 
 
+def error_404(request, exception):
+    return render(request, "404.html")
+
+
+def error_500(request):
+    return render(request, "404.html")
+
+
 class Home(ListView):
     template_name = "home.html"
     model = GeneratePage
