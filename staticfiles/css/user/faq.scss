@@ -1,0 +1,18 @@
+.ui.styled.accordion{
+  margin: auto;
+  width: $half-size;
+
+  .content{
+    min-height: 0;
+    width: $full-size;
+    padding: 1.8em;
+    text-align: justify;
+    font-size: 1.27em;
+    border-top: 1px solid rgba(0, 0, 0, 0.212);
+  }
+
+  .title{
+    font-size: 1.35em;
+  }
+
+}
