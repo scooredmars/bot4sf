@@ -161,4 +161,9 @@ class EditBotForm(forms.ModelForm):
                     raise forms.ValidationError(
                         "An account with this username already exists on this server")
 
+        if len(password) < 5:
+            raise forms.ValidationError("Password is too short")
+        if len(password) > 30:
+            raise forms.ValidationError("Password is too long")
+
         return super(EditBotForm, self).clean(*args, **keyargs)
