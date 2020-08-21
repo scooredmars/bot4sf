@@ -7,7 +7,7 @@ admin.site.register(FaqList)
 
 @admin.register(Bots)
 class BotsAdmin(admin.ModelAdmin):
-    list_display = ("profile", "username", "country", "server")
+    list_display = ("profile", "username", "country", "server", "status")
     list_filter = ("profile", "server")
     search_fields = ["username", "profile__user__username"]
 
