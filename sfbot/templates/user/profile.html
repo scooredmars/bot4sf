@@ -26,14 +26,9 @@
                       <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
                         <div class="bar"></div>
                       </div>
-                    {% elif bot.profile.plan.max_time == 12 %}
+                    {% else %}
                       <h4 class="info">{{ bot.username }}<span class="time">{{ bot.time_left }}h</span></h4>
-                      <div class="ui orange progress" data-percent="{% widthratio bot.time_left 12 100 %}" id="example{{ forloop.counter }}">
-                        <div class="bar"></div>
-                      </div>
-                    {% elif bot.profile.plan.max_time == 6 %}
-                      <h4 class="info">{{ bot.username }}<span class="time">{{ bot.time_left }}h</span></h4>
-                      <div class="ui orange progress" data-percent="{% widthratio bot.time_left 6 100 %}" id="example{{ forloop.counter }}">
+                      <div class="ui orange progress" data-percent="{% widthratio bot.time_left bot.profile.plan.max_time 100 %}" id="example{{ forloop.counter }}">
                         <div class="bar"></div>
                       </div>
                     {% endif %}

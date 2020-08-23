@@ -35,16 +35,14 @@ class Plan(models.Model):
         ("I DON'T HAVE TIME", "I DON'T HAVE TIME"),
         ("I'M ON VACATION", "I'M ON VACATION"),
     )
-    name = models.CharField(max_length=21, choices=NAME,
-                            default="FOR BEGINNERS")
+    name = models.CharField(max_length=21, choices=NAME, default="FOR BEGINNERS")
     price = models.IntegerField()
     description = models.CharField(max_length=70)
     permission_list = models.ManyToManyField("sfbot.PermissionList")
     special_style = models.CharField(max_length=15, null=True, blank=True)
-    max_time = models.IntegerField()
-    max_bots = models.IntegerField()
-    available = models.BooleanField(
-        verbose_name="Plan is available", default=True)
+    max_time = models.FloatField(null=True)
+    max_bots = models.IntegerField(null=True)
+    available = models.BooleanField(verbose_name="Plan is available", default=True)
 
     def __str__(self):
         return self.name
@@ -104,26 +102,23 @@ class Bots(AbstractBaseUser):
         ("s4", "s4"),
         ("s5", "s5"),
     )
-    profile = models.ForeignKey(
-        "sfbot.Profile", on_delete=models.CASCADE, null=True)
+    profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
     status = models.BooleanField(verbose_name="Bot status", default=False)
-    time_left = models.IntegerField(null=True)
+    time_left = models.TimeField(null=True)
+    converted_time = models.FloatField(null=True)
+    start = models.DateTimeField(null=True, blank=True)
+    stop = models.DateTimeField(null=True, blank=True)
 
-    username = models.CharField(
-        verbose_name="SF Username", max_length=40, null=True)
-    password = models.CharField(
-        verbose_name="SF Password", max_length=30, null=True)
+    username = models.CharField(verbose_name="SF Username", max_length=40, null=True)
+    password = models.CharField(verbose_name="SF Password", max_length=30, null=True)
     country = models.CharField(
         max_length=20, choices=COUNTRY, default="Intercontinental", null=True
     )
     server = models.CharField(max_length=4, choices=SERVER, null=True)
 
-    tavern_status = models.BooleanField(
-        verbose_name="Tavern status", default=False)
-    tavern_settings = models.CharField(
-        max_length=4, choices=TAVERN, default="Exp")
-    arena_status = models.BooleanField(
-        verbose_name="Arena status", default=False)
+    tavern_status = models.BooleanField(verbose_name="Tavern status", default=False)
+    tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
+    arena_status = models.BooleanField(verbose_name="Arena status", default=False)
     arena_settings = models.CharField(
         max_length=50, choices=ARENA, default="Stop fight after 10 wins"
     )

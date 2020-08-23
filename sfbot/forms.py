@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.http import HttpResponseRedirect
 from .models import Bots
+from django.utils import timezone
+from sfbot.tasks import bot_time
 
 
 class UserSignupForm(SignupForm):
@@ -12,12 +14,10 @@ class UserSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
         self.fields["first_name"].widget.attrs.update(
-            {"name": "first_name",
-                "pattern": "[a-zA-Z]*", "placeholder": "First Name"}
+            {"name": "first_name", "pattern": "[a-zA-Z]*", "placeholder": "First Name"}
         )
         self.fields["last_name"].widget.attrs.update(
-            {"name": "last_name",
-                "pattern": "[a-zA-Z]*", "placeholder": "Last Name"}
+            {"name": "last_name", "pattern": "[a-zA-Z]*", "placeholder": "Last Name"}
         )
 
     def signup(self, request, user):
@@ -29,22 +29,15 @@ class UserSignupForm(SignupForm):
 class AddBotForm(forms.ModelForm):
     class Meta:
         model = Bots
-        fields = (
-            "username",
-            "password",
-            "country",
-            "server"
-        )
+        fields = ("username", "password", "country", "server")
         widgets = {
             "password": forms.PasswordInput(),
         }
 
     def __init__(self, *args, **kwargs):
         super(AddBotForm, self).__init__(*args, **kwargs)
-        self.fields["username"].widget.attrs.update(
-            {"placeholder": "Username"})
-        self.fields["password"].widget.attrs.update(
-            {"placeholder": "Password"})
+        self.fields["username"].widget.attrs.update({"placeholder": "Username"})
+        self.fields["password"].widget.attrs.update({"placeholder": "Password"})
         self.fields["country"].widget.attrs.update({"class": "country-input"})
         self.fields["server"].widget.attrs.update({"class": "server-input"})
 
@@ -76,28 +69,39 @@ class SettingsForm(forms.ModelForm):
             "tavern_status",
             "tavern_settings",
             "arena_status",
-            "arena_settings"
+            "arena_settings",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['status'].widget.attrs.update(
-            {'class': 'onoffswitch-checkbox'})
-        self.fields['tavern_status'].widget.attrs.update(
-            {'class': 'onoffswitch-checkbox'})
-        self.fields['arena_status'].widget.attrs.update(
-            {'class': 'onoffswitch-checkbox'})
+        self.fields["status"].widget.attrs.update({"class": "onoffswitch-checkbox"})
+        self.fields["tavern_status"].widget.attrs.update(
+            {"class": "onoffswitch-checkbox"}
+        )
+        self.fields["arena_status"].widget.attrs.update(
+            {"class": "onoffswitch-checkbox"}
+        )
+
+    def save(self, commit=True):
+        status = self.cleaned_data.get("status")
+        instance = super(SettingsForm, self).save(commit=False)
+        if commit:
+            if status == True:
+                instance.start = timezone.now()
+                instance.save()
+                bot_id = instance.id
+                profile_name = instance.profile.plan.name
+                bot_time(bot_id, profile_name)
+            elif status == False:
+                instance.start = None
+                instance.save()
+        return instance
 
 
 class EditBotForm(forms.ModelForm):
     class Meta:
         model = Bots
-        fields = (
-            "username",
-            "password",
-            "country",
-            "server"
-        )
+        fields = ("username", "password", "country", "server")
 
     def __init__(self, *args, **kwargs):
         # get pk value from views and set them to request
@@ -119,8 +123,7 @@ class EditBotForm(forms.ModelForm):
             Check if current bot username exists on server.
             If bot doesn't exist return epmty list. Needed for validations.
             """
-            bot_server_qs = Bots.objects.filter(
-                server=server).filter(username=username)
+            bot_server_qs = Bots.objects.filter(server=server).filter(username=username)
 
             """
             Assignment pk value from request to variable.
@@ -143,15 +146,21 @@ class EditBotForm(forms.ModelForm):
             Check if user  data was change.
             If data are same as in base, then return to 'dashboard'.
             """
-            if (data.username == username) & (data.password == password) & (data.server == server):
+            if (
+                (data.username == username)
+                & (data.password == password)
+                & (data.server == server)
+            ):
                 return HttpResponseRedirect("dashboard")
             elif data.server != server:
                 if bot_server_qs.exists():
-                    bot_server_data = Bots.objects.filter(
-                        server=server).get(username=username)
+                    bot_server_data = Bots.objects.filter(server=server).get(
+                        username=username
+                    )
                     if bot_server_data in bot_server_qs:
                         raise forms.ValidationError(
-                            "An account with this username already exists on this server")
+                            "An account with this username already exists on this server"
+                        )
             elif data.password != password:
                 if len(password) < 5:
                     raise forms.ValidationError("Password is too short")
@@ -159,7 +168,8 @@ class EditBotForm(forms.ModelForm):
                     raise forms.ValidationError("Password is too long")
                 if (data.username == username) and (data.id != session_pk):
                     raise forms.ValidationError(
-                        "An account with this username already exists on this server")
+                        "An account with this username already exists on this server"
+                    )
 
         if len(password) < 5:
             raise forms.ValidationError("Password is too short")

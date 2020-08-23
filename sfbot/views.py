@@ -36,8 +36,7 @@ def DashboardAddBot(request):
         user_profile.save()
 
     amount_user_bots = user_bots.count()
-    current_plan_q = Plan.objects.get(
-        profile=(Profile.objects.get(user=request.user)))
+    current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=request.user)))
     if amount_user_bots >= current_plan_q.max_bots:
         lock_add = True
     else:
@@ -52,17 +51,19 @@ def DashboardAddBot(request):
             current_user = Profile.objects.filter(user=request.user)
             if current_user:
                 # amount of all bots for current user
-                max_user_bots = Bots.objects.filter(
-                    profile__user=request.user).count()
+                max_user_bots = Bots.objects.filter(profile__user=request.user).count()
                 # acces to user current plan query
-                current_plan_q = Plan.objects.get(profile=(Profile.objects.get(
-                    user=request.user)))
+                current_plan_q = Plan.objects.get(
+                    profile=(Profile.objects.get(user=request.user))
+                )
                 if max_user_bots < current_plan_q.max_bots:
                     obj = form.save(commit=False)
                     # Set current user profile
-                    obj.profile = Profile.objects.get(
-                        user=request.user)
-                    obj.time_left = current_plan_q.max_time
+                    obj.profile = Profile.objects.get(user=request.user)
+                    # Convert float form plan to time in bot
+                    obj.time_left = "{0:02.0f}:{1:02.0f}".format(
+                        *divmod(float(current_plan_q.max_time) * 60, 60)
+                    )
                     obj.save()
                     return HttpResponseRedirect(obj.get_absolute_url())
 
@@ -75,7 +76,7 @@ def DashboardAddBot(request):
     return render(request, "user/dashboard.html", context)
 
 
-class ProfileView (ListView):
+class ProfileView(ListView):
     template_name = "user/profile.html"
     model = Bots
     context_object_name = "user_info"
@@ -84,14 +85,23 @@ class ProfileView (ListView):
         current_user = Profile.objects.filter(user=self.request.user)
 
         if current_user:
-            max_user_bots = Bots.objects.filter(
-                profile__user=self.request.user).count()
+            max_user_bots = Bots.objects.filter(profile__user=self.request.user).count()
             if max_user_bots != 0:
                 return Bots.objects.filter(profile__user=self.request.user)
             else:
                 return User.objects.filter(username=self.request.user)
         else:
             return User.objects.filter(username=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        bots_list = Bots.objects.filter(profile__user=self.request.user)
+        for bot in bots_list:
+            bot_time = bot.time_left
+            converted_time = bot_time.hour + bot_time.minute / 60.0
+            bot.converted_time = converted_time
+            bot.save()
+        return context
 
 
 class SettingsView(UpdateView):
@@ -121,7 +131,7 @@ class EditBotDetails(UpdateView):
     def get_form_kwargs(self):
         kwargs = super(EditBotDetails, self).get_form_kwargs()
         # Update the existing form kwargs dict with the pk session.
-        kwargs.update({"pk": self.kwargs['pk']})
+        kwargs.update({"pk": self.kwargs["pk"]})
         return kwargs
 
 
