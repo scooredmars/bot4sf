@@ -16,12 +16,32 @@
         <h1 class="text-center">Bot Status</h1>
         <div class="status">
           <div class="onoffswitch">
-            {{ form.status }}
-            <label class="onoffswitch-label" for="id_status">
-              <span class="onoffswitch-inner"></span>
-              <span class="onoffswitch-switch"></span>
-            </label>
+            {% if object.time_left|time:"H:i" != '00:00' %}
+              {{ form.status }}
+              <label class="onoffswitch-label" for="id_status">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
+            {% else %}
+              {% if object.status == True %}
+                {{ form.status }}
+                <label class="onoffswitch-label" for="id_status">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              {% else %}
+                <label class="onoffswitch-label max" for="id_status">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              {% endif %}
+            {% endif %}
           </div>
+          {% if object.time_left|time:"H:i" == '00:00' %}
+            <p class="time-error text-center">
+              You have used up the package, wait until the next day for its renewal!
+            </p>
+          {% endif %}
         </div>
 
 
@@ -33,8 +53,22 @@
               <div class="object">{{ object.username }}</div>
             </div>
             <div class="item">
-              <div class="desc">Time to stop bot:</div>
-              <div class="object">{{ object.time_left }}</div>
+              <div class="desc">Bot will stop at:</div>
+              <div class="object">
+                {% if object.stop %}
+                  {{ object.stop|date:"d.m g:i A" }}
+                {% else %}
+                  {% if object.profile.plan.name == "I'M ON VACATION" %}
+                    Unlimited
+                  {% else %}
+                    {% if object.status %}
+                      Calculating...
+                    {% else %}
+                      ????
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              </div>
             </div>
           </div>
           <div class="right">

@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Bots
 from django.utils import timezone
 from sfbot.tasks import bot_time
+import datetime
 
 
 class UserSignupForm(SignupForm):
@@ -84,18 +85,34 @@ class SettingsForm(forms.ModelForm):
 
     def save(self, commit=True):
         status = self.cleaned_data.get("status")
-        instance = super(SettingsForm, self).save(commit=False)
+        bot_data = super(SettingsForm, self).save(commit=False)
         if commit:
             if status == True:
-                instance.start = timezone.now()
-                instance.save()
-                bot_id = instance.id
-                profile_name = instance.profile.plan.name
-                bot_time(bot_id, profile_name)
+                bot_data.start = timezone.now()
+                bot_data.save()
+                if bot_data.profile.plan.name != "I'M ON VACATION":
+                    if str(bot_data.time_left) != "00:00:00":
+                        bot_id = bot_data.id
+                        profile_name = bot_data.profile.plan.name
+
+                        # calculate data bot stop
+                        converted_time_left = str(bot_data.time_left)
+                        date_time = datetime.datetime.strptime(
+                            converted_time_left, "%H:%M:%S"
+                        )
+                        a_timedelta = date_time - datetime.datetime(1900, 1, 1)
+                        seconds = a_timedelta.total_seconds()
+                        stop_time = bot_data.start + datetime.timedelta(0, seconds)
+                        bot_data.stop = stop_time
+                        bot_data.save()
+
+                        bot_time(bot_id, profile_name)
             elif status == False:
-                instance.start = None
-                instance.save()
-        return instance
+                bot_data.start = None
+                if bot_data.profile.plan.name != "I'M ON VACATION":
+                    bot_data.stop = None
+                bot_data.save()
+        return bot_data
 
 
 class EditBotForm(forms.ModelForm):

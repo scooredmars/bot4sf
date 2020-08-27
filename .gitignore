@@ -3,3 +3,9 @@ __pycache__
 db.sqlite3
 .vscode
 .temp
+*.pid
+*.bak
+*.dat
+*.dir
+staticfiles/
+*comands.txt
