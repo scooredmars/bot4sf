@@ -106,7 +106,7 @@ class SettingsForm(forms.ModelForm):
                         bot_data.stop = stop_time
                         bot_data.save()
 
-                        bot_time(bot_id, profile_name)
+                        bot_time.delay(bot_id, profile_name)
             elif status == False:
                 bot_data.start = None
                 if bot_data.profile.plan.name != "I'M ON VACATION":

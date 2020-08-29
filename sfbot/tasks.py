@@ -5,7 +5,7 @@ from datetime import timedelta
 from core.celery import app
 
 
-@app.task
+@app.task(name="time_counter")
 def bot_time(bot_id, profile_name):
     bot_data = Bots.objects.get(id=bot_id)
     if profile_name != "I'M ON VACATION":
