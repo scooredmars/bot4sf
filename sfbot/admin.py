@@ -7,8 +7,16 @@ admin.site.register(FaqList)
 
 @admin.register(Bots)
 class BotsAdmin(admin.ModelAdmin):
-    list_display = ("profile", "username", "country", "server", "status")
-    list_filter = ("profile", "server")
+    list_display = (
+        "profile",
+        "username",
+        "country",
+        "server",
+        "status",
+        "time_left",
+        "converted_time",
+    )
+    list_filter = ("profile", "server", "status")
     search_fields = ["username", "profile__user__username"]
 
 

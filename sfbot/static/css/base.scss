@@ -57,6 +57,10 @@ button{
   border: 0;
 }
 
+.max{
+  cursor: not-allowed !important;
+}
+
 button:focus{
   outline: none
 }

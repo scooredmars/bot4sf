@@ -21,14 +21,23 @@
               <div class="card-body">
                 {% for bot in user_info %}
                   {% if bot.country %}
-                    {% if bot.profile.plan.max_time == 24 %}
+                    {% if bot.profile.plan.max_time_int == 24 %}
                       <h4 class="info">{{ bot.username }}<span class="time">unlimited</span></h4>
                       <div div class="ui orange progress" data-percent="100" id="example{{ forloop.counter }}">
                         <div class="bar"></div>
                       </div>
                     {% else %}
-                      <h4 class="info">{{ bot.username }}<span class="time">{{ bot.time_left }}h</span></h4>
-                      <div class="ui orange progress" data-percent="{% widthratio bot.time_left bot.profile.plan.max_time 100 %}" id="example{{ forloop.counter }}">
+                      <h4 class="info">
+                        {{ bot.username }}
+                        <span class="time">
+                          {% if bot.converted_time == 0.0 %}
+                            End of Time !
+                          {% else %}
+                            {{ bot.time_left|date:"H:i" }} h
+                          {% endif %}
+                        </span>
+                      </h4>
+                      <div class="ui orange progress" data-percent="{% widthratio bot.converted_time bot.profile.plan.max_time 100 %}" id="example{{ forloop.counter }}">
                         <div class="bar"></div>
                       </div>
                     {% endif %}

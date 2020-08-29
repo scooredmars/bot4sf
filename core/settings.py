@@ -17,12 +17,6 @@ REGISTER_OFFLINE = False
 DEBUG_PROPAGATE_EXCEPTIONS = False
 
 
-if DEBUG:
-    EMAIL_BACKEND = (
-        "django.core.mail.backends.console.EmailBackend"  # Durning development
-    )
-
-
 ALLOWED_HOSTS = []
 
 SITE_ID = 1
@@ -37,7 +31,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "background_task",
     "sfbot",
     "compressor",
     "django.contrib.sites",
@@ -104,9 +97,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
 
@@ -115,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Warsaw"
 
 USE_I18N = True
 
@@ -162,7 +155,7 @@ LOGIN_REDIRECT_URL = "../dashboard"
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 ACCOUNT_USERNAME_MIN_LENGTH = 10
 
@@ -181,8 +174,16 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/dashboard"
 
 if REGISTER_OFFLINE:
-    ACCOUNT_ADAPTER = 'sfbot.adapter.NoNewUsersAccountAdapter'
+    ACCOUNT_ADAPTER = "sfbot.adapter.NoNewUsersAccountAdapter"
 
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 
 django_heroku.settings(locals())
+
+# CELERY STUFF
+BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = TIME_ZONE
