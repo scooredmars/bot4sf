@@ -8,4 +8,4 @@ db.sqlite3
 *.dat
 *.dir
 staticfiles/
-*comands.txt
+*commands.txt

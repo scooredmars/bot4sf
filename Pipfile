@@ -8,14 +8,20 @@ pylint = "*"
 black = "*"
 
 [packages]
-django = "*"
+Django = "*"
 django-allauth = "*"
 django-compressor = "*"
 django-libsass = "*"
 django-cleanup = "*"
+autopep8 = "*"
+django-appconf = "*"
+django-heroku = "*"
+libsass = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
-python_version = "3.8.3"
+python_version = "3.8.2"
 
 [pipenv]
 allow_prereleases = true
