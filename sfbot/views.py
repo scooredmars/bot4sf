@@ -93,16 +93,6 @@ class ProfileView(ListView):
         else:
             return User.objects.filter(username=self.request.user)
 
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        bots_list = Bots.objects.filter(profile__user=self.request.user)
-        for bot in bots_list:
-            bot_time = bot.time_left
-            converted_time = bot_time.hour + bot_time.minute / 60.0
-            bot.converted_time = converted_time
-            bot.save()
-        return context
-
 
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
