@@ -155,7 +155,7 @@ LOGIN_REDIRECT_URL = "../dashboard"
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_USERNAME_MIN_LENGTH = 10
 
@@ -181,9 +181,16 @@ ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 django_heroku.settings(locals())
 
 # CELERY STUFF
-BROKER_URL = "redis://localhost:6379"
+CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = TIME_ZONE
+
+CELERY_BEAT_SCHEDULE = {
+    'calculate-every-60-seconds': {
+        'task': 'sfbot.tasks.bot_time',
+        'schedule': 60,
+    },
+}
