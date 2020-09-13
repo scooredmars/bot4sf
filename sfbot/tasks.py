@@ -1,30 +1,23 @@
-from celery.schedules import crontab
-from .models import Bots, Profile
+from .models import Bots
 import datetime
 from datetime import timedelta
-from core.celery import app
+from celery import shared_task
 
-
-@app.task(name="time_counter")
-def bot_time(bot_id, profile_name):
-    bot_data = Bots.objects.get(id=bot_id)
-    if profile_name != "I'M ON VACATION":
-        if str(bot_data.time_left) == "00:00:00":
-            lock = True
-        else:
-            lock = False
-        if lock == False:
-            if bot_data.status == True:
-                # calculate time left
-                date_time_left = datetime.datetime.strptime(
-                    str(bot_data.time_left), "%H:%M:%S"
-                )
-                subtraction = date_time_left - timedelta(0, 60)
-                current_time_left = subtraction - datetime.datetime(1900, 1, 1)
-                bot_data.time_left = str(current_time_left)
-
-                bot_data.save()
-        else:
-            bot_data.status = False
-            bot_data.stop = None
-            bot_data.save()
+@shared_task
+def bot_time():
+    for bot in Bots.objects.all():
+        if bot.profile.plan.name != "I'M ON VACATION":
+            bot_time = bot.time_left
+            if str(bot_time) != "00:00:00":
+                if bot.status == True:
+                    # create datetime from time
+                    date_time_left = datetime.datetime.strptime(
+                        str(bot_time), "%H:%M:%S"
+                    )
+                    subtraction = date_time_left - timedelta(0, 60)
+                    current_time_left = subtraction - datetime.datetime(1900, 1, 1)
+                    bot.time_left = str(current_time_left)
+                    # calculate converted time
+                    converted_time = bot_time.hour + bot_time.minute / 60.0
+                    bot.converted_time = converted_time
+                    bot.save()
