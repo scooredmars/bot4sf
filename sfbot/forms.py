@@ -4,9 +4,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.http import HttpResponseRedirect
 from .models import Bots
 from django.utils import timezone
-from sfbot.tasks import bot_time
 import datetime
-
 
 class UserSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label="First Name")
@@ -92,9 +90,6 @@ class SettingsForm(forms.ModelForm):
                 bot_data.save()
                 if bot_data.profile.plan.name != "I'M ON VACATION":
                     if str(bot_data.time_left) != "00:00:00":
-                        bot_id = bot_data.id
-                        profile_name = bot_data.profile.plan.name
-
                         # calculate data bot stop
                         converted_time_left = str(bot_data.time_left)
                         date_time = datetime.datetime.strptime(
@@ -105,8 +100,6 @@ class SettingsForm(forms.ModelForm):
                         stop_time = bot_data.start + datetime.timedelta(0, seconds)
                         bot_data.stop = stop_time
                         bot_data.save()
-
-                        bot_time.delay(bot_id, profile_name)
             elif status == False:
                 bot_data.start = None
                 if bot_data.profile.plan.name != "I'M ON VACATION":
@@ -130,39 +123,27 @@ class EditBotForm(forms.ModelForm):
         password = self.cleaned_data.get("password")
         server = self.cleaned_data.get("server")
 
-        """
-        Check if current QuerySet Bot exists.
-        """
+        # Check if current QuerySet Bot exists.
         username_change = Bots.objects.filter(username=username)
 
         if username_change.exists():
-            """
-            Check if current bot username exists on server.
-            If bot doesn't exist return epmty list. Needed for validations.
-            """
+            # Check if current bot username exists on server.
+            # If bot doesn't exist return epmty list. Needed for validations.
             bot_server_qs = Bots.objects.filter(server=server).filter(username=username)
 
-            """
-            Assignment pk value from request to variable.
-            This is used for check if pk != data.id.
-            """
+            # Assignment pk value from request to variable.
+            # This is used for check if pk != data.id.
             session_pk = self.request
 
-            """
-            Return a QuerySet for currnet session bot, using id.
-            """
+            # Return a QuerySet for currnet session bot, using id.
             currnet_bot = Bots.objects.filter(username=username).only("id")
 
-            """
-            Access to values in QuerySet and assign them to variable.
-            """
+            # Access to values in QuerySet and assign them to variable.
             for bot_data in currnet_bot:
                 data = bot_data
 
-            """
-            Check if user  data was change.
-            If data are same as in base, then return to 'dashboard'.
-            """
+            # Check if user  data was change.
+            # If data are same as in base, then return to 'dashboard'.
             if (
                 (data.username == username)
                 & (data.password == password)

@@ -105,7 +105,7 @@ class Bots(AbstractBaseUser):
     profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
     status = models.BooleanField(verbose_name="Bot status", default=False)
     time_left = models.TimeField(null=True)
-    converted_time = models.FloatField(null=True)
+    converted_time = models.FloatField(null=True, blank=True)
     start = models.DateTimeField(null=True, blank=True)
     stop = models.DateTimeField(null=True, blank=True)
 
