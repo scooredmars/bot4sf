@@ -52,7 +52,7 @@
                 <div class="custom actions">
                     <button type="submit">
                         <div class="ui spositive right labeled icon button">
-                            Create
+                            Update
                             <i class="checkmark icon"></i>
                         </div>
                     </button>
@@ -63,3 +63,11 @@
 </div>
 
 <script src="{% static 'js/modal.js' %}"></script> 
+
+<script>
+$(document).ready(function() {
+    {% if form.errors %}
+        $(".ui.modal.user-settings").modal("show");
+    {% endif %}
+});
+</script>
