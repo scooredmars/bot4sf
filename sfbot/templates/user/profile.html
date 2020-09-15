@@ -11,6 +11,7 @@
   {% include "layouts/mobile-sidebar.html" %}
   <div class="user-content">
     {% include "layouts/navbar.html" %}
+    {% include "modal/user-settings.html" %}
       <h1 class="text-center">Profile</h1>
       <div class="profile-container">
         <div class="left">
@@ -19,7 +20,7 @@
                 <p class="topic">Bots</p>
               </div>
               <div class="card-body">
-                {% for bot in user_info %}
+                {% for bot in current_user_qs %}
                   {% if bot.country %}
                     {% if bot.profile.plan.max_time == 24 %}
                       <h4 class="info">{{ bot.username }}<span class="time">unlimited</span></h4>
@@ -51,10 +52,10 @@
         <div class="right">
           <div class="card-profile">
             <div class="card-header">
-              <p class="topic">Account Informations</p>
+              <p class="topic">Account Informations</p><i class="pen icon user-settings"></i>
             </div>
             <div class="card-body">
-            {% for info in user_info|slice:"1" %}
+            {% for info in current_user_qs|slice:"1" %}
               <div class="list">
                 <div class="item">Username:</div>
                 <div class="item">{{ user }}</div>
