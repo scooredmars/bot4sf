@@ -67,10 +67,17 @@
     margin-bottom: 0;
     background-color: $bg-content;
     border-bottom: 1px solid $card-border;
+    display: flex;
+    justify-content: space-between;
 
     .topic{
       color: $light-blu;
       font-weight: normal;
+    }
+
+    .user-settings{
+      padding-top: .4em;
+      font-size: 1.2em;
     }
   }
 
