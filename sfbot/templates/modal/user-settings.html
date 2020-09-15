@@ -1,0 +1,65 @@
+{% load static %}
+
+<div class="ui modal user-settings">
+    <div class="header">
+        Settings
+    </div>
+    <div class="modal-div-form">
+        <div class="description">
+            <form method="post" class="modal-form">
+                {% csrf_token %}
+                <div class="data">
+                    <p>
+                        <label for="id_SF_Username">Current Username: </label>
+                        {{ user }}
+                    </p>
+                    <p>
+                        <label for="id_SF_Password">New Username: </label>
+                        {{ form.username }}
+                    </p>
+                </div>
+                <div class="data">
+                    <p>
+                        <label for="id_SF_Username">Current Name: </label>
+                        {{ user.first_name }}
+                    </p>
+                    <p>
+                        <label for="id_SF_Password">New Name: </label>
+                        {{ form.first_name }}
+                    </p>
+                </div>
+                <div class="data">
+                    <p>
+                        <label for="id_SF_Username">Current Last Name: </label>
+                        {{ user.last_name }}
+                    </p>
+                    <p>
+                        <label for="id_SF_Password">New Last Name: </label>
+                        {{ form.last_name }}
+                    </p>
+                </div>
+                <div class="data">
+                    <p>
+                        <label for="id_SF_Username">Current Email: </label>
+                        {{ user.email }}
+                    </p>
+                    <p>
+                        <label for="id_SF_Password">New Email: </label>
+                        {{ form.email }}
+                    </p>
+                </div>
+                {{ form.non_field_errors }}
+                <div class="custom actions">
+                    <button type="submit">
+                        <div class="ui spositive right labeled icon button">
+                            Create
+                            <i class="checkmark icon"></i>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/modal.js' %}"></script> 

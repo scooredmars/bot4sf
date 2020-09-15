@@ -2,7 +2,7 @@ from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.http import HttpResponseRedirect
-from .models import Bots
+from .models import Bots, User
 from django.utils import timezone
 import datetime
 
@@ -175,3 +175,34 @@ class EditBotForm(forms.ModelForm):
             raise forms.ValidationError("Password is too long")
 
         return super(EditBotForm, self).clean(*args, **keyargs)
+
+
+class UserSettingsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email")
+        
+    def __init__(self, *args, **kwargs):
+        super(UserSettingsForm, self).__init__(*args, **kwargs)
+        self.fields['username'].required = False
+
+    def clean(self, *args, **keyargs):
+        username = self.cleaned_data.get("username")
+        email = self.cleaned_data.get("email")
+
+        username_qs = User.objects.exclude(pk=self.instance.pk).filter(username=username)
+        email_qs = User.objects.exclude(pk=self.instance.pk).filter(email=email)
+        if not username_qs:
+            if username:
+                if len(username) < 10:
+                    raise forms.ValidationError('This username is too short.')
+                elif len(username) > 25:
+                    raise forms.ValidationError('This username is too long.')
+        else:
+            raise forms.ValidationError('This username is already in use. Please supply a different username.')
+        if email_qs:
+            raise forms.ValidationError('This email is already in use. Please supply a different email.')
+
+        # po zmianie email ma zostac wyslany mail potwierdzajacy
+        # poprawic wyswietlanie bledu (zeby nie zamykalo okienka jesli jest blad) to samo w dodawaniu bota
+        return super(UserSettingsForm, self).clean(*args, **keyargs)

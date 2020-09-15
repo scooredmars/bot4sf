@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
-from .forms import AddBotForm, SettingsForm, EditBotForm
+from .forms import AddBotForm, SettingsForm, EditBotForm, UserSettingsForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
 
 # Create your views here.
@@ -76,22 +76,47 @@ def DashboardAddBot(request):
     return render(request, "user/dashboard.html", context)
 
 
-class ProfileView(ListView):
-    template_name = "user/profile.html"
-    model = Bots
-    context_object_name = "user_info"
+def ProfileView(request):
+    current_user = Profile.objects.filter(user=request.user)
 
-    def get_queryset(self):
-        current_user = Profile.objects.filter(user=self.request.user)
-
-        if current_user:
-            max_user_bots = Bots.objects.filter(profile__user=self.request.user).count()
-            if max_user_bots != 0:
-                return Bots.objects.filter(profile__user=self.request.user)
-            else:
-                return User.objects.filter(username=self.request.user)
+    if current_user:
+        max_user_bots = Bots.objects.filter(profile__user=request.user).count()
+        if max_user_bots != 0:
+            current_user_qs = Bots.objects.filter(profile__user=request.user)
         else:
-            return User.objects.filter(username=self.request.user)
+            current_user_qs = User.objects.filter(username=request.user)
+    else:
+        current_user_qs = User.objects.filter(username=request.user)
+
+    user_data = User.objects.get(username=request.user)
+    form = UserSettingsForm()
+    if request.method == "POST":
+        form = UserSettingsForm(request.POST, instance=request.user)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            
+            obj = form.save(commit=False)
+            
+            if not username:
+                obj.username = user_data.username
+            if not first_name:
+                obj.first_name = user_data.first_name
+            if not last_name:
+                obj.last_name = user_data.last_name
+            if not email:
+                obj.email = user_data.email
+            obj.save()
+            form = UserSettingsForm()
+
+    context = {
+        "current_user_qs": current_user_qs,
+        "form": form,
+    }
+
+    return render(request, "user/profile.html", context)
 
 
 class SettingsView(UpdateView):
