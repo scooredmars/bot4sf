@@ -7,8 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from .forms import AddBotForm, SettingsForm, EditBotForm, UserSettingsForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile, User
-
-# Create your views here.
+from django.contrib import messages
 
 
 def error_404(request, exception):
@@ -24,7 +23,7 @@ class Home(ListView):
     model = GeneratePage
 
 
-def DashboardAddBot(request):
+def dashboard_add_bot_view(request):
     # Dashboard
     bots_q = Bots.objects.all()
     user_bots = bots_q.filter(profile__user=request.user)
@@ -65,6 +64,7 @@ def DashboardAddBot(request):
                         *divmod(float(current_plan_q.max_time) * 60, 60)
                     )
                     obj.save()
+                    messages.add_message(request, messages.SUCCESS, 'A new bot has been added.')
                     return HttpResponseRedirect(obj.get_absolute_url())
 
     context = {
@@ -76,7 +76,7 @@ def DashboardAddBot(request):
     return render(request, "user/dashboard.html", context)
 
 
-def ProfileView(request):
+def profile_view(request):
     current_user = Profile.objects.filter(user=request.user)
 
     if current_user:
@@ -108,8 +108,11 @@ def ProfileView(request):
                 obj.last_name = user_data.last_name
             if not email:
                 obj.email = user_data.email
+            messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
             obj.save()
             form = UserSettingsForm()
+        else:
+            messages.add_message(request, messages.ERROR, 'Wrong data provided')
 
     context = {
         "current_user_qs": current_user_qs,
@@ -150,7 +153,7 @@ class EditBotDetails(UpdateView):
         return kwargs
 
 
-def shop(request):
+def shop_view(request):
     plans = Plan.objects.all()
     user_profile = Profile.objects.get(user=request.user)
     user_plan = user_profile.plan.name
