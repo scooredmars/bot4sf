@@ -1,0 +1,17 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            $(document).ready(function() {
+                $('body')
+                    .toast({
+                    class: '{{ message.tags }}',
+                    showIcon: false,
+                    message: '{{ message }}',
+                    progressUp: true,
+                });
+            });
+        </script>
+    {% endfor %}
+{% endif %}
