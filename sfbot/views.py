@@ -22,12 +22,12 @@ def home_view(request):
     plans = Plan.objects.all()
     users = User.objects.all().count()
     bots = Bots.objects.all().count()
-    premium = Profile.objects.filter(plan__name="PREMIUM").count()
+    working_bots = Bots.objects.filter(status=True).count()
     context = {
         "plans": plans,
         "users": users,
         "bots": bots,
-        "premium": premium,
+        "working_bots": working_bots,
     }
     return render(request, "home.html", context)
 
