@@ -18,9 +18,18 @@ def error_500(request):
     return render(request, "404.html")
 
 
-class Home(ListView):
-    template_name = "home.html"
-    model = GeneratePage
+def home_view(request):
+    plans = Plan.objects.all()
+    users = User.objects.all().count()
+    bots = Bots.objects.all().count()
+    premium = Profile.objects.filter(plan__name="PREMIUM").count()
+    context = {
+        "plans": plans,
+        "users": users,
+        "bots": bots,
+        "premium": premium,
+    }
+    return render(request, "home.html", context)
 
 
 def dashboard_add_bot_view(request):
@@ -30,7 +39,7 @@ def dashboard_add_bot_view(request):
     current_user = Profile.objects.filter(user=request.user)
 
     if not current_user:
-        starter_plan = Plan.objects.get(name="FOR BEGINNERS")
+        starter_plan = Plan.objects.get(name="STARTER")
         user_profile = Profile(user=request.user, plan=starter_plan)
         user_profile.save()
 

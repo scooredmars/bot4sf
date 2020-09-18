@@ -11,7 +11,6 @@
     <a href="#home"><div class="logo"></div></a>
     <a href="#home">Home</a>
     <a href="#pricing">Pricing</a>
-    <a href="#screenshots">Screenshots</a>
     <a href="signup"><div class="ui button">Try for free</div></a>
   </div>
 </div>
@@ -22,7 +21,6 @@
       <a href="#home"><div class="logo"></div></a>
       <a href="#home">Home</a>
       <a href="#pricing">Pricing</a>
-      <a href="#screenshots">Screenshots</a>
       <a href="signup"><div class="ui button">Try for free</div></a>
     </div>
   </div>
@@ -31,63 +29,45 @@
   <p class="text-center">The plan concerns monthly fees. <br> We do not have annual accounts. <br> Fees are not automatically renewable.</p>
 
   <div class="plans">
-    <div class="plan">
-      <div class="header text-center">FOR BEGINNERS</div>
-      <div class="price text-center">$00</div>
-      <div class="description text-center">Perfect to start</div>
-      <div class="text-center">
-        <div class="information"><i class="check icon"></i>Bot works 6h per day</div>
-        <div class="information"><i class="check icon"></i>Max 1 bot</div>
-        <div class="information"><i class="times icon"></i>Bot works 12h per day</div>
-        <div class="information"><i class="times icon"></i>Max 3 bot</div>
-        <div class="information"><i class="times icon"></i>Bot works all the time</div>
-        <div class="information"><i class="times icon"></i>Max 5 bot</div>
-      </div>
-      <a href="signup"><div class="register">Sign Up</div></a>
-    </div>
-    <div class="plan best">
-      <div class="header text-center">I DON'T HAVE TIME</div>
-      <div class="price text-center">$04</div>
-      <div class="description text-center">Perfect when you are busy</div>
-      <div class="text-center">
-        <div class="information"><i class="check icon"></i>Bot works 6h per day</div>
-        <div class="information"><i class="check icon"></i>Max 1 bot</div>
-        <div class="information"><i class="check icon"></i>Bot works 12h per day</div>
-        <div class="information"><i class="check icon"></i>Max 3 bot</div>
-        <div class="information"><i class="times icon"></i>Bot works all the time</div>
-        <div class="information"><i class="times icon"></i>Max 5 bot</div>
-      </div>
-      <a href="signup"><div class="register">Sign Up</div></a>
-    </div>
-    <div class="plan">
-      <div class="header text-center">I'M ON VACATION</div>
-      <div class="price text-center">$08</div>
-      <div class="description text-center">Perfect when you want <br> to take a break</div>
-      <div class="text-center">
-        <div class="information"><i class="check icon"></i>Bot works 6h per day</div>
-        <div class="information"><i class="check icon"></i>Max 1 bot</div>
-        <div class="information"><i class="check icon"></i>Bot works 12h per day</div>
-        <div class="information"><i class="check icon"></i>Max 3 bot</div>
-        <div class="information"><i class="check icon"></i>Bot works all the time</div>
-        <div class="information"><i class="check icon"></i>Max 5 bot</div>
-      </div>
-      <a href="signup"><div class="register">Sign Up</div></a>
-    </div>
+    {% for plan in plans %}
+      {% if plan.available %}
+        <div class="plan {{ plan.special_style }}">
+          <div class="header text-center">{{ plan.name }}</div>
+          <div class="price text-center">$0{{ plan.price }}</div>
+          <div class="text-center">
+            {% for permission in plan.permission_list.all %}
+              <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 
-<div class="screenshots" id="screenshots">
-  <h1 class="text-center">App Screenshots</h1>
-
-  <div class="images">
-    <div class="image">
-      <img class="ui fluid image" src="{% static 'img/home/dashboard-ss.png' %}">
+<div class="ui statistics">
+  <div class="statistic">
+    <div class="value">
+      {{ users }}
     </div>
-    <div class="image">
-      <img class="ui fluid image" src="{% static 'img/home/settings-ss.png' %}">
+    <div class="label">
+      Users
     </div>
-    <div class="image">
-      <img class="ui fluid image" src="{% static 'img/home/profile-ss.png' %}">
+  </div>
+  <div class="statistic">
+    <div class="value">
+      {{ bots }}
+    </div>
+    <div class="label">
+      Bots
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      {{ premium }}
+    </div>
+    <div class="label">
+      Premium Users
     </div>
   </div>
 </div>

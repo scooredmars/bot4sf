@@ -246,27 +246,12 @@
   }
 }
 
-.screenshots{
-  min-height: 100vh;
-  padding-bottom: 4vh;
+.statistics{
+  width: 60%;
+  margin: auto !important;
+  justify-content: space-around;
+}
 
-  h1{
-    padding-top: 5.7em;
-  }
-
-  .images{
-    width: 90%;
-    margin: auto;
-    justify-content: space-around;
-    padding-top: .5em;
-    
-    .image{
-      width: 90%;
-      margin: auto;
-    }
-
-    .image:nth-child(2){
-      margin: 2em auto;
-    }
-  }
+.ui.statistics:after{
+  content: none;
 }
