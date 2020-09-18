@@ -6,7 +6,7 @@ from celery import shared_task
 @shared_task
 def bot_time():
     for bot in Bots.objects.all():
-        if bot.profile.plan.name != "I'M ON VACATION":
+        if bot.profile.plan.name != "PREMIUM":
             bot_time = bot.time_left
             if str(bot_time) != "00:00:00":
                 if bot.status == True:

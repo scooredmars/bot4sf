@@ -31,13 +31,12 @@ class Profile(models.Model):
 
 class Plan(models.Model):
     NAME = (
-        ("FOR BEGINNERS", "FOR BEGINNERS"),
-        ("I DON'T HAVE TIME", "I DON'T HAVE TIME"),
-        ("I'M ON VACATION", "I'M ON VACATION"),
+        ("STARTER", "STARTER"),
+        ("STANDARD", "STANDARD"),
+        ("PREMIUM", "PREMIUM"),
     )
-    name = models.CharField(max_length=21, choices=NAME, default="FOR BEGINNERS")
+    name = models.CharField(max_length=21, choices=NAME, default="STARTER")
     price = models.IntegerField()
-    description = models.CharField(max_length=70)
     permission_list = models.ManyToManyField("sfbot.PermissionList")
     special_style = models.CharField(max_length=15, null=True, blank=True)
     max_time = models.FloatField(null=True)

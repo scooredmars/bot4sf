@@ -58,7 +58,7 @@
                 {% if object.stop %}
                   {{ object.stop|date:"d.m g:i A" }}
                 {% else %}
-                  {% if object.profile.plan.name == "I'M ON VACATION" %}
+                  {% if object.profile.plan.name == "PREMIUM" %}
                     Unlimited
                   {% else %}
                     {% if object.status %}

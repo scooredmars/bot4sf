@@ -88,7 +88,7 @@ class SettingsForm(forms.ModelForm):
             if status == True:
                 bot_data.start = timezone.now()
                 bot_data.save()
-                if bot_data.profile.plan.name != "I'M ON VACATION":
+                if bot_data.profile.plan.name != "PREMIUM":
                     if str(bot_data.time_left) != "00:00:00":
                         # calculate data bot stop
                         converted_time_left = str(bot_data.time_left)
@@ -102,7 +102,7 @@ class SettingsForm(forms.ModelForm):
                         bot_data.save()
             elif status == False:
                 bot_data.start = None
-                if bot_data.profile.plan.name != "I'M ON VACATION":
+                if bot_data.profile.plan.name != "PREMIUM":
                     bot_data.stop = None
                 bot_data.save()
         return bot_data
