@@ -69,9 +69,14 @@ def dashboard_add_bot_view(request):
                     # Set current user profile
                     obj.profile = Profile.objects.get(user=request.user)
                     # Convert float form plan to time in bot
-                    obj.time_left = "{0:02.0f}:{1:02.0f}".format(
-                        *divmod(float(current_plan_q.max_time) * 60, 60)
-                    )
+                    if current_plan_q.max_time == 24.0:
+                        obj.time_left = "{0:02.0f}:{1:02.0f}".format(
+                            *divmod(float("23.99") * 60, 60)
+                        )
+                    else:
+                        obj.time_left = "{0:02.0f}:{1:02.0f}".format(
+                            *divmod(float(current_plan_q.max_time) * 60, 60)
+                        )
                     obj.save()
                     messages.add_message(request, messages.SUCCESS, 'A new bot has been added.')
                     return HttpResponseRedirect(obj.get_absolute_url())
