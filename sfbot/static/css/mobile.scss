@@ -71,6 +71,9 @@
   }
 
   // pricing //
+  .ui.horizontal.divider.fitted.header.shop{
+    top: 923px;
+  }
 
   h1{
     padding-top: 4vh !important;
@@ -91,6 +94,15 @@
         margin-bottom: 5vh;
       }
     }
+  }
+
+  // statistics //
+  .ui.statistics{
+    width: 100%;
+  }
+
+  .ui.horizontal.divider.fitted.header.stat{
+    top: 2247px;
   }
 
   // custom forms //
@@ -165,30 +177,35 @@
     width: 85% !important;
 
     .information-account{
-      display: block !important;
+      justify-content: space-around;
+      text-align: center;
 
-      .desc{
+      .left,.right{
         width: auto !important;
-        padding-left: .5em !important;
-        padding-right: 1em !important;
-        font-size: 1.2em !important;
       }
 
-      .object{
-        font-size: 1.05em !important;
-      }
-    }
+      .item{
+        display: block !important;
+        padding: 1.5em .2em !important;
 
-    .left,.right{
-      width: auto !important;
+        .desc{
+          padding-right: 1em !important;
+          font-size: 1.2em !important;
+        }
+
+        .object{
+          padding-top: .5em;
+          font-size: 1.05em !important;
+        }
+      }
     }
 
     .section{
       display: block !important;
-    }
 
-    .work, .task{
-      width: 100% !important;
+      .work, .task{
+        width: 100% !important;
+      }
     }
   }
 
@@ -218,6 +235,10 @@
 
     .left{
       padding-bottom: 1em;
+    }
+
+    .left,.right{
+      width: auto !important;
     }
 
     .item:first-child{
@@ -263,11 +284,35 @@
     }
   }
 
+  .ui.horizontal.divider.fitted.header.shop{
+    top: 919px;
+  }
+
+  .ui.statistics{
+    width: 100%;
+  }
+
+  .ui.horizontal.divider.fitted.header.stat{
+    top: 1857px;
+  }
+
   .dashboard{
     width: 100% !important;
 
     .bots{
       width: 95% !important;
+    }
+  }
+
+  // navbar //
+  .navbar{
+    width: 100%;
+
+    .logo{
+      width: 176px;
+      height: 68px;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
   }
 
@@ -300,10 +345,22 @@
     width: 65% !important;
 
     .information-account{
-      .desc{
-        width: auto !important;
-        padding-right: 1em !important;
+      justify-content: space-around;
+      text-align: center;
+
+      .item{
+        display: block !important;
+        padding: 1.5em .2em !important;
+
+        .desc{
+          padding-right: 1em !important;
+        }
+
+        .object{
+          padding-top: .5em;
+        }
       }
+      
     }
 
     .left,.right{
