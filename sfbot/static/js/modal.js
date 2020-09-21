@@ -8,5 +8,5 @@ $('.ui.modal.add-bot')
 ;
 
 $('.ui.modal.user-settings')
-    .modal('attach events', '.user-settings', 'show')
+    .modal('attach events', '.edit', 'show')
 ;
