@@ -1,73 +1,99 @@
 .home-bcga{
   height: 100vh;
-  background-image: url("/static/img/home/background.svg");
+  background-image: url("/static/img/home/background.png");
   background-repeat: no-repeat;
   background-size: cover;
-
-.about{
-  margin-top: 1.3em;
 
   h1{
     font-size: 2.5em;
     margin-bottom: .4em;
   }
 
-  p{
-    font-size: 1.3em;
-  }
-
-  .blocks{
-    width: 70%;
-    margin: auto;
-    justify-content: space-around;
+  .introduction{
     display: flex;
-    margin-top: 2em;
+    color: white;
+    justify-content: center;
+    margin-left: -5em;
+    margin: auto;
 
-    .block{
-      box-shadow: -4px 8px 42px -20px rgba(0, 0, 0, 0.473);
-      border: 1px solid rgba(0, 0, 0, 0.099);
-      width: 25%;
-      height: 225px;
-      border-radius: 5%;
-    }
+    .right{
+        width: 45%;
+        padding-top: 7em;
 
-    .icon{
-      width: 70px;
-      height: 70px;
-      margin: 1.15em auto;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+      h1{
+        color: white;
+        font-size: 2.8em;
+      }
 
-    .start{
-      background-image: url("/static/img/home/money.png");
-    }
-
-    .privacy{
-      background-image: url("/static/img/home/security.png");
-    }
-
-    .settings{
-      background-image: url("/static/img/home/settings.png");
-    }
-
-    i{
-      font-size: 2.4em;
-      color: blue;
-      margin-top: 1em;
-    }
-
-    .topic{
-      font-size: 1.5em;
-      margin-bottom: 1em;
-    }
-
-    .description{
-      font-size: 1.2em;
-      padding: 0 1em;
+      .description{
+        font-size: 1.45em;
+        padding-top: .5em;
+        width: 68%;
+        margin-left: -.45em;
+        
+        p{
+          font-size: 1em;
+        }
+      }
     }
   }
-}
+
+  .about{
+    padding-top: 1.7em;
+
+    .description-header{
+      font-size: 1.3em;
+      color: rgba(90, 90, 90, 0.863);
+    }
+
+    .blocks{
+      width: 70%;
+      margin: auto;
+      justify-content: space-around;
+      display: flex;
+      margin-top: 2em;
+
+      .block{
+        box-shadow: -4px 8px 42px -20px rgba(0, 0, 0, 0.473);
+        border: 1px solid rgba(0, 0, 0, 0.099);
+        width: 25%;
+        height: 213px;
+        border-radius: 5%;
+        text-align: center;
+        padding-top: 1.1em;
+
+        img{
+          width: 70px;
+        }
+
+        h3{
+          color: #1da5ff;
+          font-size: 1.5em;
+          margin-block-start: .7em;
+        }
+
+        .description{
+          font-size: 1.15em;
+          color: rgba(90, 90, 90, 0.945);
+          padding: 0em .45em;
+        }
+      }
+
+      .icon{
+        width: 70px;
+        height: 70px;
+        margin: 1.15em auto;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  i{
+    font-size: 2.4em;
+    color: blue;
+    margin-top: 1em;
+  }
 }
 
 .navbar{
