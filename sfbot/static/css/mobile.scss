@@ -1,9 +1,70 @@
 @media only screen and (max-width: $width_mobile){
-  // home //
+  //home //
   .home-bcga{
-    background-image: url("/static/img/home/mobile-background.png");
-  }
+    background-image: url("/static/img/home/background2.png");
+    .left{
+      display: none;
+    }
 
+    .right{
+      width: 100% !important;
+      margin-left: 0em;
+      margin: auto;
+      padding-top: 0em !important;
+      text-align: center;
+
+      h1{
+        font-size: 2.1em !important;
+        padding-top: .5em !important;
+      }
+
+      .description{
+        margin-left: 0em !important;
+        width: 85% !important;
+        margin: auto !important;
+        font-size: 1.1em !important;
+      }
+    }
+
+    .about{
+      padding-top: 2em;
+
+      h1{
+        padding-top: 0vh !important;
+        font-size: 2.1em !important;
+      }
+
+      .description-header{
+        font-size: 1em !important;
+        width: 90%;
+        margin: auto;
+      }
+
+      .blocks{
+        display: block !important;
+        margin-top: 1em;
+      
+        .block{
+          width: 100%;
+          height: unset;
+          padding-bottom: 1.2em;
+
+          img{
+            width: 50px;
+          }
+
+          h3{
+            margin-block-start: .2em;
+            margin-block-end: .3em;
+          }
+        }
+
+        .block:nth-child(1), .block:nth-child(2){
+          margin-bottom: 1em;
+        }
+      }
+    }
+  }
   // navbar //
 
   .navbar{
@@ -268,9 +329,56 @@
 
 }
 
+@media only screen and (max-width: $width_mobile) and (min-width: $width_small_mobile){
+  .home-bcga{
+    .about{
+      padding-top: 6.5em;
+    }
+  }
+}
+
 @media only screen and (max-width: $width_laptops) and (min-width: $width_mobile){
   .home-bcga{
-    background-image: url("/static/img/home/laptop-background.png");
+    background-image: url("/static/img/home/background-lap.png");
+
+    .introduction{
+      width: 96%;
+      margin: auto;
+
+      .left{
+        img{
+          width: 97%;
+        }
+      }
+
+      .right{
+        margin-right: 1em;
+        padding-top: 5em;
+
+        h1{
+          font-size: 2.15em;
+        }
+
+        .description{
+          font-size: 1.2em;
+          width: 90%;
+          padding-left: .7em;
+        }
+      }
+    }
+
+    .about{
+      padding-top: 2.2em;
+
+      h1{
+        margin: .6em 0;
+      }
+    
+      .blocks{
+        width: 95%;
+        margin-top: 3em;
+      }
+    }
   }
 
   .pricing{
