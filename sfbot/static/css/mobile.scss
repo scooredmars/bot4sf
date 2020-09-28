@@ -1,7 +1,7 @@
 @media only screen and (max-width: $width_mobile){
   //home //
   .home-bcga{
-    background-image: url("/static/img/home/background2.png");
+    background-image: url("/static/img/home/background-phone.png");
     .left{
       display: none;
     }
@@ -157,13 +157,25 @@
     }
   }
 
-  // statistics //
-  .ui.statistics{
-    width: 100%;
+  // slider //
+  .slider-container{
+    display: none;
+    .ui.horizontal.divider.fitted.header{
+      display: none;
+    }
   }
 
-  .ui.horizontal.divider.fitted.header.stat{
-    top: 2247px;
+  // statistics //
+  .statistics-container{
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 0em !important;
+
+    .ui.horizontal.divider.fitted.header{
+      top: 2250px;
+    }
+  }
+  .ui.statistics{
+    width: 100%;
   }
 
   // custom forms //
@@ -396,12 +408,20 @@
     top: 919px;
   }
 
-  .ui.statistics{
-    width: 100%;
+  .slider-container{
+    .ui.horizontal.divider.fitted.header{
+      top: 1859px;
+    }
   }
 
-  .ui.horizontal.divider.fitted.header.stat{
-    top: 1857px;
+  .statistics-container{
+    .ui.horizontal.divider.fitted.header{
+      top: 2410px;
+    }
+  }
+
+  .ui.statistics{
+    width: 100%;
   }
 
   .dashboard{
@@ -409,6 +429,16 @@
 
     .bots{
       width: 95% !important;
+    }
+  }
+
+  // ss //
+  .bx-viewport{
+    .s1{
+      background-image: url("/static/img/ss/dashboard_lap.svg") !important;
+    }
+    .s2{
+      background-image: url("/static/img/ss/profile_lap.svg") !important;
     }
   }
 
