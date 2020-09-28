@@ -323,7 +323,7 @@
 
   .error-information{
     .container{
-      width: 85% !important;
+      display: block !important;
 
       h1{
         font-size: 1.7em;
@@ -331,6 +331,10 @@
 
       .left{
         text-align: center;
+      }
+
+      .right{
+        display: none !important;
       }
 
       .information{
