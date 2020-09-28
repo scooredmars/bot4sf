@@ -95,38 +95,51 @@
   </div>
 </div>
 
-<h2 class="ui horizontal divider fitted header stat">
-  <i class="chart bar outline inverted circular icon"></i>
-</h2>
-<div class="ui statistics">
-  <div class="statistic">
-    <div class="value">
-      {{ users }}
-    </div>
-    <div class="label">
-      Users
-    </div>
+<div class="slider-container">
+  <h2 class="ui horizontal divider fitted header">
+    <i class="image outline inverted circular icon"></i>
+  </h2>
+  <div class="slider">
+    <div class="s1 ss"></div>
+    <div class="s2 ss"></div>
   </div>
-  <div class="statistic">
-    <div class="value">
-      {{ bots }}
+</div>
+
+<div class="statistics-container">
+  <h2 class="ui horizontal divider fitted header">
+    <i class="chart bar outline inverted circular icon"></i>
+  </h2>
+  <div class="ui statistics">
+    <div class="statistic">
+      <div class="value">
+        {{ users }}
+      </div>
+      <div class="label">
+        Users
+      </div>
     </div>
-    <div class="label">
-      Bots
+    <div class="statistic">
+      <div class="value">
+        {{ bots }}
+      </div>
+      <div class="label">
+        Bots
+      </div>
     </div>
-  </div>
-  <div class="statistic">
-    <div class="value">
-      {{ working_bots }}
-    </div>
-    <div class="label">
-      Working Bots
+    <div class="statistic">
+      <div class="value">
+        {{ working_bots }}
+      </div>
+      <div class="label">
+        Working Bots
+      </div>
     </div>
   </div>
 </div>
 
 <script src="{% static 'js/nav-scroll.js' %}"></script>
 <script src="{% static 'js/mobile-nav.js' %}"></script>
+<script src="{% static 'js/shape-slider.js' %}"></script>
 {% include "layouts/footer.html" %}
 {% endblock %}
 
