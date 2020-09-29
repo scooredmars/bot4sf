@@ -1,84 +1,84 @@
-.background{
+.background {
   background-color: $light-blu;
-  background-image: linear-gradient(180deg,$light-blu 10%,#224abe);
+  background-image: linear-gradient(180deg, $light-blu 10%, #224abe);
   background-size: cover;
   min-height: 100vh;
   padding: 2em;
 }
 
-
 .custom-form {
-  background:rgba($form-bg,.9);
+  background: rgba($form-bg, 0.9);
   padding: 40px;
-  max-width:600px;
+  max-width: 600px;
   margin: auto;
-  border-radius:$br;
-  box-shadow:0 $br 10px $br rgba($form-bg,.3);
+  border-radius: $br;
+  box-shadow: 0 $br 10px $br rgba($form-bg, 0.3);
 
   h1 {
-    text-align:center;
-    color:$white;
-    font-weight:$thin;
-    margin:0 0 25px;
+    text-align: center;
+    color: $white;
+    font-weight: $thin;
+    margin: 0 0 25px;
   }
 
   label {
     color: rgba(255, 255, 255, 0.774);
-    font-size:22px;
+    font-size: 22px;
     .req {
-      margin:2px;
-      color:$main;
+      margin: 2px;
+      color: $main;
     }
   }
 
-  input, textarea {
-    margin-top: .4em;
+  input,
+  textarea {
+    margin-top: 0.4em;
     margin-bottom: 1em;
-    font-size:22px;
-    width:$full-size;
-    padding:5px 10px;
-    background:none;
-    background-image:none;
-    border:1px solid $gray-light;
-    color:$white;
-    border-radius:0;
-    transition:border-color .25s ease, box-shadow .25s ease;
+    font-size: 22px;
+    width: $full-size;
+    padding: 5px 10px;
+    background: none;
+    background-image: none;
+    border: 1px solid $gray-light;
+    color: $white;
+    border-radius: 0;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
     &:focus {
-      outline:0;
-      border-color:$main;
+      outline: 0;
+      border-color: $main;
     }
   }
 }
 
 .tab-group {
-  list-style:none;
-  padding:0;
-  margin:0 0 34px 0;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 34px 0;
   &:after {
     content: "";
     display: table;
     clear: both;
   }
   li a {
-    display:block;
-    text-decoration:none;
-    padding:15px;
-    background:rgba($gray-light,.25);
-    color:$gray-light;
-    font-size:20px;
-    float:left;
-    width:$half-size;
-    text-align:center;
-    cursor:pointer;
-    transition:.5s ease;
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba($gray-light, 0.25);
+    color: $gray-light;
+    font-size: 20px;
+    float: left;
+    width: $half-size;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s ease;
     &:hover {
-      background:$main-dark;
-      color:$white;
+      background: $main-dark;
+      color: $white;
     }
   }
   .active a {
-    background:$main;
-    color:$white;
+    background: $main;
+    color: $white;
   }
 }
 
@@ -88,145 +88,145 @@
 }
 
 .button {
-  border:0;
-  outline:none;
-  border-radius:0;
-  padding:15px 0;
-  font-size:2rem;
-  font-weight:$bold;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  background:$main;
-  color:$white;
-  transition:all.5s ease;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: $bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: $main;
+  color: $white;
+  transition: all.5s ease;
   -webkit-appearance: none;
   cursor: pointer;
-  &:hover, &:focus {
-    background:$main-dark;
+  &:hover,
+  &:focus {
+    background: $main-dark;
   }
 }
 
 .button-block {
-  display:block;
-  width:$full-size;
+  display: block;
+  width: $full-size;
 }
 
 .forgot {
-  margin-top:-5px;
-  text-align:right;
+  margin-top: -5px;
+  text-align: right;
   margin-bottom: 15px;
   font-size: 1.1em;
 }
 
-.regulations{
+.regulations {
   color: $white;
-  margin-bottom: .8em;
+  margin-bottom: 0.8em;
 }
 
-.errorlist{
+.errorlist {
   color: rgb(255, 104, 104);
   font-size: 1.2em;
   padding-bottom: 1em;
 }
 
-.space{
+.space {
   margin-top: 8em;
 }
 
 // restart password
 
-.restart{
-  label{
+.restart {
+  label {
     position: initial;
     left: 0;
-    margin-top: .4em;
+    margin-top: 0.4em;
   }
 
-  input{
-    margin-top: .6em;
+  input {
+    margin-top: 0.6em;
   }
 
-  input:last-child{
+  input:last-child {
     margin-bottom: -7px;
   }
 
-  p{
+  p {
     padding-bottom: 1.5em;
     font-size: 1.1em;
   }
-
 }
 
 // Verification_sent and confirm e-mail
 
-.bigger-p{
+.bigger-p {
   font-size: 1.5em;
 }
 
-.space-p{
+.space-p {
   margin-bottom: 2em;
 }
 
-.bigger-form{
+.bigger-form {
   max-width: 1000px;
 }
 
-fieldset{
+fieldset {
   border: none;
 }
 
-.default-input{
+.default-input {
   width: auto;
   margin: auto;
 }
 
-.button-holder{
+.button-holder {
   display: flex;
   justify-content: space-between;
   margin-top: 1.7em;
   font-size: 1.3em;
 
-  .primary-button{
+  .primary-button {
     background-color: #1ab188;
     width: 30%;
     color: rgba(255, 255, 255, 0.726);
     padding: 15px 0;
-    border-radius: .5em;
+    border-radius: 0.5em;
     cursor: pointer;
     transition: all 0.5s ease;
   }
-  .primary-button:hover{
+  .primary-button:hover {
     background-color: #009b72;
   }
 
-  .verification-button{
+  .verification-button {
     background-color: rgb(187, 132, 29);
     width: 30%;
     color: rgba(255, 255, 255, 0.726);
     padding: 15px 0;
-    border-radius: .5em;
+    border-radius: 0.5em;
     cursor: pointer;
     transition: all 0.5s ease;
   }
-  .verification-button:hover{
+  .verification-button:hover {
     background-color: rgb(172, 112, 2);
   }
 
-  .remove-button{
+  .remove-button {
     background-color: rgb(204, 22, 22);
     width: 30%;
     color: rgba(255, 255, 255, 0.911);
     padding: 15px 0;
-    border-radius: .5em;
+    border-radius: 0.5em;
     cursor: pointer;
     transition: all 0.5s ease;
   }
-  .remove-button:hover{
+  .remove-button:hover {
     background-color: rgb(182, 1, 1);
   }
 }
 
-.ctrlHolder{
+.ctrlHolder {
   margin: 1em;
 }
 
@@ -249,27 +249,27 @@ fieldset{
     height: 25px;
     width: 25px;
     background-color: #eee;
-    border-radius: .3em;
+    border-radius: 0.3em;
   }
-  
+
   .custom-label:hover input ~ .checkmark {
     background-color: #ccc;
   }
-  
+
   .custom-label input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #2196f3;
   }
-  
+
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   .custom-label input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   .custom-label .checkmark:after {
     left: 10px;
     top: 5px;
@@ -291,19 +291,17 @@ fieldset{
   width: 0;
 }
 
-
-
-.primary{
-  padding-left: .3em;
+.primary {
+  padding-left: 0.3em;
   color: #1ab188;
 }
 
-.verified{
+.verified {
   padding-left: 1em;
   color: rgb(218, 141, 0);
 }
 
-.unverified{
+.unverified {
   padding-left: 1em;
   color: rgba(255, 43, 43, 0.952);
 }

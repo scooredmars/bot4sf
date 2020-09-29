@@ -1,9 +1,9 @@
-.error-information{
+.error-information {
     background-color: rgba(25, 49, 80, 0.808);
     width: 100%;
     height: 100vh;
-    
-    .container{
+
+    .container {
         color: #f0f0f0;
         width: 75%;
         margin: auto;
@@ -11,28 +11,28 @@
         padding-top: 25vh;
         justify-content: space-around;
 
-        h1{
+        h1 {
             color: #f0f0f0;
         }
 
-        a{
-            padding: .7em 2em;
+        a {
+            padding: 0.7em 2em;
             border: 2px solid #f0f0f0;
             font-size: 1.2em;
             color: #f0f0f0;
         }
 
-        a:hover{
+        a:hover {
             background-color: #f0f0f0;
             color: rgba(25, 49, 80, 0.808);
             transition: 1s;
         }
 
-        .left{
+        .left {
             padding-top: 10vh;
         }
 
-        .information{
+        .information {
             margin-bottom: 5vh;
             font-size: 1.2em;
         }

@@ -1,17 +1,19 @@
-.wrapper{
+.wrapper {
   display: flex;
   width: $full-size;
 }
 
-#burger,#quit,#links{
+#burger,
+#quit,
+#links {
   display: none;
 }
 
-.nav-left{
+.nav-left {
   min-height: 100vh;
   width: 12%;
   background-color: $light-blu;
-  background-image: linear-gradient(180deg,$light-blu 10%,#224abe);
+  background-image: linear-gradient(180deg, $light-blu 10%, #224abe);
   background-size: cover;
   padding: 0;
   align-items: flex-start;
@@ -21,43 +23,43 @@
   position: relative;
   min-width: 200px;
 
-  .container-fluid{
+  .container-fluid {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    flex-direction: column!important;
+    flex-direction: column !important;
     width: $full-size;
-    padding-right: .75rem;
-    padding-left: .75rem;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
     margin-right: auto;
     margin-left: auto;
 
-    .navbar-brand{
+    .navbar-brand {
       display: flex;
       margin-top: 1.2em;
       color: $white;
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: .05rem;
+      letter-spacing: 0.05rem;
       align-items: center;
       font-size: 1.25rem;
     }
-    .sidebar-brand-icon{
+    .sidebar-brand-icon {
       -webkit-transform: rotate(-15deg);
       transform: rotate(-15deg);
 
-      i{
+      i {
         font-size: 2em;
       }
     }
 
-    .sidebar-brand-text{
+    .sidebar-brand-text {
       display: inline;
-      margin: 0 1rem!important;
+      margin: 0 1rem !important;
     }
 
-    .navbar-nav{
+    .navbar-nav {
       color: $bg-content;
       display: flex;
       flex-direction: column;
@@ -68,62 +70,62 @@
       margin-left: -10px;
     }
 
-    .nav-item{
+    .nav-item {
       position: relative;
     }
 
-    .nav-link{
+    .nav-link {
       display: block;
       width: $full-size;
       text-align: left;
       padding: 1rem;
       width: $full-size;
-      font-size: .85rem;
+      font-size: 0.85rem;
       position: relative;
       color: rgba(231, 231, 231, 0.493);
       font-size: 1.1em;
 
-      .active{
+      .active {
         color: rgb(255, 255, 255) !important;
         font-weight: 700;
       }
     }
 
-    .nav-link:hover{
+    .nav-link:hover {
       color: rgb(255, 255, 255);
     }
 
-    .rounded-circle{
+    .rounded-circle {
       background-color: rgba(231, 231, 231, 0.301);
       border-radius: $full-size;
-      padding: 1em .8em;
+      padding: 1em 0.8em;
       color: rgba(255, 255, 255, 0.568);
       cursor: pointer;
     }
 
-    .rounded-circle:hover{
+    .rounded-circle:hover {
       background-color: rgba(231, 231, 231, 0.384);
     }
   }
 }
 
-.nav-col{
+.nav-col {
   flex-direction: column;
   width: $full-size;
   display: flex;
 
-  .nav-right{
+  .nav-right {
     height: 4.375rem;
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
     background-color: $white;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
     display: flex;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
   }
 
-  .container-fluid{
+  .container-fluid {
     display: flex;
     align-items: center;
     padding-left: 1.5rem;
@@ -131,67 +133,67 @@
     width: $full-size;
     justify-content: space-between;
 
-    .add{
+    .add {
       cursor: pointer;
     }
   }
 
-  .btn-add-bot{
+  .btn-add-bot {
     cursor: pointer;
     text-transform: uppercase;
     color: $white;
     background-color: $light-blu;
     border-color: $light-blu;
     border: 0;
-    padding: .8em;
+    padding: 0.8em;
     font-size: 1.1em;
-    border-radius: .5em;
+    border-radius: 0.5em;
   }
 
-  .btn-add-bot-max{
+  .btn-add-bot-max {
     cursor: not-allowed;
     text-transform: uppercase;
     background-color: #b8b8b8cc;
     border-color: $light-blu;
     border: 0;
-    padding: .8em;
+    padding: 0.8em;
     font-size: 1.1em;
-    border-radius: .5em;
+    border-radius: 0.5em;
   }
 
-  .btn-add-bot:focus{
-    outline: none
+  .btn-add-bot:focus {
+    outline: none;
   }
 
-  .ui.dropdown{
+  .ui.dropdown {
     padding-right: 1em;
 
-    .menu{
+    .menu {
       margin-top: 2em;
 
-      .item{
+      .item {
         color: rgba(0, 0, 0, 0.548);
       }
 
-      .item:first-child{
-        border-bottom: 1px solid rgba(34,36,38,.1);
+      .item:first-child {
+        border-bottom: 1px solid rgba(34, 36, 38, 0.1);
       }
 
-      .active{
+      .active {
         font-weight: unset;
       }
 
-      .nav-links{
+      .nav-links {
         font-size: 1em;
         padding: 1em;
       }
 
-      .nav-links:hover{
+      .nav-links:hover {
         background-color: rgba(182, 182, 182, 0.233);
       }
     }
 
-    .account{
+    .account {
       display: inline-block;
       font-size: 1.1em;
     }

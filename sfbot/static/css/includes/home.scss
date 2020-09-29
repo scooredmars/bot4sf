@@ -1,59 +1,59 @@
-.home-bcga{
+.home-bcga {
   height: 100vh;
   background-image: url("/static/img/home/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 
-  h1{
+  h1 {
     font-size: 2.5em;
-    margin-bottom: .4em;
+    margin-bottom: 0.4em;
   }
 
-  .introduction{
+  .introduction {
     display: flex;
     color: white;
     justify-content: center;
     margin-left: -5em;
     margin: auto;
 
-    .right{
-        width: 45%;
-        padding-top: 7em;
+    .right {
+      width: 45%;
+      padding-top: 7em;
 
-      h1{
+      h1 {
         color: white;
         font-size: 2.8em;
       }
 
-      .description{
+      .description {
         font-size: 1.45em;
-        padding-top: .5em;
+        padding-top: 0.5em;
         width: 68%;
-        margin-left: -.45em;
-        
-        p{
+        margin-left: -0.45em;
+
+        p {
           font-size: 1em;
         }
       }
     }
   }
 
-  .about{
+  .about {
     padding-top: 1.7em;
 
-    .description-header{
+    .description-header {
       font-size: 1.3em;
       color: rgba(90, 90, 90, 0.863);
     }
 
-    .blocks{
+    .blocks {
       width: 70%;
       margin: auto;
       justify-content: space-around;
       display: flex;
       margin-top: 2em;
 
-      .block{
+      .block {
         box-shadow: -4px 8px 42px -20px rgba(0, 0, 0, 0.473);
         border: 1px solid rgba(0, 0, 0, 0.099);
         width: 25%;
@@ -62,24 +62,24 @@
         text-align: center;
         padding-top: 1.1em;
 
-        img{
+        img {
           width: 70px;
         }
 
-        h3{
+        h3 {
           color: #1da5ff;
           font-size: 1.5em;
-          margin-block-start: .7em;
+          margin-block-start: 0.7em;
         }
 
-        .description{
+        .description {
           font-size: 1.15em;
           color: rgba(90, 90, 90, 0.945);
-          padding: 0em .45em;
+          padding: 0em 0.45em;
         }
       }
 
-      .icon{
+      .icon {
         width: 70px;
         height: 70px;
         margin: 1.15em auto;
@@ -89,47 +89,48 @@
     }
   }
 
-  i{
+  i {
     font-size: 2.4em;
     color: blue;
     margin-top: 1em;
   }
 }
 
-.navbar{
+.navbar {
   width: 76.5%;
   display: flex;
-  padding: .8em;
+  padding: 0.8em;
   margin: auto;
   justify-content: space-around;
 
-  .logo{
+  .logo {
     background-image: url("/static/img/home/logo.png");
     width: 233px;
     height: 78px;
   }
 
-  a{
+  a {
     color: white;
     font-size: 1.4em;
     align-self: center;
-    padding-bottom: .3vh;
+    padding-bottom: 0.3vh;
   }
 
-  a:last-child{
+  a:last-child {
     align-self: auto;
   }
 
-  a:hover:last-child,a:hover:first-child{
+  a:hover:last-child,
+  a:hover:first-child {
     border-bottom: none;
   }
 
-  a:hover{
+  a:hover {
     border-bottom: 3px solid white;
     transition: 0.3s;
   }
 
-  .ui.button{
+  .ui.button {
     padding: 1.2em 3em;
     border-radius: 2em;
     text-align: center;
@@ -139,9 +140,9 @@
   }
 }
 
-.sections{
-  background: rgb(59,132,254);
-  background: linear-gradient(90deg, rgba(59,132,254,1) 0%, rgba(34,107,226,1) 100%);
+.sections {
+  background: rgb(59, 132, 254);
+  background: linear-gradient(90deg, rgba(59, 132, 254, 1) 0%, rgba(34, 107, 226, 1) 100%);
   width: 100%;
   margin-left: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.212);
@@ -152,7 +153,7 @@
   transition: top 0.5s;
   z-index: 3;
 
-  .container{
+  .container {
     width: 76.5%;
     display: flex;
     margin: auto;
@@ -160,159 +161,159 @@
   }
 }
 
-.pricing{
+.pricing {
   min-height: 100vh;
   padding-bottom: 4vh;
-  background-color: #F8F6F6;
-  color: #5D5D5D;
+  background-color: #f8f6f6;
+  color: #5d5d5d;
 
-  h1{
+  h1 {
     padding-top: 5.5em;
   }
 
-  .header{
+  .header {
     font-size: 1.7em;
     padding-top: 1.7em;
-    color: #5D5D5D;
+    color: #5d5d5d;
   }
 
-  .price{
-    color: #4085F6;
+  .price {
+    color: #4085f6;
     font-size: 3em;
-    padding: .7em;
+    padding: 0.7em;
   }
 
-  .description{
+  .description {
     font-size: 1.2em;
     font-weight: bold;
     padding-bottom: 1.7em;
   }
 
-  p{
+  p {
     font-size: 1.3em;
   }
 
-  .information{
+  .information {
     font-size: 1.15em;
-    margin-bottom: .3em;
+    margin-bottom: 0.3em;
   }
 
-  .check{
-    color: #4085F6;
-    margin-right: .45em;
+  .check {
+    color: #4085f6;
+    margin-right: 0.45em;
   }
 
-  .times{
+  .times {
     color: rgba(255, 65, 51, 0.904);
-    margin-right: .45em;
+    margin-right: 0.45em;
   }
 
-  .plans{
+  .plans {
     width: 60%;
     margin: auto;
     display: flex;
     justify-content: space-around;
     margin-top: 6.5em;
 
-    .best{
-      background: rgb(59,132,254);
-      background: linear-gradient(90deg, rgba(59,132,254,1) 0%, rgba(34,107,226,1) 100%);
+    .best {
+      background: rgb(59, 132, 254);
+      background: linear-gradient(90deg, rgba(59, 132, 254, 1) 0%, rgba(34, 107, 226, 1) 100%);
       color: white;
 
-      .header{
+      .header {
         color: white;
       }
 
-      .check{
+      .check {
         color: white;
       }
 
-      .times{
+      .times {
         color: rgb(255, 128, 119) !important;
       }
 
-      .price{
+      .price {
         color: white;
       }
 
-      .description{
+      .description {
         font-weight: normal;
       }
 
-      .register{
+      .register {
         border: 2px solid white !important;
         background: white;
       }
     }
 
-    .plan{
+    .plan {
       width: 26%;
-      border: 2px solid #226BE2;
+      border: 2px solid #226be2;
       border-radius: 1.2em;
       padding-bottom: 2em;
 
-      .register{
+      .register {
         width: 48%;
         margin: auto;
         margin-top: 1.5em;
         text-align: center;
         font-size: 1.65em;
-        border: 2px solid #226BE2;
+        border: 2px solid #226be2;
         color: rgba(34, 108, 226, 0.801);
         border-radius: 1em;
-        padding: .45em;
+        padding: 0.45em;
       }
 
-      .register:hover{
-        background: #226BE2;
+      .register:hover {
+        background: #226be2;
         color: white;
-        transition: .6s;
+        transition: 0.6s;
       }
     }
   }
 }
 
-.slider-container{
-  .ui.horizontal.divider.fitted.header{
+.slider-container {
+  .ui.horizontal.divider.fitted.header {
     position: absolute;
     top: 1880px;
   }
 
-  .bx-wrapper{
+  .bx-wrapper {
     height: 40%;
     max-width: 80% !important;
     margin: auto;
     margin-top: 4.5em;
 
-    .bx-prev{
+    .bx-prev {
       display: none;
     }
 
-    .bx-viewport{
+    .bx-viewport {
       height: 100% !important;
 
-      .ss{
+      .ss {
         background-size: cover;
         background-repeat: no-repeat;
         height: 100%;
       }
 
-      .s1{
+      .s1 {
         background-image: url("/static/img/ss/dashboard_pc.svg");
       }
-      .s2{
+      .s2 {
         background-image: url("/static/img/ss/profile_pc.svg");
       }
     }
   }
 }
 
-.statistics-container{
+.statistics-container {
   min-height: 18%;
-  background-color: #F8F6F6;
+  background-color: #f8f6f6;
   margin-top: 8em !important;
 
-  .statistics{
+  .statistics {
     width: 60%;
     margin: auto !important;
     justify-content: space-around;
@@ -320,34 +321,35 @@
     margin-bottom: 1.5em !important;
     padding-top: 3.8em;
   }
-  
-  .ui.statistics:after{
+
+  .ui.statistics:after {
     content: none;
   }
 
-  .ui.horizontal.divider.fitted.header{
+  .ui.horizontal.divider.fitted.header {
     position: absolute;
     top: 2431px;
   }
 }
 
-.ui.horizontal.divider.fitted.header.shop{
+.ui.horizontal.divider.fitted.header.shop {
   position: absolute;
   top: 940px;
 }
 
-i.inverted.bordered.icon, i.inverted.circular.icon{
+i.inverted.bordered.icon,
+i.inverted.circular.icon {
   background-color: #1b1c1de0;
 }
 
-.ui.horizontal.divider:before{
+.ui.horizontal.divider:before {
   background-position: right 0em top 50%;
 }
 
-.ui.horizontal.divider:after{
+.ui.horizontal.divider:after {
   background-position: left 0em top 50%;
 }
 
-.ui.header .icon:only-child{
+.ui.header .icon:only-child {
   margin-right: 0rem;
 }

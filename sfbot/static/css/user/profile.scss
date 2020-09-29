@@ -1,55 +1,54 @@
-.profile-container{
+.profile-container {
   width: 88%;
   margin: auto;
   display: flex;
 
-  .left{
+  .left {
     width: 35%;
 
-    .time{
+    .time {
       float: right;
     }
   }
 
-  .right{
+  .right {
     width: 65%;
   }
 }
 
-.bot-stats{
+.bot-stats {
   width: 85%;
   margin: auto;
   margin-bottom: 2em;
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
   background-color: $white;
   border: 1px solid $card-border;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
 }
 
-.bot-package{
+.bot-package {
   width: 92%;
   margin: auto;
   margin-bottom: 2em;
   box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
   background-color: $white;
   border: 1px solid $card-border;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
 }
 
-.card-body{
+.card-body {
   font-size: 1.2em;
 }
 
-.topic{
+.topic {
   color: $light-blu;
   font-weight: normal !important;
 }
 
-
-.card-profile{
+.card-profile {
   width: 92%;
   margin-bottom: 1rem;
-  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -58,113 +57,113 @@
   background-color: $white;
   background-clip: border-box;
   border: 1px solid $card-border;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
   margin: auto;
   margin-bottom: 1em;
 
-  .card-header{
-    padding: .75rem 1.25rem;
+  .card-header {
+    padding: 0.75rem 1.25rem;
     margin-bottom: 0;
     background-color: $bg-content;
     border-bottom: 1px solid $card-border;
     display: flex;
     justify-content: space-between;
 
-    .topic{
+    .topic {
       color: $light-blu;
       font-weight: normal;
     }
 
-    .edit{
-      padding-top: .4em;
+    .edit {
+      padding-top: 0.4em;
       font-size: 1.2em;
       cursor: pointer;
     }
   }
 
-  .card-body{
+  .card-body {
     flex: 1 1 auto;
     padding: 1.25rem;
 
-    .form-row{
+    .form-row {
       display: flex;
       flex-wrap: wrap;
       margin-right: -5px;
       margin-left: -5px;
     }
 
-    .col{
+    .col {
       padding: 0 5px;
       flex-basis: 0;
       flex-grow: 1;
       max-width: $full-size;
     }
 
-    .form-group{
+    .form-group {
       margin-bottom: 1rem;
     }
 
-    label{
+    label {
       display: inline-block;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       position: relative;
       transform: 0;
       color: $lightgrey-color;
       left: 0;
       transition: none;
       pointer-events: none;
-      padding-bottom: .5em;
+      padding-bottom: 0.5em;
       font-size: 1.1em;
     }
 
-    .form-control{
+    .form-control {
       display: block;
-    width: $full-size;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: $normal;
-    line-height: 1.5;
-    color: $lightgrey-color;
-    background-color: $white;
-    background-clip: padding-box;
-    border: 1px solid #d1d3e2;
-    border-radius: .35rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      width: $full-size;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: $normal;
+      line-height: 1.5;
+      color: $lightgrey-color;
+      background-color: $white;
+      background-clip: padding-box;
+      border: 1px solid #d1d3e2;
+      border-radius: 0.35rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
-    .btn-save{
+    .btn-save {
       cursor: pointer;
       width: $full-size;
-      padding: .7em;
+      padding: 0.7em;
       font-size: 1.2em;
-      border-radius: .5em;
+      border-radius: 0.5em;
       color: $white;
       background-color: $light-blu;
       border-color: $light-blu;
     }
 
-    input{
+    input {
       color: $black;
     }
 
-    .list{
+    .list {
       display: flex;
       width: 100%;
       margin-bottom: 1em;
       font-size: 1.25em;
       color: rgb(99, 99, 99);
 
-      .item:first-child{
+      .item:first-child {
         width: 25%;
         color: rgba(0, 0, 0, 0.897);
       }
 
-      .item{
+      .item {
         width: 70%;
       }
     }
-    .list:last-child{
+    .list:last-child {
       margin-bottom: 0;
     }
   }

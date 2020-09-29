@@ -1,116 +1,115 @@
-.shop{
-  h1{
+.shop {
+  h1 {
     padding-top: 2.25em;
   }
 
-  .header{
+  .header {
     font-size: 1.7em;
     padding-top: 1.7em;
-    color: #5D5D5D;
+    color: #5d5d5d;
   }
 
-  .price{
-    color: #4085F6;
+  .price {
+    color: #4085f6;
     font-size: 3em;
-    padding: .7em;
+    padding: 0.7em;
   }
 
-  .description{
+  .description {
     font-size: 1.2em;
     font-weight: bold;
     padding-bottom: 1.7em;
   }
 
-  p{
+  p {
     font-size: 1.3em;
   }
 
-  .information{
+  .information {
     font-size: 1.15em;
-    margin-bottom: .3em;
+    margin-bottom: 0.3em;
   }
 
-  .check{
-    color: #4085F6;
-    margin-right: .45em;
+  .check {
+    color: #4085f6;
+    margin-right: 0.45em;
   }
 
-  .times{
+  .times {
     color: rgba(255, 65, 51, 0.904);
-    margin-right: .45em;
+    margin-right: 0.45em;
   }
 
-  .plans{
+  .plans {
     width: 75%;
     margin: auto;
     display: flex;
     justify-content: space-around;
     margin-top: 6.5em;
-    
-    
-    .not-available{
+
+    .not-available {
       cursor: not-allowed;
       background-image: url(../img/status/not-available.png);
       background-size: cover;
       background-repeat: no-repeat;
     }
 
-    .best{
-      background: rgb(59,132,254);
-      background: linear-gradient(90deg, rgba(59,132,254,1) 0%, rgba(34,107,226,1) 100%);
+    .best {
+      background: rgb(59, 132, 254);
+      background: linear-gradient(90deg, rgba(59, 132, 254, 1) 0%, rgba(34, 107, 226, 1) 100%);
       color: $white;
 
-      .header{
+      .header {
         color: $white;
       }
 
-      .check{
+      .check {
         color: $white;
       }
 
-      .times{
+      .times {
         color: rgb(255, 128, 119) !important;
       }
 
-      .price{
+      .price {
         color: $white;
       }
 
-      .description{
+      .description {
         font-weight: normal;
       }
 
-      .register{
+      .register {
         border: 2px solid $white !important;
         background: $white;
       }
     }
 
-    .plan{
+    .plan {
       width: 26%;
-      border: 2px solid #226BE2;
+      border: 2px solid #226be2;
       border-radius: 1.2em;
       padding-bottom: 2em;
 
-      .register{
+      .register {
         width: 48%;
         margin: auto;
         margin-top: 1.5em;
         text-align: center;
         font-size: 1.65em;
-        border: 2px solid #226BE2;
+        border: 2px solid #226be2;
         color: rgba(34, 108, 226, 0.801);
         border-radius: 1em;
-        padding: .45em;
+        padding: 0.45em;
       }
 
-      .register:hover{
-        background: #226BE2;
+      .register:hover {
+        background: #226be2;
         color: $white;
-        transition: .6s;
+        transition: 0.6s;
       }
 
-      .owned{
+      .owned {
         cursor: not-allowed;
       }
     }

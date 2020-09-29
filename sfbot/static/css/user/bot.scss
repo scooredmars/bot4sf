@@ -1,93 +1,99 @@
-.bot-settings{
+.bot-settings {
   width: 55%;
   margin: auto;
 
-  input{
+  input {
     color: black;
   }
 
-  .time-error{
+  .time-error {
     color: rgba(216, 35, 35, 0.76);
     font-size: 1.4em;
     padding-top: 1em;
   }
 
-  button{
-    border-radius: .25em;
+  button {
+    border-radius: 0.25em;
     margin-top: 1.5em;
     margin-bottom: 5em;
   }
 
-  .information-account{
+  .information-account {
     border-bottom: 1px solid rgba(66, 66, 66, 0.479);
-    border-radius: .5em;
+    border-radius: 0.5em;
     display: flex;
-    padding-bottom: .7em;
-    
-    .item{
+    padding-bottom: 0.7em;
+
+    .item {
       display: flex;
       font-size: 1.2em;
-      padding: 1em .2em;
+      padding: 1em 0.2em;
 
-      .desc{
+      .desc {
         min-width: 45%;
         font-size: 1.3em;
         padding-left: 1em;
       }
 
-      .object{
+      .object {
         font-size: 1.2em;
       }
     }
   }
 
-  .section{
+  .section {
     display: flex;
     margin: 1em auto;
     border-bottom: 1px solid rgba(66, 66, 66, 0.479);
-    border-radius: .5em;
+    border-radius: 0.5em;
   }
 
-    .task{
-      h1{
-        margin-bottom: 0;
-        padding: .5em 0;
-      }
-
-      .choose{
-        padding-bottom: 1.2em;
-        padding-top: .5em;
-        font-size: 1.3em;
-      }
-
-      select{
-        max-width: 50%;
-        min-width: 15%;
-        padding: .6em;
-        border-radius: .6em;
-        margin-left: 10px;
-        outline: none;
-      }
+  .task {
+    h1 {
+      margin-bottom: 0;
+      padding: 0.5em 0;
     }
-  
-  .work,.task,.left,.right{
+
+    .choose {
+      padding-bottom: 1.2em;
+      padding-top: 0.5em;
+      font-size: 1.3em;
+    }
+
+    select {
+      max-width: 50%;
+      min-width: 15%;
+      padding: 0.6em;
+      border-radius: 0.6em;
+      margin-left: 10px;
+      outline: none;
+    }
+  }
+
+  .work,
+  .task,
+  .left,
+  .right {
     width: 50%;
   }
 
-  .status{
+  .status {
     margin-top: 2em;
     padding-bottom: 2em;
     border-bottom: 1px solid rgba(66, 66, 66, 0.479);
-    border-radius: .5em;
+    border-radius: 0.5em;
 
-    .btn-desc{
+    .btn-desc {
       font-size: 1.4em;
     }
   }
 
   .onoffswitch {
-    position: relative; width: 200px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    position: relative;
+    width: 200px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     margin: auto;
     margin-top: 2.25em;
   }
@@ -99,41 +105,62 @@
   }
 
   .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 30px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 30px;
   }
 
   .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block;
+    width: 200%;
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
   }
 
-  .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 75px; padding: 0; line-height: 75px;
-    font-size: 40px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+  .onoffswitch-inner:before,
+  .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 75px;
+    padding: 0;
+    line-height: 75px;
+    font-size: 40px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
     box-sizing: border-box;
   }
 
   .onoffswitch-inner:before {
     content: "ON";
     padding-left: 50px;
-    background-color: #00D69D; color: #FFFFFF;
+    background-color: #00d69d;
+    color: #ffffff;
   }
 
   .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 50px;
-    background-color: #E6E6E6; color: #999999;
+    background-color: #e6e6e6;
+    color: #999999;
     text-align: right;
   }
 
   .onoffswitch-switch {
-    display: block; width: 24px; margin: 25.5px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
+    display: block;
+    width: 24px;
+    margin: 25.5px;
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     right: 121px;
-    border: 2px solid #999999; border-radius: 30px;
-    transition: all 0.3s ease-in 0s; 
+    border: 2px solid #999999;
+    border-radius: 30px;
+    transition: all 0.3s ease-in 0s;
   }
 
   .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -141,39 +168,41 @@
   }
 
   .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
   }
-
 }
 
-.edit-information{
+.edit-information {
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
-  border-radius: .7em;
+  border-radius: 0.7em;
   padding: 1.8em;
   display: flex;
   font-size: 1.2em;
   justify-content: space-around;
 
-  .item:first-child{
+  .item:first-child {
     padding-bottom: 2em;
   }
 
-  .object:first-child{
-    padding-bottom: .7em;
+  .object:first-child {
+    padding-bottom: 0.7em;
   }
 
-  select,input{
-    border-radius: .8em;
-    padding: .5em;
+  select,
+  input {
+    border-radius: 0.8em;
+    padding: 0.5em;
     border: 1px solid rgba(128, 128, 128, 0.651);
   }
 
-  select:focus ,input:focus{
+  select:focus,
+  input:focus {
     outline: none;
   }
 
-  .left, .right{
+  .left,
+  .right {
     text-align: center;
   }
 }
