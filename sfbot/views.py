@@ -1,13 +1,14 @@
 from allauth.account.views import PasswordChangeView
 from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from .forms import AddBotForm, SettingsForm, EditBotForm, UserSettingsForm
-from .models import Bots, FaqList, GeneratePage, Plan, Profile, User, PermissionList
+from .models import Bots, FaqList, GeneratePage, Plan, Profile, User, PermissionList, Currency, Orders
 from django.contrib import messages
+import json
 
 
 def error_404(request, exception):
@@ -27,32 +28,43 @@ def home_view(request):
     permission_list = PermissionList.objects.all()
 
     if not permission_list:
-        w_6 = PermissionList(name="6h", icon="check icon", description="Bot works 6h per day")
+        w_6 = PermissionList(name="6h", icon="check icon",
+                             description="Bot works 6h per day")
         w_6.save()
-        m_1 = PermissionList(name="1bot", icon="check icon", description="Max 1 bot")
+        m_1 = PermissionList(name="1bot", icon="check icon",
+                             description="Max 1 bot")
         m_1.save()
-        w_12_n = PermissionList(name="12h no", icon="times icon", description="Bot works 12h per day")
+        w_12_n = PermissionList(
+            name="12h no", icon="times icon", description="Bot works 12h per day")
         w_12_n.save()
-        m_3_n = PermissionList(name="3bots no", icon="times icon", description="Max 3 bots")
+        m_3_n = PermissionList(
+            name="3bots no", icon="times icon", description="Max 3 bots")
         m_3_n.save()
-        w_12_y = PermissionList(name="12h yes", icon="check icon", description="Bot works 12h per day")
+        w_12_y = PermissionList(
+            name="12h yes", icon="check icon", description="Bot works 12h per day")
         w_12_y.save()
-        m_3_y = PermissionList(name="3bots yes", icon="check icon", description="Max 3 bots")
+        m_3_y = PermissionList(
+            name="3bots yes", icon="check icon", description="Max 3 bots")
         m_3_y.save()
-        w_24_n = PermissionList(name="24h no", icon="times icon", description="Bot works all the time")
+        w_24_n = PermissionList(
+            name="24h no", icon="times icon", description="Bot works all the time")
         w_24_n.save()
-        m_5_n = PermissionList(name="5bots no", icon="times icon", description="Max 5 bot")
+        m_5_n = PermissionList(
+            name="5bots no", icon="times icon", description="Max 5 bot")
         m_5_n.save()
-        w_24_y = PermissionList(name="24h yes", icon="check icon", description="Bot works all the time")
+        w_24_y = PermissionList(
+            name="24h yes", icon="check icon", description="Bot works all the time")
         w_24_y.save()
-        m_5_y = PermissionList(name="5bots yes", icon="check icon", description="Max 5 bot")
+        m_5_y = PermissionList(
+            name="5bots yes", icon="check icon", description="Max 5 bot")
         m_5_y.save()
     if not plan_list:
         starter = Plan(name="STARTER", price="0", max_time="6", max_bots="1")
         starter.save()
         starter.permission_list.add(w_6, m_1, w_12_n, m_3_n, w_24_n, m_5_n)
 
-        standard = Plan(name="STANDARD", price="4", special_style="best", max_time="12", max_bots="3")
+        standard = Plan(name="STANDARD", price="4",
+                        special_style="best", max_time="12", max_bots="3")
         standard.save()
         standard.permission_list.add(w_6, m_1, w_12_y, m_3_y, w_24_n, m_5_n)
 
@@ -81,7 +93,8 @@ def dashboard_add_bot_view(request):
         user_profile.save()
 
     amount_user_bots = user_bots.count()
-    current_plan_q = Plan.objects.get(profile=(Profile.objects.get(user=request.user)))
+    current_plan_q = Plan.objects.get(
+        profile=(Profile.objects.get(user=request.user)))
     if amount_user_bots >= current_plan_q.max_bots:
         lock_add = True
     else:
@@ -96,7 +109,8 @@ def dashboard_add_bot_view(request):
             current_user = Profile.objects.filter(user=request.user)
             if current_user:
                 # amount of all bots for current user
-                max_user_bots = Bots.objects.filter(profile__user=request.user).count()
+                max_user_bots = Bots.objects.filter(
+                    profile__user=request.user).count()
                 # acces to user current plan query
                 current_plan_q = Plan.objects.get(
                     profile=(Profile.objects.get(user=request.user))
@@ -115,7 +129,8 @@ def dashboard_add_bot_view(request):
                             *divmod(float(current_plan_q.max_time) * 60, 60)
                         )
                     obj.save()
-                    messages.add_message(request, messages.SUCCESS, 'A new bot has been added.')
+                    messages.add_message(
+                        request, messages.SUCCESS, 'A new bot has been added.')
                     return HttpResponseRedirect(obj.get_absolute_url())
 
     context = {
@@ -132,6 +147,7 @@ def profile_view(request):
 
     if current_user:
         max_user_bots = Bots.objects.filter(profile__user=request.user).count()
+        user_profile = Profile.objects.get(user=request.user)
         if max_user_bots != 0:
             current_user_qs = Bots.objects.filter(profile__user=request.user)
         else:
@@ -148,9 +164,9 @@ def profile_view(request):
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
             email = form.cleaned_data["email"]
-            
+
             obj = form.save(commit=False)
-            
+
             if not username:
                 obj.username = user_data.username
             if not first_name:
@@ -159,18 +175,49 @@ def profile_view(request):
                 obj.last_name = user_data.last_name
             if not email:
                 obj.email = user_data.email
-            messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Profile details updated.')
             obj.save()
             form = UserSettingsForm()
         else:
-            messages.add_message(request, messages.ERROR, 'Wrong data provided')
+            messages.add_message(request, messages.ERROR,
+                                 'Wrong data provided')
 
     context = {
         "current_user_qs": current_user_qs,
         "form": form,
+        "user_profile": user_profile
     }
 
     return render(request, "user/profile.html", context)
+
+
+def currency_checkout(request, pk):
+    product = Currency.objects.filter(id=pk)
+    current_user = Profile.objects.get(user=request.user)
+    context = {
+        "product": product,
+        "current_user": current_user,
+    }
+    return render(request, "user/buy_currency.html", context)
+
+
+def paymentComplete(request):
+    body_data = json.loads(request.body)
+    currency_id = body_data['productId']
+    profile_id = body_data['userProfile']
+    currency_object = Currency.objects.get(id=currency_id)
+    profile_object = Profile.objects.get(id=profile_id)
+    Orders.objects.create(profile=profile_object,
+                          currency_package=currency_object)
+
+    if currency_id and profile_id:
+        profile_object.wallet += currency_object.value
+        profile_object.save()
+        messages.add_message(request, messages.SUCCESS,
+                             "Successfully purchased: " + str(currency_object))
+
+    return JsonResponse('Payment completed!', safe=False)
 
 
 class SettingsView(UpdateView):
@@ -208,9 +255,11 @@ def shop_view(request):
     plans = Plan.objects.all()
     user_profile = Profile.objects.get(user=request.user)
     user_plan = user_profile.plan.name
+    currency = Currency.objects.all()
     context = {
         "plans": plans,
         "user_plan": user_plan,
+        "currency": currency,
     }
     return render(request, "user/shop.html", context)
 
