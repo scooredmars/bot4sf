@@ -12,35 +12,54 @@
     <div class="user-content">
       {% include "layouts/navbar.html" %}
       <div class="shop">
-        <h1 class="text-center">Pricing Plan</h1>
+        <h1 class="text-center">Shop</h1>
+        <span style="margin: 0.8em;">Plan</span>
+        <label class="switch">
+          <input type="checkbox" id="checbox" onclick="check()" ; />
+        </label>
+        <span style="margin: 0.8em;">Currency</span>
         {% if not plans %}
-          <p class="text-center">At the moment plans are disable.</p>
+          <p class="text-center">At the moment shop is disable.</p>
         {% else %}
-          <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
-          <div class="plans">
-            {% for plan in plans %}
-              {% if plan.available %}
-                <div class="plan {{ plan.special_style }}">
-                  <div class="header text-center">{{ plan.name }}</div>
-                  <div class="price text-center">$0{{ plan.price }}</div>
-                  <div class="text-center">
-                    {% for permission in plan.permission_list.all %}
-                      <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
-                    {% endfor %}
+          <div class="plan-shop">
+            <p class="text-center">The plan concerns monthly fees. We do not have annual accounts. <br> Fees are not automatically renewable.</p>
+            <div class="plans">
+              {% for plan in plans %}
+                {% if plan.available %}
+                  <div class="plan {{ plan.special_style }}">
+                    <div class="header text-center">{{ plan.name }}</div>
+                    <div class="price text-center">$0{{ plan.price }}</div>
+                    <div class="text-center">
+                      {% for permission in plan.permission_list.all %}
+                        <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>
+                      {% endfor %}
+                    </div>
+                    {% if not user_plan == plan.name %}
+                      <a href=""><div class="register">Buy</div></a>
+                    {% else %}
+                      <div class="register owned">Alredy have</div>
+                    {% endif %}
                   </div>
-                  {% if not user_plan == plan.name %}
-                    <a href=""><div class="register">Buy</div></a>
-                  {% else %}
-                    <div class="register owned">Alredy have</div>
-                  {% endif %}
+                {% else %}
+                  <div class="plan not-available"></div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="currency">
+            {% for item in currency %}
+              <div class="ui grid">
+                <div class="four wide column">
+                  ${{ item.price }}
+                  {{ item.value }}
+                  <a href="{% url 'sfbot:checkout' item.id %}">Buy</a>
                 </div>
-              {% else %}
-                <div class="plan not-available"></div>
-              {% endif %}
+              </div>
             {% endfor %}
           </div>
         {% endif %}
       </div>
+      <script src="{% static 'js/shop-currency.js' %}"></script>
       {% include "layouts/footer-user.html" %}
     </div>
   {% else %}
