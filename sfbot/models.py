@@ -24,9 +24,32 @@ class FaqList(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey("sfbot.Plan", on_delete=models.CASCADE, null=True)
+    wallet = models.IntegerField(null=True, default=0)
 
     def __str__(self):
         return self.user.username
+
+
+class Currency(models.Model):
+    price = models.IntegerField(null=True)
+    value = models.IntegerField(null=True)
+
+    class Meta:
+        verbose_name_plural = "Currency"
+
+    def __str__(self):
+        return str(self.value)
+
+
+class Orders(models.Model):
+    profile = models.ForeignKey(
+        "sfbot.Profile", on_delete=models.CASCADE, null=True)
+    order_create = models.DateTimeField(auto_now=True, null=True)
+    currency_package = models.ForeignKey(
+        "sfbot.Currency", on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name_plural = "Orders"
 
 
 class Plan(models.Model):
@@ -41,7 +64,9 @@ class Plan(models.Model):
     special_style = models.CharField(max_length=15, null=True, blank=True)
     max_time = models.FloatField(null=True)
     max_bots = models.IntegerField(null=True)
-    available = models.BooleanField(verbose_name="Plan is available", default=True)
+    available = models.BooleanField(
+        verbose_name="Plan is available", default=True)
+    cost = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
@@ -101,23 +126,29 @@ class Bots(AbstractBaseUser):
         ("s4", "s4"),
         ("s5", "s5"),
     )
-    profile = models.ForeignKey("sfbot.Profile", on_delete=models.CASCADE, null=True)
+    profile = models.ForeignKey(
+        "sfbot.Profile", on_delete=models.CASCADE, null=True)
     status = models.BooleanField(verbose_name="Bot status", default=False)
     time_left = models.TimeField(null=True)
     converted_time = models.FloatField(null=True, blank=True)
     start = models.DateTimeField(null=True, blank=True)
     stop = models.DateTimeField(null=True, blank=True)
 
-    username = models.CharField(verbose_name="SF Username", max_length=40, null=True)
-    password = models.CharField(verbose_name="SF Password", max_length=30, null=True)
+    username = models.CharField(
+        verbose_name="SF Username", max_length=40, null=True)
+    password = models.CharField(
+        verbose_name="SF Password", max_length=30, null=True)
     country = models.CharField(
         max_length=20, choices=COUNTRY, default="Intercontinental", null=True
     )
     server = models.CharField(max_length=4, choices=SERVER, null=True)
 
-    tavern_status = models.BooleanField(verbose_name="Tavern status", default=False)
-    tavern_settings = models.CharField(max_length=4, choices=TAVERN, default="Exp")
-    arena_status = models.BooleanField(verbose_name="Arena status", default=False)
+    tavern_status = models.BooleanField(
+        verbose_name="Tavern status", default=False)
+    tavern_settings = models.CharField(
+        max_length=4, choices=TAVERN, default="Exp")
+    arena_status = models.BooleanField(
+        verbose_name="Arena status", default=False)
     arena_settings = models.CharField(
         max_length=50, choices=ARENA, default="Stop fight after 10 wins"
     )
