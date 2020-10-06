@@ -13,11 +13,14 @@
       {% include "layouts/navbar.html" %}
       <div class="shop">
         <h1 class="text-center">Shop</h1>
-        <span style="margin: 0.8em;">Plan</span>
-        <label class="switch">
-          <input type="checkbox" id="checbox" onclick="check()" ; />
-        </label>
-        <span style="margin: 0.8em;">Currency</span>
+        <div class="switch text-center">
+          <span class="type">Plans</span>
+          <div class="ui toggle checkbox">
+            <input type="checkbox" id="checbox" onclick="check()" ; />
+            <label></label>
+          </div>
+          <span class="type">Gears</span>
+        </div>
         {% if not plans %}
           <p class="text-center">At the moment shop is disable.</p>
         {% else %}
@@ -46,20 +49,32 @@
               {% endfor %}
             </div>
           </div>
-          <div class="currency">
-            {% for item in currency %}
-              <div class="ui grid">
-                <div class="four wide column">
-                  ${{ item.price }}
-                  {{ item.value }}
-                  <a href="{% url 'sfbot:checkout' item.id %}">Buy</a>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
+          <div class="plans currency">
+              {% for item in currency %}
+                  <div class="plan {{ plan.special_style }}">
+                    <div class="header text-center">{{ item.value }} Gears</div>
+                    {% if item.price < 10 %}
+                      <div class="price text-center">$0{{ item.price }}</div>
+                    {% else %}
+                      <div class="price text-center">${{ item.price }}</div>
+                    {% endif %}
+                    <div class="text-center">
+                      {% if item.id == 1 %}
+                        <img src="{% static 'img/currency/bronze.svg' %}">
+                      {% elif item.id == 2 %}
+                        <img src="{% static 'img/currency/silver.svg' %}">
+                      {% elif item.id == 3 %}
+                        <img src="{% static 'img/currency/gold.svg' %}">
+                      {% elif item.id == 4 %}
+                        <img src="{% static 'img/currency/diamond.svg' %}">
+                      {% endif %}
+                    </div>
+                    <a href="{% url 'sfbot:checkout' item.id %}"><div class="register">Buy</div></a>
+                  </div>
+              {% endfor %}
+            </div>
         {% endif %}
       </div>
-      <script src="{% static 'js/shop-currency.js' %}"></script>
       {% include "layouts/footer-user.html" %}
     </div>
   {% else %}

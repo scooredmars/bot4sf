@@ -1,6 +1,28 @@
 .shop {
   h1 {
-    padding-top: 2.25em;
+    padding-top: 1.5em;
+  }
+
+  .switch{
+    margin-bottom: 2.5em;
+
+    .type{
+      margin: .8em;
+      font-size: 1.4em;
+    }
+
+    .type:last-child{
+      margin: .1em;
+    }
+
+    .checkbox{
+      vertical-align: middle;
+      margin-bottom: .25em;
+
+      label::before{
+        background: rgba(0, 0, 0, 0.15);
+      }
+    }
   }
 
   .header {
@@ -45,7 +67,7 @@
     margin: auto;
     display: flex;
     justify-content: space-around;
-    margin-top: 6.5em;
+    margin-top: 4em;
 
     .not-available {
       cursor: not-allowed;
@@ -112,6 +134,20 @@
       .owned {
         cursor: not-allowed;
       }
+    }
+  }
+
+  .currency{
+    flex-wrap: wrap;
+    margin-bottom: 6.5em;
+    margin-top: 0em;
+
+    .plan:last-child{
+      margin-top: 1.4em;
+    }
+
+    img{
+      width: 25%;
     }
   }
 }
