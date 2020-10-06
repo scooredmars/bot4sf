@@ -31,7 +31,13 @@
                 {% if plan.available %}
                   <div class="plan {{ plan.special_style }}">
                     <div class="header text-center">{{ plan.name }}</div>
-                    <div class="price text-center">$0{{ plan.price }}</div>
+                    <div class="price text-center">
+                      {% if plan.price == 0 %}
+                        FREE
+                      {% else %}
+                        {{ plan.price }}<img class="gears-img" src="{% static 'img/currency/wallet-gears.svg' %}">
+                      {% endif %}
+                    </div>
                     <div class="text-center">
                       {% for permission in plan.permission_list.all %}
                         <div class="information"><i class="{{ permission.icon }}"></i> {{ permission.description }}</div>

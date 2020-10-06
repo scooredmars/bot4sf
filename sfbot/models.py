@@ -66,7 +66,6 @@ class Plan(models.Model):
     max_bots = models.IntegerField(null=True)
     available = models.BooleanField(
         verbose_name="Plan is available", default=True)
-    cost = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
