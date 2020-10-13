@@ -192,16 +192,6 @@ def profile_view(request):
     return render(request, "user/profile.html", context)
 
 
-def currency_checkout(request, pk):
-    product = Currency.objects.filter(id=pk)
-    current_user = Profile.objects.get(user=request.user)
-    context = {
-        "product": product,
-        "current_user": current_user,
-    }
-    return render(request, "user/buy_currency.html", context)
-
-
 def paymentComplete(request):
     body_data = json.loads(request.body)
     currency_id = body_data['productId']
@@ -218,6 +208,32 @@ def paymentComplete(request):
                              "Successfully purchased: " + str(currency_object))
 
     return JsonResponse('Payment completed!', safe=False)
+
+
+def shop_view(request):
+    plans = Plan.objects.all()
+    user_profile = Profile.objects.get(user=request.user)
+    user_plan = user_profile.plan.name
+    currency = Currency.objects.all()
+    if request.body:
+        body_data = json.loads(request.body)
+        currency_id = body_data['productId']
+        product = Currency.objects.get(id=currency_id)
+        price = str(product.price)
+        value = str(product.value)
+        data = {
+            'price': price,
+            'value': value,
+        }
+        return JsonResponse(data)
+    else:
+        context = {
+            "plans": plans,
+            "user_plan": user_plan,
+            "currency": currency,
+            "user_profile": user_profile,
+        }
+    return render(request, "user/shop.html", context)
 
 
 class SettingsView(UpdateView):
@@ -249,19 +265,6 @@ class EditBotDetails(UpdateView):
         # Update the existing form kwargs dict with the pk session.
         kwargs.update({"pk": self.kwargs["pk"]})
         return kwargs
-
-
-def shop_view(request):
-    plans = Plan.objects.all()
-    user_profile = Profile.objects.get(user=request.user)
-    user_plan = user_profile.plan.name
-    currency = Currency.objects.all()
-    context = {
-        "plans": plans,
-        "user_plan": user_plan,
-        "currency": currency,
-    }
-    return render(request, "user/shop.html", context)
 
 
 class Faq(ListView):

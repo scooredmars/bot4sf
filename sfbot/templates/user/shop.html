@@ -56,32 +56,94 @@
             </div>
           </div>
           <div class="plans currency">
-              {% for item in currency %}
-                  <div class="plan {{ plan.special_style }}">
-                    <div class="header text-center">{{ item.value }} Gears</div>
-                    {% if item.price < 10 %}
-                      <div class="price text-center">$0{{ item.price }}</div>
-                    {% else %}
-                      <div class="price text-center">${{ item.price }}</div>
-                    {% endif %}
-                    <div class="text-center">
-                      {% if item.id == 1 %}
-                        <img src="{% static 'img/currency/bronze.svg' %}">
-                      {% elif item.id == 2 %}
-                        <img src="{% static 'img/currency/silver.svg' %}">
-                      {% elif item.id == 3 %}
-                        <img src="{% static 'img/currency/gold.svg' %}">
-                      {% elif item.id == 4 %}
-                        <img src="{% static 'img/currency/diamond.svg' %}">
-                      {% endif %}
-                    </div>
-                    <a href="{% url 'sfbot:checkout' item.id %}"><div class="register">Buy</div></a>
-                  </div>
-              {% endfor %}
-            </div>
+            {% for item in currency %}
+              <div class="plan {{ plan.special_style }}">
+                <div class="header text-center">{{ item.value }} Gears</div>
+                {% if item.price < 10 %}
+                  <div class="price text-center">$0{{ item.price }}</div>
+                {% else %}
+                  <div class="price text-center">${{ item.price }}</div>
+                {% endif %}
+                <div class="text-center">
+                  {% if item.id == 1 %}
+                    <img src="{% static 'img/currency/bronze.svg' %}">
+                  {% elif item.id == 2 %}
+                    <img src="{% static 'img/currency/silver.svg' %}">
+                  {% elif item.id == 3 %}
+                    <img src="{% static 'img/currency/gold.svg' %}">
+                  {% elif item.id == 4 %}
+                    <img src="{% static 'img/currency/diamond.svg' %}">
+                  {% endif %}
+                </div>
+                <a><div class="buymodal register" onclick="sendPk('{{ item.id }}')">Buy</div></a>
+              </div>
+            {% endfor %}
+          </div>
+          <script>
+            var style = document.createElement("style");
+            style.innerHTML = `body::-webkit-scrollbar {display: none;}`;
+            document.head.appendChild(style);
+            function getCookie(name) {
+              var cookieValue = null;
+              if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                  var cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+                }
+              }
+              return cookieValue;
+            }
+            var csrftoken = getCookie('csrftoken');
+            function sendPk(productId){
+              var url = "{% url 'sfbot:shop' %}";
+              fetch(url, {
+                method:'POST',
+                headers:{
+                  'Content-type':'application/json',
+                  'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'productId':productId})
+              })
+              .then((resp) => resp.json())
+              .then(function(data) {
+                $(".gears").remove();
+                $(".price-product").remove();
+                $(".paypal-buttons").remove();
+                $(".append-img").remove();
+                if (data.price < 10){
+                  $(".data").prepend('<div class="text-center gears">' + data.value + ' Gears</div><div class="text-center price-product">$0' + data.price + '</div>');
+                }
+                else {
+                  $(".data").prepend('<div class="text-center gears">' + data.value + ' Gears</div><div class="text-center price-product">$' + data.price + '</div>');
+                }
+                if (data.value == 25){
+                  $(".img").append('<img class="append-img" src="{% static "img/currency/bronze.svg" %}">');
+                }
+                else if (data.value == 50){
+                  $(".img").append('<img class="append-img" src="{% static "img/currency/silver.svg" %}">');
+                }
+                else if (data.value == 100){
+                  $(".img").append('<img class="append-img" src="{% static "img/currency/gold.svg" %}">');
+                }
+                else if (data.value == 200){
+                  $(".img").append('<img class="append-img" src="{% static "img/currency/diamond.svg" %}">');
+                }
+                var productPrice = data.price
+                generatePayPal(productId, productPrice);
+              })
+            }
+          </script>
         {% endif %}
       </div>
+      {% include "modal/buy_currency.html" %}
+      {% include "modal/toasts.html" %}
       {% include "layouts/footer-user.html" %}
+      <script src="{% static 'js/modal.js' %}"></script> 
     </div>
   {% else %}
   <div class="background">

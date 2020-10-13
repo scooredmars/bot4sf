@@ -147,6 +147,7 @@
     flex-wrap: wrap;
     margin-bottom: 6.5em;
     margin-top: 0em;
+    display: none;
 
     .plan:last-child{
       margin-top: 1.4em;
@@ -154,6 +155,47 @@
 
     img{
       width: 20%;
+    }
+  }
+}
+
+.checkout{
+  .product{
+    display: flex;
+    margin-top: 1em;
+
+    .information{
+      width: 50%;
+      display: flex;
+      padding: 1em;
+      margin: auto;
+
+      .data{
+        width: 60%;
+
+        .gears{
+          font-size: 2em;
+          padding: 0.5em;
+          color: #5d5d5d;
+        }
+
+        .price-product{
+          color: #4085f6;
+          font-size: 3em;
+          padding: 0.5em;
+        }
+      }
+
+      .img{
+        img{
+          height: 135px;
+        }
+      }
+    }
+
+    .pay-methods{
+      width: 45%;
+      margin: auto;
     }
   }
 }
