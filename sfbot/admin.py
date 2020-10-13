@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Bots, FaqList, PermissionList, Plan, Profile
+from .models import Bots, FaqList, PermissionList, Plan, Profile, Currency, Orders
 
 admin.site.register(FaqList)
 
@@ -22,9 +22,21 @@ class BotsAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "plan")
+    list_display = ("user", "plan", "wallet")
     list_filter = ["plan"]
     search_fields = ["user__username"]
+
+
+@admin.register(Currency)
+class CurrencyAdmin(admin.ModelAdmin):
+    list_display = ("price", "value")
+
+
+@admin.register(Orders)
+class OrdersAdmin(admin.ModelAdmin):
+    list_display = ("profile", "order_create", "currency_package")
+    list_filter = ["profile", "order_create", "currency_package"]
+    search_fields = ["profile"]
 
 
 @admin.register(Plan)

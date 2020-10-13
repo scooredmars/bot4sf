@@ -9,6 +9,7 @@ urlpatterns = [
     path("<int:pk>", views.UserBotDetails.as_view(), name="bot-detail"),
     path("edit/<int:pk>", views.EditBotDetails.as_view(), name="edit-bot"),
     path("profile", views.profile_view, name="profile"),
+    path("complete", views.paymentComplete, name="complete"),
     path("shop", views.shop_view, name="shop"),
     path("faq", views.Faq.as_view(), name="faq"),
     path("regulations", views.Regulations.as_view(), name="regulations"),
