@@ -44,7 +44,11 @@
                       {% endfor %}
                     </div>
                     {% if not user_plan == plan.name %}
-                      <a href=""><div class="register">Buy</div></a>
+                      {% if plan.name == "STARTER" %}
+                        <div class="register owned">Not for sell</div>
+                      {% else %}
+                        <div class="register buyplanmodal" onclick="buyPlan('{{ plan.id }}')">Buy</div>
+                      {% endif %}
                     {% else %}
                       <div class="register owned">Alredy have</div>
                     {% endif %}
@@ -100,7 +104,7 @@
             }
             var csrftoken = getCookie('csrftoken');
             function sendPk(productId){
-              var url = "{% url 'sfbot:shop' %}";
+              var url = "{% url 'sfbot:currency' %}";
               fetch(url, {
                 method:'POST',
                 headers:{
@@ -137,10 +141,23 @@
                 generatePayPal(productId, productPrice);
               })
             }
+
+            function buyPlan(planId){
+              var url = "{% url 'sfbot:plan' %}";
+              fetch(url, {
+                method:'POST',
+                headers:{
+                  'Content-type':'application/json',
+                  'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'planId':planId})
+              })
+            }
           </script>
         {% endif %}
       </div>
-      {% include "modal/buy_currency.html" %}
+      {% include "modal/buy-plan.html" %}
+      {% include "modal/buy-currency.html" %}
       {% include "modal/toasts.html" %}
       {% include "layouts/footer-user.html" %}
       <script src="{% static 'js/modal.js' %}"></script> 

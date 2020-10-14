@@ -14,3 +14,7 @@ $('.ui.modal.user-settings')
 $('.ui.modal.checkout')
     .modal('attach events', '.buymodal', 'show')
 ;
+
+$('.ui.modal.buy-plan')
+    .modal('attach events', '.buyplanmodal', 'show')
+;
