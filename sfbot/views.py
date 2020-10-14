@@ -9,6 +9,7 @@ from .forms import AddBotForm, SettingsForm, EditBotForm, UserSettingsForm
 from .models import Bots, FaqList, GeneratePage, Plan, Profile, User, PermissionList, Currency, Orders
 from django.contrib import messages
 import json
+from django.utils import timezone
 
 
 def error_404(request, exception):
@@ -89,7 +90,8 @@ def dashboard_add_bot_view(request):
 
     if not current_user:
         starter_plan = Plan.objects.get(name="STARTER")
-        user_profile = Profile(user=request.user, plan=starter_plan)
+        user_profile = Profile(
+            user=request.user, plan=starter_plan, create_account=timezone.now(), plan_start_date=timezone.now())
         user_profile.save()
 
     amount_user_bots = user_bots.count()

@@ -25,6 +25,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey("sfbot.Plan", on_delete=models.CASCADE, null=True)
     wallet = models.IntegerField(null=True, default=0)
+    create_account = models.DateTimeField(null=True, blank=True)
+    plan_start_date = models.DateTimeField(blank=True, null=True)
+    plan_expiration_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username

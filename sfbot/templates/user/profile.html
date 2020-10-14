@@ -87,6 +87,14 @@
                 {% endif %}
               </div>
               <div class="list">
+                <div class="item">Plan will expire in:</div>
+                {% if info.profile.plan.name == "STARTER" %}
+                  <div class="item">Time unlimited</div>
+                {% else %}
+                  <div class="item">30 days</div>
+                {% endif %}
+              </div>
+              <div class="list">
                 <div class="item">Wallet:</div>
                 <div class="item">
                   {{ user_profile.wallet }}
