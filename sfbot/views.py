@@ -215,26 +215,44 @@ def shop_view(request):
     user_profile = Profile.objects.get(user=request.user)
     user_plan = user_profile.plan.name
     currency = Currency.objects.all()
-    if request.body:
-        body_data = json.loads(request.body)
-        currency_id = body_data['productId']
-        product = Currency.objects.get(id=currency_id)
-        price = str(product.price)
-        value = str(product.value)
-        data = {
-            'price': price,
-            'value': value,
-        }
-        return JsonResponse(data)
-    else:
-        context = {
-            "plans": plans,
-            "user_plan": user_plan,
-            "currency": currency,
-            "user_profile": user_profile,
-        }
+    context = {
+        "plans": plans,
+        "user_plan": user_plan,
+        "currency": currency,
+        "user_profile": user_profile,
+    }
     return render(request, "user/shop.html", context)
 
+
+def currency(request):
+    body_data = json.loads(request.body)
+    currency_id = body_data['productId']
+    product = Currency.objects.get(id=currency_id)
+    price = str(product.price)
+    value = str(product.value)
+    data = {
+        'price': price,
+        'value': value,
+    }
+    return JsonResponse(data)
+
+def plan_buy(request):
+    body_data = json.loads(request.body)
+    plan_id = body_data['planId']
+    plan_product = Plan.objects.get(id=plan_id)
+    # sprawdzic czy user posiada juz ten plan 
+    # sprawdzic czy posiada odpowiednia ilosc pkt
+    user_profile = Profile.objects.get(user=request.user)
+    if user_profile.plan != plan_product:
+        if user_profile.wallet >= plan_product.price:
+            user_profile.wallet -= plan_product.price
+            user_profile.plan = plan_product
+            user_profile.save()
+        else:
+            print("za malo kasy")
+    else:
+        print("masz juz ten plan")
+    return HttpResponseRedirect('profile')
 
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
