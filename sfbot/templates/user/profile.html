@@ -87,11 +87,11 @@
                 {% endif %}
               </div>
               <div class="list">
-                <div class="item">Plan will expire in:</div>
+                <div class="item">Plan will expire:</div>
                 {% if info.profile.plan.name == "STARTER" %}
                   <div class="item">Time unlimited</div>
                 {% else %}
-                  <div class="item">30 days</div>
+                  <div class="item">{{ user_profile.plan_expiration_date | date:"d.m.Y  (G:i)" }}</div>
                 {% endif %}
               </div>
               <div class="list">
