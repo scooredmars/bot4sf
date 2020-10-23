@@ -11,6 +11,7 @@ urlpatterns = [
     path("profile", views.profile_view, name="profile"),
     path("complete", views.paymentComplete, name="complete"),
     path("shop", views.shop_view, name="shop"),
+    path("plan_modal", views.plan_modal, name="plan_modal"),
     path("currency", views.currency, name="currency"),
     path("plan", views.plan_buy, name="plan"),
     path("faq", views.Faq.as_view(), name="faq"),
