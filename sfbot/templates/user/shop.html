@@ -46,8 +46,14 @@
                     {% if not user_plan == plan.name %}
                       {% if plan.name == "STARTER" %}
                         <div class="register owned">Not for sell</div>
+                      {% elif user_profile.wallet < plan.price %}
+                        <div class="register owned">Not enough points</div>
                       {% else %}
-                        <div class="register buyplanmodal" onclick="buyPlan('{{ plan.id }}')">Buy</div>
+                        {% if lock %}
+                          <div class="register owned">Wait for expiration date</div>
+                        {% else %}
+                          <div class="register buyplanmodal" onclick="planModal('{{ plan.id }}')">Buy</div>
+                        {% endif %}
                       {% endif %}
                     {% else %}
                       <div class="register owned">Alredy have</div>
@@ -79,7 +85,7 @@
                     <img src="{% static 'img/currency/diamond.svg' %}">
                   {% endif %}
                 </div>
-                <a><div class="buymodal register" onclick="sendPk('{{ item.id }}')">Buy</div></a>
+                  <div class="buymodal register" onclick="sendPk('{{ item.id }}')">Buy</div>
               </div>
             {% endfor %}
           </div>
@@ -142,7 +148,27 @@
               })
             }
 
-            function buyPlan(planId){
+            function planModal(modalId){
+              var url = "{% url 'sfbot:plan_modal' %}";
+              fetch(url, {
+                method:'POST',
+                headers:{
+                  'Content-type':'application/json',
+                  'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'modalId':modalId})
+              })
+              .then((resp) => resp.json())
+              .then(function(data) {
+                $(".t").remove();
+                $(".spositive").remove();
+                $(".name").prepend('<p class="t">' + data.name + '</p>');
+                $(".plan_price").append('<p class="t">' + data.price + '</p>');
+                $(".actions").append('<div class="ui spositive right labeled icon button" onclick="planBuy(' + data.id + ')">' + 'Buy' + '<i class="shopping cart icon"></i>' + '</div>');
+              })
+            }
+
+            function planBuy(planId){
               var url = "{% url 'sfbot:plan' %}";
               fetch(url, {
                 method:'POST',
@@ -152,12 +178,17 @@
                 },
                 body:JSON.stringify({'planId':planId})
               })
+              .then((resp) => resp.json())
+              .then(function(data) {
+                window.location.href = "{% url 'sfbot:profile' %}"
+              })
             }
           </script>
         {% endif %}
       </div>
-      {% include "modal/buy-plan.html" %}
+      
       {% include "modal/buy-currency.html" %}
+      {% include "modal/buy-plan.html" %}
       {% include "modal/toasts.html" %}
       {% include "layouts/footer-user.html" %}
       <script src="{% static 'js/modal.js' %}"></script> 
