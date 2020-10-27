@@ -160,10 +160,10 @@
               })
               .then((resp) => resp.json())
               .then(function(data) {
-                $(".t").remove();
+                $(".js").remove();
                 $(".spositive").remove();
-                $(".name").prepend('<p class="t">' + data.name + '</p>');
-                $(".plan_price").append('<p class="t">' + data.price + '</p>');
+                $(".name").append('<p class="js">"' + data.name + '"</p>');
+                $(".plan_price").append('<p class="js">' + data.price + '$</p>');
                 $(".actions").append('<div class="ui spositive right labeled icon button" onclick="planBuy(' + data.id + ')">' + 'Buy' + '<i class="shopping cart icon"></i>' + '</div>');
               })
             }
