@@ -10,6 +10,7 @@ from .models import Bots, FaqList, GeneratePage, Plan, Profile, User, Permission
 from django.contrib import messages
 import json
 from django.utils import timezone
+from datetime import timedelta
 
 
 def error_404(request, exception):
@@ -215,13 +216,25 @@ def paymentComplete(request):
 def shop_view(request):
     plans = Plan.objects.all()
     user_profile = Profile.objects.get(user=request.user)
+    starter_plan = Plan.objects.get(name="STARTER")
     user_plan = user_profile.plan.name
     currency = Currency.objects.all()
+    lock = False
+    if user_profile.plan_expiration_date:
+        time_to_end = str(user_profile.plan_expiration_date -
+                          user_profile.plan_start_date)
+        if time_to_end != "0:00:00":
+            lock = True
+        else:
+            if user_profile.plan != starter_plan:
+                user_profile.plan = starter_plan
+                user_profile.save()
     context = {
         "plans": plans,
         "user_plan": user_plan,
         "currency": currency,
         "user_profile": user_profile,
+        "lock": lock,
     }
     return render(request, "user/shop.html", context)
 
@@ -238,23 +251,54 @@ def currency(request):
     }
     return JsonResponse(data)
 
+
+def plan_modal(request):
+    body_data = json.loads(request.body)
+    modal_id = body_data['modalId']
+    modal_object = Plan.objects.get(id=modal_id)
+    name = str(modal_object.name)
+    price = str(modal_object.price)
+
+    modal_data = {
+        'name': name,
+        'price': price,
+        'id': modal_id,
+    }
+
+    return JsonResponse(modal_data)
+
+
 def plan_buy(request):
     body_data = json.loads(request.body)
     plan_id = body_data['planId']
     plan_product = Plan.objects.get(id=plan_id)
-    # sprawdzic czy user posiada juz ten plan 
-    # sprawdzic czy posiada odpowiednia ilosc pkt
     user_profile = Profile.objects.get(user=request.user)
     if user_profile.plan != plan_product:
         if user_profile.wallet >= plan_product.price:
             user_profile.wallet -= plan_product.price
             user_profile.plan = plan_product
+            user_profile.plan_start_date = timezone.now()
+            user_profile.plan_expiration_date = user_profile.plan_start_date + \
+                timedelta(30, 0)
             user_profile.save()
+            user_bots = Bots.objects.filter(profile=user_profile)
+            if user_bots:
+                if plan_product.max_time == 24.0:
+                    for bot in user_bots:
+                        bot.time_left = "23:59:00"
+                        bot.save()
+                elif plan_product.max_time == 12.0:
+                    for bot in user_bots:
+                        bot.time_left = "12:00:00"
+                        bot.save()
+            response = "The transaction was successful, the plan was purchased"
         else:
-            print("za malo kasy")
+            response = "You don't have enough gears"
     else:
-        print("masz juz ten plan")
-    return HttpResponseRedirect('profile')
+        response = "You already have a plan"
+    messages.add_message(request, messages.SUCCESS, response)
+    return JsonResponse('Payment completed!', safe=False)
+
 
 class SettingsView(UpdateView):
     template_name = "user/settings.html"
