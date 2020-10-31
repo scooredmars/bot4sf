@@ -229,6 +229,7 @@ def shop_view(request):
             if user_profile.plan != starter_plan:
                 user_profile.plan = starter_plan
                 user_profile.save()
+
     context = {
         "plans": plans,
         "user_plan": user_plan,

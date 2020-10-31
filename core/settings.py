@@ -193,4 +193,8 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'sfbot.tasks.bot_time',
         'schedule': 60,
     },
+    'check-plan-every-5-min': {
+        'task': 'sfbot.tasks.plan_check',
+        'schedule': 300,
+    },
 }
