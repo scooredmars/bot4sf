@@ -131,6 +131,7 @@ def dashboard_add_bot_view(request):
                         obj.time_left = "{0:02.0f}:{1:02.0f}".format(
                             *divmod(float(current_plan_q.max_time) * 60, 60)
                         )
+                        obj.converted_time = current_plan_q.max_time
                     obj.save()
                     messages.add_message(
                         request, messages.SUCCESS, 'A new bot has been added.')
@@ -291,6 +292,7 @@ def plan_buy(request):
                 elif plan_product.max_time == 12.0:
                     for bot in user_bots:
                         bot.time_left = "12:00:00"
+                        bot.converted_time = 12
                         bot.save()
             response = "The transaction was successful, the plan was purchased"
         else:

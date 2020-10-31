@@ -1,4 +1,4 @@
-from .models import Bots, Profile
+from .models import Bots, Profile, Plan
 import datetime
 from datetime import timedelta
 from django.utils import timezone
@@ -47,3 +47,7 @@ def plan_check():
                     for bot in bots:
                         if first_bot != bot.id:
                             Bots.objects.filter(id=bot.id).delete()
+                        elif first_bot:
+                            bot.time_left = "06:00:00"
+                            bot.converted_time = 6
+                            bot.save()
